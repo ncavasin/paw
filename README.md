@@ -6,5 +6,3 @@ Grupo 2:
 - Cavasin Nicolas
 - Tosello Joaquin
 
-bla
-
