@@ -21,18 +21,29 @@ nav{
 }
 
 section{
-    background-color: coral;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: black;
+    height: 600px;
+}
+.section1{
+    /*background-color: coral;*/
+    /* background-attachment: fixed;*/ 
+
+    background-image: url('https://raw.githubusercontent.com/ncavasin/paw/main/01-maquetado_web/img/istockphoto-949812160-612x612.jpg');
 }
 
-section img{
-    height: 400px;
-    width: 600px;
+.section2{
+    background-image: url('https://raw.githubusercontent.com/ncavasin/paw/main/01-maquetado_web/img/doctores2.jpg');
 }
+
 
 section h1{
     margin: 0;
     text-align: center;
 }
+
+
 
 footer{
     background-color: #96BAE6;
