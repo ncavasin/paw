@@ -1,0 +1,44 @@
+header{
+    background-color: #96BAE6;
+    color: #black;
+
+} 
+
+header img{
+    display: inline-block;
+}
+
+header p{
+    margin: 0;
+    display: inline-block;
+}
+
+nav{
+    padding-top: 0;
+    margin: 0;
+    background-color: #5A99E5;
+    text-align: center;
+}
+
+section{
+    background-color: coral;
+}
+
+section img{
+    height: 400px;
+    width: 600px;
+}
+
+section h1{
+    margin: 0;
+    text-align: center;
+}
+
+footer{
+    background-color: #96BAE6;
+    color: black;
+}
+
+.footer{
+    display: inline;
+}
