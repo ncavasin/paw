@@ -13,6 +13,7 @@ header p{
     display: inline-block;
 }
 
+
 nav{
     padding-top: 0;
     margin: 0;
@@ -20,35 +21,45 @@ nav{
     text-align: center;
 }
 
+
 section{
     background-repeat: no-repeat;
     background-size: cover;
     color: black;
     height: 600px;
 }
+
+
 .section1{
-    /*background-color: coral;*/
-    /* background-attachment: fixed;*/ 
-
-    background-image: url('https://raw.githubusercontent.com/ncavasin/paw/main/01-maquetado_web/img/istockphoto-949812160-612x612.jpg');
-}
-
-.section2{
+    text-align: center;
     background-image: url('https://raw.githubusercontent.com/ncavasin/paw/main/01-maquetado_web/img/doctores2.jpg');
 }
 
-
-section h1{
-    margin: 0;
-    text-align: center;
+.section2{
+    background-color: #f6f7f5;
+    padding-top: 50px;
 }
 
+.section2 label{
+    margin-top: 20px;   
+}
+
+.section2 input{
+    margin-bottom: 20px;
+}
+
+.submit-btn{
+    border-radius: 3px;
+    background: #96BAE6;
+}
 
 
 footer{
     background-color: #96BAE6;
     color: black;
 }
+
+
 
 .footer{
     display: inline;
