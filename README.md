@@ -2,9 +2,7 @@
 
 Repositorio para almacenar todos los trabajos practicos de la asignatura.
 
-Grupo 2:
+Grupo 3:
 - Cavasin Nicolas
 - Tosello Joaquin
-
-
 
