@@ -3,12 +3,13 @@
     <head>
         <meta charset="utf-8">
         <title>Clínicas PAW</title>
+
     </head>
     <body>
         <div class="preheader">
             <a href="tel::+54 9 2346 42-4593" class="texto-header">+54 9 2346 42-4593</a>
-            <a href="login.html" class="texto-header">Iniciar Sesión</a>
-            <a href="register.html" class="texto-header">Registrarse</a>
+            <p>Hola, Joaquín Tossello</p>
+            <a href="#" class="texto-header">Cerrar Sesión</a>
         </div>
 
         <header>
@@ -20,7 +21,8 @@
                 <a href="about.html" class="texto-header">¿Quiénes Somos?</a>
                 <a href="services.html" class="texto-header">Nuestros Servicios</a>
                 <a href="coberturas.html" class="texto-header">Coberturas</a>
-                <a href="#" class="texto-header">Turnos</a>
+                <a href="index.html#turnos" class="texto-header">Turnos</a>
+                <a href="index.html#mis_turnos" class="texto-header">Mis Turnos</a>
             </nav>
         </header>
 
@@ -71,7 +73,50 @@
                         </tr>
                     </tbody>
                 </table>
-            </section>        
+            </section>
+
+            <section class="section2">
+                <h2>MIS TURNOS</h2>
+
+                <form class="form-turnos", action="#", method="POST">
+                
+                    <label for="especialidad">Especialidad:</label>
+                    <input type="text", id="especialidad", name="especialidad", placeholder="Kinesiología">
+
+                    <label for="especialista">Especialista:</label>
+                    <input type="text", id="especialista", name="especialista", placeholder="Fulano">
+
+                    <label for="dia">Dia:</label>
+                    <input type="date", id="dia", name="dia">
+
+                    <input type="submit", class="submit-btn", id="busqueda", name="busqueda">
+                    <input type="reset", class="reset-btn", id="reset", name="reset">
+
+                </form>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="5">HISTORIAL TURNOS</th>
+                        </tr>
+                        <tr>
+                            <th>#</th><th>Especialidad</th><th>Especialista</th><th>Fecha</th><th>Hora</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td><td>Kinesiología</td><td>Fulano</td><td>16/04/2021</td><td>16:30</td>
+                        </tr>
+                        <tr>
+                            <td>2</td><td>Kinesiología</td><td>Fulano</td><td>16/04/2021</td><td>17:30</td>
+                        </tr>
+                        <tr>
+                            <td>3</td><td>Kinesiología</td><td>Fulano</td><td>16/04/2021</td><td>18:30</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        
         </main>
 
         <footer>

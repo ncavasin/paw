@@ -1,26 +1,39 @@
-header{
-    background-color: #96BAE6;
-    color: #black;
+.preheader{
+    background-color: #0f0d26;
+}
 
+.preheader p, a{
+    padding-top: 0;
+    margin: 0;
+}
+
+
+#tel{
+    margin: 0;
+    align-self: left;
+}
+
+header{
+    background-color: #0b092e;
 } 
+
+.texto-header{
+    text-decoration-line: none;
+    color: white;
+    text-align: center;
+    font-size: 24px;
+}
 
 header img{
     display: inline-block;
+    align-self: left;
+    margin: 0;
 }
 
 header p{
     margin: 0;
     display: inline-block;
 }
-
-
-nav{
-    padding-top: 0;
-    margin: 0;
-    background-color: #5A99E5;
-    text-align: center;
-}
-
 
 section{
     background-repeat: no-repeat;
@@ -40,19 +53,22 @@ section{
     padding-top: 50px;
 }
 
-.section2 label{
+.section2 label, input{
     margin-top: 20px;   
 }
 
-.section2 input{
-    margin-bottom: 20px;
-}
 
 .submit-btn{
-    border-radius: 3px;
-    background: #96BAE6;
+
 }
 
+.reset-btn{
+
+}
+
+.prefooter{
+
+}
 
 footer{
     background-color: #96BAE6;
