@@ -1,135 +1,74 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="es-AR">
     <head>
         <meta charset="utf-8">
-        <title>Clínicas PAW</title>
+        <meta lang="es-AR"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="expires" content="0"/>
+        
+        <base href="" target="_blank"/>
 
+        <title>Clínicas PAW</title>
     </head>
     <body>
-        <div class="preheader">
-            <a href="tel::+54 9 2346 42-4593" class="texto-header">+54 9 2346 42-4593</a>
-            <p>Hola, Joaquín Tossello</p>
-            <a href="#" class="texto-header">Cerrar Sesión</a>
-        </div>
-
         <header>
-            <a href="index.html">
-                <img src="https://raw.githubusercontent.com/ncavasin/paw/main/01-maquetado_web/img/1j%2BojFVDOMkX9Wytexe43D6khveFqR5JmR3IwXs1M3EMoAJtliEljvVo9f4y.png", alt="Imagen de la clinica">
+            <ul>
+                <li>
+                    <a href="tel:+54 9 2346 42-4593" class="texto-header">+54 9 2346 42-4593</a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                   Hola, Joaquín Tossello
+                </li>
+                <li>
+                    <button type="button" value="Cerrar Sesión">Cerrar Sesión</button>
+                </li>
+            </ul>
+            <a href="index.html" target="_self">
+                <h1>CLINICAS PAW</h1>
+                <img src="/img/Logo.png", alt="Clinicas PAW">
             </a>
-            
-            <nav>
-                <a href="about.html" class="texto-header">¿Quiénes Somos?</a>
-                <a href="services.html" class="texto-header">Nuestros Servicios</a>
-                <a href="coberturas.html" class="texto-header">Coberturas</a>
-                <a href="index.html#turnos" class="texto-header">Turnos</a>
-                <a href="index.html#mis_turnos" class="texto-header">Mis Turnos</a>
-            </nav>
         </header>
 
+        <nav>
+            <ul>
+                <li>
+                    <a href="about.html" target="_self">¿Quiénes Somos?</a>
+                </li>
+                <li>
+                    <a href="services.html" target="_self">Nuestros Servicios</a>
+                </li>
+                <li>
+                    <a href="coberturas.html" target="_self">Coberturas</a>
+                </li>
+                <li>
+                    <a href="turnos.html" target="_self" >Turnos</a>
+                </li>
+                <li>
+                    <a href="mis_turnos.html" target="_self">Mis Turnos</a>
+                </li>
+            </ul>
+        </nav>
+        
 
         <main>
-            <section class="section1">
+            <section>
                 <h2>CARROUSEL</h2>
-                <img src="img/doctores2.jpg", alt="Imagen doctor", style="width: 200px;">
+                <img src="/img/doctores2.jpg" width="300px" alt="Imagen doctor">
             </section>
 
-            <section class="section2">
+            <section>
 
-                <h2>BÚSQUEDA DE TURNOS POR ESPECIALIDAD</h2>
-
-                <form class="form-turnos", action="#", method="POST">
-                    
-                    <label for="especialidad">Especialidad:</label>
-                    <input type="text", id="especialidad", name="especialidad", placeholder="Kinesiología">
-
-                    <label for="especialista">Especialista:</label>
-                    <input type="text", id="especialista", name="especialista", placeholder="Fulano">
-
-                    <label for="dia">Dia:</label>
-                    <input type="date", id="dia", name="dia">
-
-                    <input type="submit", class="submit-btn", id="busqueda", name="busqueda">
-                    <input type="reset", class="reset-btn", id="reset", name="reset">
-                </form>
-                
-                <table>
-                    <thead>
-                        <tr>
-                            <th colspan="6">TURNOS DISPONIBLES</th>
-                        </tr>
-                        <tr>
-                            <th>#</th><th>Especialidad</th><th>Especialista</th><th>Fecha</th><th>Hora</th><th>Selección</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td><td>Kinesiología</td><td>Fulano</td><td>16/04/2021</td><td>16:30</td><td>-</td>
-                        </tr>
-                        <tr>
-                            <td>2</td><td>Kinesiología</td><td>Fulano</td><td>16/04/2021</td><td>17:30</td><td>-</td>
-                        </tr>
-                        <tr>
-                            <td>3</td><td>Kinesiología</td><td>Fulano</td><td>16/04/2021</td><td>18:30</td><td>-</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <section class="section2">
-                <h2>MIS TURNOS</h2>
-
-                <form class="form-turnos", action="#", method="POST">
-                
-                    <label for="especialidad">Especialidad:</label>
-                    <input type="text", id="especialidad", name="especialidad", placeholder="Kinesiología">
-
-                    <label for="especialista">Especialista:</label>
-                    <input type="text", id="especialista", name="especialista", placeholder="Fulano">
-
-                    <label for="dia">Dia:</label>
-                    <input type="date", id="dia", name="dia">
-
-                    <input type="submit", class="submit-btn", id="busqueda", name="busqueda">
-                    <input type="reset", class="reset-btn", id="reset", name="reset">
-
-                </form>
-                
-                <table>
-                    <thead>
-                        <tr>
-                            <th colspan="5">HISTORIAL TURNOS</th>
-                        </tr>
-                        <tr>
-                            <th>#</th><th>Especialidad</th><th>Especialista</th><th>Fecha</th><th>Hora</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td><td>Kinesiología</td><td>Fulano</td><td>16/04/2021</td><td>16:30</td>
-                        </tr>
-                        <tr>
-                            <td>2</td><td>Kinesiología</td><td>Fulano</td><td>16/04/2021</td><td>17:30</td>
-                        </tr>
-                        <tr>
-                            <td>3</td><td>Kinesiología</td><td>Fulano</td><td>16/04/2021</td><td>18:30</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-        
+                <h2>BÚSQUEDA DE TURNOS</h2>
+                <a href="turnos.html" id="anchor-turnos">Sacar Turno</a>
+            </section>        
         </main>
 
         <footer>
-            <div class="prefooter">
-                <div>
-                    Dirección
-                </div>
-            </div>
-
-            <div>
-                MAPA
-            </div>
-            <p>Clínicas PAW&trade; 2021</p>
+            <address>El Grito de Alcorta N°110<br>B6620 Chivilcoy<br>Provincia de Buenos Aires</address>
+            MAPA<br>
+            <small>Clínicas PAW&trade; 2021</small>
             <img src="", alt="Facebook PAW">
             <img src="", alt="Instagram PAW">
             <img src="", alt="Twitter PAW">
