@@ -18,6 +18,11 @@ campos:
 3. Realice la maquetación de todos los wireframes. Refleje en cada sección los tags HTML que mejor consideren que se adapta al  ontenido de la página a mostrar. En el caso del formulario, utilice los tags HTML y atributos que considere que mejor se adapten al tipo de dato del campo, para facilitar la validación del lado del cliente.
 4. Realizar un SiteMap del Sitio, que tenga al menos las secciones maquetadas.
 
+### Figma
+
+Se adjunta un enlace al [Figma][1] por si el archivo *maquetado_web.fig* tiene algún inconveniente.
+
+[1]:https://www.figma.com/file/c4T819mUq76Yhqvk7Ywynh/Untitled?node-id=0%3A1
 
 
 
