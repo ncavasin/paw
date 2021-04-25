@@ -55,16 +55,21 @@
                 <img src="../img/Imagen_IniciarSesión.jpg" alt="Imagen para Inicio de Sesión" width="300px">
 
                 <form action="#" method="POST" target="_self">
-                    
-                    <label for="email">Correo Electrónico:</label>
-                    <input type="email", placeholder="usuario@correo.com"/><br>   
-                    
-                    <label for="contrasenia">Contraseña:</label>
-                    <input type="password" id="contrasenia" name="contrasenia" placeholder="Contraseña"/><br>
+                    <fieldset>
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" 
+                        placeholder="usuario@correo.com" 
+                        required autofocus tabindex="1" autocomplete="on"/><br>   
+                        
+                        <label for="contrasenia">Contraseña:</label>
+                        <input type="password" id="contrasenia" name="contrasenia" 
+                        placeholder="Contraseña" 
+                        required tabindex="2" autocomplete="on"/><br>
+                    </fieldset>
 
                     <a href="reset_password.html" target="_self">¿Olvidaste tu contraseña?</a><br>
-                    
                     <a href="register.html" target="_self">Crear cuenta</a>
+
                     <input type="submit" value="Ingresar"/>
                 </form>
             </section>        
