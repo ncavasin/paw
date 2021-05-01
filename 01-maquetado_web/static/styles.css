@@ -1,0 +1,187 @@
+html{
+    font-family: 'Roboto', sans-serif;
+    --celeste: #183f6e;
+    --azul: #003b70;
+    --violeta: #4f2c7f;
+    --gris: #8a8a8d;
+}
+
+*{
+    list-style: none;  
+    text-decoration: none;
+}
+
+
+body{
+
+}
+
+header{
+    display: grid;
+    grid-template-columns: 10fr 90fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: 
+                        "tel    user"
+                        "logo   menu";
+    background-color: var(--white);
+    margin: 0 1rem 0 1rem;
+    box-shadow: .175rem .175rem .175rem var(--gris);
+}
+
+
+
+/* ########################################## */
+/* PREHEADER => TELEFONO + OPCIONES DE USUARIO */
+/* ########################################## */
+
+/* telefono */
+header > a:first-of-type{
+    align-self: center;
+    justify-self: left;
+    padding: .25rem .25rem .25rem .25rem;
+    color: var(--azul);
+    font-size: x-small;
+}
+
+
+/* lista de login y signup */
+header > ul{
+    align-self: center;
+    justify-self: right;
+    /* Para login y signup */
+    display: flex;
+    align-content: space-around;
+}
+
+/* opcion de login y signup */
+header > ul > li > a{
+    padding: .25rem .25rem .25rem .25rem;
+    color: var(--azul);
+    font-size: x-small;
+}
+
+/* efectos del preheader*/
+header > a:first-of-type:hover, header > ul > li > a:hover{
+    background-color: var(--azul);
+    color: white;
+    border: 1px solid white;
+}
+
+
+/* ########################################## */
+/* LOGOTIPO + NAVBAR */
+/* ########################################## */
+
+/* logotipo */
+header > a:last-of-type{
+    grid-area: logo;
+    background-color: var(--azul);
+    color: white;
+}
+
+header > a:last-of-type > h1{
+    margin: .25rem .25rem .25rem 3rem;
+}
+
+/* forma de trapezoide */
+header > a:last-of-type > h1::before{
+    background-color: black;
+}
+
+/* menu */
+header > nav{
+    grid-area: menu;
+    background-color: var(--azul);
+}
+
+/* lista de opciones del menu */
+header > nav > ul{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* opciones del menu */
+header > nav > ul > li{
+    color: white;
+    justify-self: right;
+}
+
+/* ########################################## */
+/* MAIN */
+/* ########################################## */
+
+main{
+    margin: 1rem 1rem 1rem 1rem;
+}
+
+main > section > h2{
+    font-size: xx-large;
+    font-weight: bolder;
+    color: var(--celeste);
+    padding-bottom: .75rem;
+}
+
+main > section > p{
+    max-width: 60ch;
+}
+
+main > section > p > b{
+    font-weight: bolder;
+}
+
+
+
+/* ########################################## */
+/* MAPA + FOOTER */
+/* ########################################## */
+
+footer{
+    grid-area: footer;
+    background-color: var(--gris);
+    margin: 0 1rem 0 1rem;
+    display: grid;
+    grid-template-columns: 10fr 10fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: 
+                        "dir    dir"
+                        "marca  rrss";
+}
+
+footer > address{
+    grid-area: dir;
+    padding-left: 2rem;
+}
+
+footer > small{
+    grid-area: marca;
+    justify-self: left;
+    align-self: center;
+    padding-left: 2rem;
+}
+
+footer > ul{
+    grid-area: rrss;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    list-style-image: url('../img/facebook.png');
+}
+
+
+
+/* 
+
+DESCOMENTAR PARA VERSION DESKTOP
+
+VERSION DESKTOP
+=================== telefono ===================
+
+header > a:first-of-type{
+    align-self: center;
+    justify-self: left;
+    padding: .25rem .25rem .25rem .25rem;
+    color: var(--azul);
+    font-size: x-small;
+}
+
+ */
