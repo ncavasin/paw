@@ -13,7 +13,9 @@ html{
 
 
 body{
-
+    min-height: 100vh;
+    width: 100%;
+    line-height: 1.25; 
 }
 
 header{
@@ -25,13 +27,15 @@ header{
                         "logo   menu";
     background-color: var(--white);
     margin: 0 1rem 0 1rem;
-    box-shadow: .175rem .175rem .175rem var(--gris);
+    /*¿box-shadow: .175rem .175rem .175rem var(--gris);*/
+    align-items: center;
+    justify-items: center;
 }
 
 
 
 /* ########################################## */
-/* PREHEADER => TELEFONO + OPCIONES DE USUARIO */
+/* HEADER => TELEFONO + OPCIONES DE USUARIO   */
 /* ########################################## */
 
 /* telefono */
@@ -53,24 +57,36 @@ header > ul{
     align-content: space-around;
 }
 
+header > ul > li{
+    margin: 0 .25rem 0 .25rem;
+}
+
 /* opcion de login y signup */
 header > ul > li > a{
-    padding: .25rem .25rem .25rem .25rem;
     color: var(--azul);
     font-size: x-small;
+    padding: .25rem .25rem .25rem .25rem;
 }
 
 /* efectos del preheader*/
 header > a:first-of-type:hover, header > ul > li > a:hover{
     background-color: var(--azul);
     color: white;
-    border: 1px solid white;
 }
 
 
 /* ########################################## */
 /* LOGOTIPO + NAVBAR */
 /* ########################################## */
+
+/* forma de paralelograma */
+header > a:last-of-type > h1::before{
+    background-color: black;
+    width: 80px;
+    height: 120px;
+    transform: skew(20deg);
+    position: absolute;
+}
 
 /* logotipo */
 header > a:last-of-type{
@@ -79,61 +95,54 @@ header > a:last-of-type{
     color: white;
 }
 
+/* texto logotipo */
 header > a:last-of-type > h1{
-    margin: .25rem .25rem .25rem 3rem;
+    margin: .25rem .25rem .25rem .25rem;
+    position: relative;
 }
 
-/* forma de trapezoide */
-header > a:last-of-type > h1::before{
-    background-color: black;
-}
-
-/* menu */
-header > nav{
+header > a:last-of-type::after{
     grid-area: menu;
     background-color: var(--azul);
 }
 
-/* lista de opciones del menu */
-header > nav > ul{
-    display: flex;
-    justify-content: space-evenly;
+nav{
+
 }
 
-/* opciones del menu */
-header > nav > ul > li{
+nav > ul{
+    display: none;
+}
+
+nav > ul > li{
+    align-self: center;
+    text-align: center;
+    border-right: 1px solid var(--gris);
+}
+
+nav > ul > li > a{
     color: white;
-    justify-self: right;
 }
 
-/* ########################################## */
-/* MAIN */
-/* ########################################## */
-
-main{
-    margin: 1rem 1rem 1rem 1rem;
+nav > ul > li > a:hover{
+    background-color: var(--gris);
 }
 
-main > section > h2{
-    font-size: xx-large;
-    font-weight: bolder;
-    color: var(--celeste);
-    padding-bottom: .75rem;
+@media (min-width: 376px) {
+
+    nav > ul{
+        position: fixed;
+        display: grid;
+        background-color: var(--azul);
+        grid-template-columns: 25fr 25fr 25fr 25fr;
+        grid-template-rows: 3rem;
+        left: 1rem;
+        right: 1rem;
+        font-size: smaller;
+    }
+
 }
 
-main > section > p{
-    max-width: 60ch;
-}
-
-main > section > p > b{
-    font-weight: bolder;
-}
-
-
-
-/* ########################################## */
-/* MAPA + FOOTER */
-/* ########################################## */
 
 footer{
     grid-area: footer;
@@ -149,39 +158,34 @@ footer{
 
 footer > address{
     grid-area: dir;
-    padding-left: 2rem;
+    font-size: small;
 }
 
 footer > small{
     grid-area: marca;
     justify-self: left;
     align-self: center;
-    padding-left: 2rem;
+    font-size: xx-small;
 }
 
 footer > ul{
     grid-area: rrss;
+    /*
     display: flex;
     justify-content: space-evenly;
     align-content: center;
-    list-style-image: url('../img/facebook.png');
+    */
+
 }
 
+footer > ul > li{
+    display: inline;
+    float: left;
+    font-size: xx-small;
+}
 
-
-/* 
-
-DESCOMENTAR PARA VERSION DESKTOP
-
-VERSION DESKTOP
-=================== telefono ===================
-
-header > a:first-of-type{
-    align-self: center;
-    justify-self: left;
-    padding: .25rem .25rem .25rem .25rem;
+.icono-instagram, .icono-facebook, .icono-mail{
     color: var(--azul);
-    font-size: x-small;
+    size: .5rem;
 }
 
- */

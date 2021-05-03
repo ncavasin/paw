@@ -1,0 +1,26 @@
+main{
+    margin: 1rem 1rem 1rem 1rem;
+}
+
+main > section > h2{
+    font-size: xx-large;
+    font-weight: bolder;
+    color: var(--celeste);
+    padding-bottom: .75rem;
+}
+
+main > section > p{
+    max-width: 80ch;
+    padding-bottom: .75rem;
+}
+
+main > section > p > b{
+    font-weight: bolder;
+}
+
+@media (min-width: 376px){
+    
+    main{
+        padding-top: 10%; /* espacio para insercion navbar*/
+    }
+}
