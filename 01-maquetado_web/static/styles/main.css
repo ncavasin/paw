@@ -18,9 +18,11 @@ main > section > p > b{
     font-weight: bolder;
 }
 
-@media (min-width: 376px){
+/*
+@media (min-width: 561px){
     
     main{
-        padding-top: 10%; /* espacio para insercion navbar*/
+        padding-top: 10%; espacio para insercion navbar
     }
 }
+*/
