@@ -35,17 +35,18 @@ header{
 header > a:first-of-type{
     display: none;
     text-align: center;
+    justify-self: center;
     color: var(--azul);
-    font-size: x-small;
 }
 
 /* lista de entrar y registrarse */
 header > ul{
     justify-self: end;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     grid-template-areas: 
                         "entrar registrarse";
+    font-size: smaller;
 }
 
 /* entrar */
@@ -57,12 +58,18 @@ header > ul > li:first-of-type{
 /* registrarse */
 header > ul > li:last-of-type{
     grid-area: registrarse;
+    justify-self: center;
+}
+
+/* lista de entrar y registrarse */
+header > ul > li{
+    margin-top: .25rem;
+    margin-bottom: .25rem;
 }
 
 /* entrar y registrarse */
 header > ul > li > a{
     color: var(--azul);
-    font-size: x-small;
     padding: .25rem .25rem .25rem .25rem;
 }
 
@@ -70,53 +77,75 @@ header > ul > li > a{
 header > a:first-of-type:hover, header > ul > li > a:hover{
     background-color: var(--azul);
     color: white;
+    font-weight: bolder;
 }
 
-
+/* segunda linea de header */
 header > nav{
     grid-area: nav;
-    justify-self: stretch;
     text-align: left;
     align-self: center;
+    padding: .5rem 0 .5rem 0;
     display: grid;
     grid-template-columns: 6fr 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: auto;
     grid-template-areas: 
-                        "logo   hamburguesa";
+                        "logo hamburguesa";
     background-color: var(--azul);
 }
 
+
 /* forma de paralelograma */
-header > nav > a > h1::before{
-    grid-area: logo;
-    background-color: black;
-    color: white;
-    width: 80px;
-    height: 120px;
-    transform: skew(20deg);
+header > nav > a:first-of-type::before{
+    display: inline-block;
+    width: .8rem;
+    height: 2.5rem;
+    background-color: white;
+    content: '';
+    -webkit-transform: skew(25deg);
+    -moz-transform: skew(25deg);
+    -o-transform: skew(25deg);
+    transform: skew(25deg);
+    overflow:hidden;  
+    margin-right: 1rem;
+    text-align: center;
+    float: left;    
 }
 
 /* logotipo */
 header > nav > a:first-of-type{
     grid-area: logo;
     color: white;
-    background-color: var(--azul);
-    text-align: center;
-    justify-self: center;
+    justify-self: left;
     align-self: center;
+    padding-left: 1rem;
+    display: block;
+   /* max-width: 1ch; /* equivale a un <br> */
 }
 
 /* texto logotipo */
 header > nav > a:first-of-type > h1{
-    margin: .25rem .25rem .25rem 1rem;
-}
-
-header > nav > a:last-of-type::after{
-    grid-area: menu;
-    background-color: var(--azul);
+    text-align: left;
+    font-weight: 900;    
 }
 
 /* hamburguesa */
+header > nav > a:nth-of-type(2){
+    grid-area: hamburguesa;
+    color: white;
+    align-self: center;
+    justify-self: center;
+    font-size: x-large;
+    padding: .5rem .5rem;
+}
+
+header > nav > a:nth-of-type(2):hover{
+    background-color: white;
+    color: var(--azul);
+}
+
+
+/* menu */
 header > nav > ul{
     display: none;
     grid-area: hamburguesa;
@@ -125,25 +154,26 @@ header > nav > ul{
     align-self: center;
 }
 
-/* opciones de la hamburguesa */
+/* opciones del menu */
 header > nav > ul > li{
     align-self: center;
-    text-align: center;
-    border-right: 1px solid var(--gris);
+    text-align: center; 
     justify-self: stretch;
 }
 
-header > nav > ul > li:last-of-type{
-    border: 0;
+header > nav > ul > li:not(:last-of-type){
+    border-right: 1px solid var(--gris);
 }
 
 header > nav > ul > li > a{
     color: white;
 }
 
-header > nav > ul > li:hover{
-    background-color: var(--gris);
+header > nav > ul > li > a:hover{
+    color: var(--azul);
+    background-color: white;
 }
+
 
 @media (min-width: 480px) {
 
@@ -161,14 +191,23 @@ header > nav > ul > li:hover{
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-areas:
                             "tel entrar registrarse";
+        font-size: smaller;
     }
 
     /* telefono */
     header > a:first-of-type{
-        display: inline;
+        display: inline-block;
         grid-area: tel;
         justify-self: left;
+        align-self: center;
         text-align: center;
+        font-size: smaller;
+        padding: .25rem .75rem .25rem 1rem;
+        margin-right: 3rem;
+    }
+
+    header > a:first-of-type:hover{
+        font-weight: bolder;
     }
 
     header > nav{
@@ -182,20 +221,21 @@ header > nav > ul > li:hover{
     /* logotipo */
     header > nav > a:first-of-type{
         grid-area: logo;
-        justify-self: center;
-        background-color: var(--azul);
+        justify-self: left;        
     }
 
+    /* lista de opciones del menu */ 
     header > nav > ul{
         grid-area: opciones;
         justify-self: stretch;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 2rem;
-        /*
-        left: 1rem;
-        right: 1rem;
-        */
+    }
+
+    /* escondo hamburguesa */
+    header > nav > a:nth-of-type(2){
+        display: none;
     }
 
 }
@@ -205,13 +245,13 @@ footer{
     grid-area: footer;
     background-color: var(--azul);
     color: white;
-    margin: 0 1rem 0 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     grid-template-areas: 
                         "dir    dir"
                         "marca  rrss";
+    padding: .5rem 1rem .25rem 1rem;
 }
 
 footer > address{
@@ -224,6 +264,7 @@ footer > address{
                         "dir"
                         "cp"
                         "prov";
+    background-color: rgba(var(--azul),  .25);
 }
 
 footer > address > p:first-of-type{
@@ -241,25 +282,20 @@ footer > address > p:last-of-type{
 footer > small{
     grid-area: marca;
     justify-self: left;
-    align-self: stretch;
+    align-self: flex-end;
     font-size: xx-small;
-    background-color: black;
+    font-weight: bolder;    
 }
 
 footer > ul{
     grid-area: rrss;
-    background-color: black;
-    /*
-    display: flex;
-    justify-content: space-evenly;
-    align-content: center;
-    */
-
-}
-
-footer > ul{
-    display: flex;
-    align-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+                        "fb     ig      mail";
+    justify-content: baseline;
+    align-content: space-between;
+    margin-top: 1rem;
 }
 
 
@@ -267,4 +303,5 @@ footer > ul{
 .gg-instagram, .gg-facebook, .gg-mail{
     color: white;
 }
+
 
