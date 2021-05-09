@@ -13,6 +13,16 @@ html{
     text-decoration: none;
 }
 
+.boton{
+    border-radius: 5px;
+    background-color: white;
+    color: var(--azul);
+    padding: .175rem .175rem;
+    align-self: center;
+    justify-self: center;
+    margin: 50%;
+}
+
 
 body{
     min-height: 100vh;
@@ -28,6 +38,11 @@ header{
                         "opciones"
                         "nav";
     background-color: var(--white);
+}
+
+
+p{
+    line-height: 2rem;
 }
 
 
@@ -71,13 +86,8 @@ header > ul > li{
 header > ul > li > a{
     color: var(--azul);
     padding: .25rem .25rem .25rem .25rem;
-}
+    text-decoration: underline;
 
-/* efecto entrar y registrarse */
-header > a:first-of-type:hover, header > ul > li > a:hover{
-    background-color: var(--azul);
-    color: white;
-    font-weight: bolder;
 }
 
 /* segunda linea de header */
@@ -92,6 +102,7 @@ header > nav{
     grid-template-areas: 
                         "logo hamburguesa";
     background-color: var(--azul);
+    position: sticky;
 }
 
 
@@ -194,6 +205,10 @@ header > nav > ul > li > a:hover{
         font-size: smaller;
     }
 
+    header > ul > li > a{
+        text-decoration: none;
+    }
+
     /* telefono */
     header > a:first-of-type{
         display: inline-block;
@@ -206,7 +221,10 @@ header > nav > ul > li > a:hover{
         margin-right: 3rem;
     }
 
-    header > a:first-of-type:hover{
+    /* efecto entrar y registrarse */
+    header > a:first-of-type:hover, header > ul > li > a:hover{
+        background-color: var(--azul);
+        color: white;
         font-weight: bolder;
     }
 
@@ -249,14 +267,14 @@ footer{
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     grid-template-areas: 
+                        "rrss   rrss"
                         "dir    dir"
-                        "marca  rrss";
-    padding: .5rem 1rem .25rem 1rem;
+                        "marca  marca";
+    padding: 2rem 1rem 2rem 1rem;
 }
 
 footer > address{
     grid-area: dir;
-    font-size: small;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -283,7 +301,7 @@ footer > small{
     grid-area: marca;
     justify-self: left;
     align-self: flex-end;
-    font-size: xx-small;
+    font-size: smaller;
     font-weight: bolder;    
 }
 
@@ -291,14 +309,13 @@ footer > ul{
     grid-area: rrss;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
     grid-template-areas: 
                         "fb     ig      mail";
-    justify-content: baseline;
-    align-content: space-between;
+    justify-content: center;
+    align-content: center;
     margin-top: 1rem;
 }
-
-
 
 .gg-instagram, .gg-facebook, .gg-mail{
     color: white;
