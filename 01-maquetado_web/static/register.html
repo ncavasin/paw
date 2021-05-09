@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="styles/icono.min.css">  
         <link rel="stylesheet" href="styles/header_footer.css"/>
         <link rel="stylesheet" href="styles/main.css"/>
-
+        <link rel="stylesheet" href="styles/form.css"/>
     
 
         <title>Dental Medical Group</title>
@@ -41,7 +41,7 @@
                         <a href="coberturas.html" target="_self">Coberturas</a>
                     </li>
                     <li>
-                        <a href="index.html" target="_self">Turnos</a>
+                        <a href="turnos.html" target="_self">Turnos</a>
                     </li>
                 </ul>
             </nav>
@@ -49,21 +49,21 @@
 
 
         <main>
-            <section class="section2">
+            <section>
                 <h2>REGISTRARSE</h2>
                 
-                <img src="../img/Imagen_Registrar.jpg" alt="Imagen para Registrarse" width="300">
+                <!--<img src="../img/Imagen_Registrar.jpg" alt="Imagen para Registrarse" width="300">-->
 
                 <form action="#" method="POST" target="_self">
                     <fieldset>
                         <label for="pnom">Nombre</label>
                         <input type="text" id="pnom" name="pnom" 
-                        placeholder="Nombre" autofocus 
+                        placeholder="Fulano" autofocus 
                         required tabindex="1" autocomplete="on"/>
                     
                         <label for="ape">Apellido</label>
                         <input type="text" id="ape" name="ape" 
-                        placeholder="Apellido" required tabindex="2" autocomplete="on"/>
+                        placeholder="De tal" required tabindex="2" autocomplete="on"/>
                     
                         <label for="fnac">Fecha de Nacimiento:</label>
                         <input type="date" id="fnac" name="fnac" 
@@ -75,7 +75,7 @@
                         <label for="celular">Celular</label>
                         <input type="tel" id="celular" name="celular" 
                         placeholder="+54 9 1144556677" 
-                        required tabindex="4" autocomplete="on"/><br>
+                        required tabindex="4" autocomplete="on"/>
                     </fieldset>
 
                     <fieldset>
@@ -84,10 +84,10 @@
                         placeholder="usuario@correo.com" 
                         required tabindex="5" autocomplete="on"/>
 
-                        <label for="conf_email">Confirmar Correo Electrónico:</label>
+                        <label for="conf_email">Confirmación:</label>
                         <input type="email" id="conf_email" name="conf_email"
                         placeholder="usuario@gmail.com" 
-                        required tabindex="6"/><br>
+                        required tabindex="6"/>
                     </fieldset>
 
                     <fieldset>
@@ -96,12 +96,12 @@
                         placeholder="Contraseña" 
                         required tabindex="7"/>
                     
-                        <label for="conf_contrasenia">Confirmar contraseña:</label>
+                        <label for="conf_contrasenia">Confirmación:</label>
                         <input type="password" id="conf_contrasenia" name="conf_contrasenia" 
                         placeholder="Contraseña" 
-                        required tabindex="8"/><br>
+                        required tabindex="8"/>
                     </fieldset>              
-                    <input type="submit" value="Registrarse"/>
+                    <input type="submit" value="Registrarse" class="boton"/>
                 </form>
             </section>        
         </main>
@@ -116,7 +116,8 @@
             <ul>
                 <li><a href="https://www.facebook.com/dentalmedicalgroup"><i class="gg-facebook"></i></a></li>
                 <li><a href="https://www.instagram.com/dentalmedicalgroup"><i class="gg-instagram"></i></a></li>
-                <li><a href="mailto:contacto@dentalmedicalgroup.com"><i class="gg-mail"></i></a></li>
+                <li><a href="mailto:contacto@dentalmedicalgroup.com"><i class="gg-facebook"></i></a></li>
+                <li><a href="https://www.linkedin.com/dentalmedicalgroup"><i class="gg-facebook"></i></a></li>
             </ul>
         </footer>
     </body>

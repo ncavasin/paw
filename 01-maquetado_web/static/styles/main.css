@@ -2,27 +2,40 @@ main{
     margin: 1rem 1rem 1rem 1rem;
 }
 
-main > section > h2{
-    font-size: xx-large;
+section{
+    text-align: center;
+}
+
+h2{
+    background-image: url('../../img/Carrusel_3.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: scroll;
+    border-radius: 20px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: x-large;
     font-weight: bolder;
     color: var(--celeste);
-    padding-bottom: .75rem;
+    text-align: center;
 }
 
-main > section > p{
+section > p{
+    font-size: larger;
     max-width: 80ch;
-    padding-bottom: .75rem;
+    margin-bottom: 1rem;
 }
 
-main > section > p > b{
+section > ul{
+    margin-bottom: 2rem;
+}
+
+section > ul > li{
+    font-size: larger;
+    line-height: 2.5rem;
+}
+
+b{
     font-weight: bolder;
 }
-
-/*
-@media (min-width: 561px){
-    
-    main{
-        padding-top: 10%; espacio para insercion navbar
-    }
-}
-*/
