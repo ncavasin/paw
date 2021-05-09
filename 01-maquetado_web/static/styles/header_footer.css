@@ -15,12 +15,8 @@ html{
 
 .boton{
     border-radius: 5px;
-    background-color: white;
-    color: var(--azul);
-    padding: .175rem .175rem;
-    align-self: center;
-    justify-self: center;
-    margin: 50%;
+    background-color: var(--azul);
+    color: white;
 }
 
 
@@ -264,12 +260,12 @@ footer{
     background-color: var(--azul);
     color: white;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
     grid-template-areas: 
-                        "rrss   rrss"
-                        "dir    dir"
-                        "marca  marca";
+                        "rrss"
+                        "dir"
+                        "marca";
     padding: 2rem 1rem 2rem 1rem;
 }
 
@@ -285,17 +281,6 @@ footer > address{
     background-color: rgba(var(--azul),  .25);
 }
 
-footer > address > p:first-of-type{
-    grid-area: dir;
-}
-
-footer > address > p:nth-of-type(2){
-    grid-area: cp;
-}
-
-footer > address > p:last-of-type{
-    grid-area: prov;
-}
 
 footer > small{
     grid-area: marca;
@@ -308,13 +293,14 @@ footer > small{
 footer > ul{
     grid-area: rrss;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
-    grid-template-areas: 
-                        "fb     ig      mail";
     justify-content: center;
     align-content: center;
-    margin-top: 1rem;
+}
+
+footer > ul > li{
+    padding: 0 .5rem 0 .5rem;
 }
 
 .gg-instagram, .gg-facebook, .gg-mail{
