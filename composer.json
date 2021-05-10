@@ -1,0 +1,35 @@
+{
+    "name": "paw/cursada_2021",
+    "description": "Proyecto del grupo #2",
+    "type": "library",
+    "keywords": [
+        "php", "paw", "dynamic website"
+    ],
+    "homepage": "https://github.com/ncavasin/paw",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cavasin Nicolas",
+            "email": "ncavasin97@gmail.com",
+            "role": "Creator"
+        },
+        {
+            "name": "Marcello Diego",
+            "email": "diegomarcello_17@gmail.com",
+            "role": "Creator"
+        },
+        {
+            "name": "Tosello Joaquin",
+            "email": "preguntar@gmail.com",
+            "role": "Creator"
+        }
+    ],
+    "require": {
+        "php": ">= 7.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Paw\\":"src/"
+        }
+    }
+}
