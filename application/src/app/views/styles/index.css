@@ -1,0 +1,56 @@
+@import url('https://css.gg/css?=|facebook|instagram|log-in|log-out|mail|menu');
+
+:root{
+    font-family: 'Roboto', sans-serif;
+    --celeste: #183f6e;
+    --azul: #003b70;
+    --violeta: #4f2c7f;
+    --gris: #8a8a8d;
+}
+
+h2{
+    background-image: none;
+    color: white;
+}
+
+section{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    font-weight: bolder;
+    align-items: center;
+    justify-items: center;
+    background-color: var(--azul);
+    color: white;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+section:first-of-type{
+    background-image: url('../../img/Carrusel_2.jpg');
+    background-repeat: no-repeat;
+    background-position: center; 
+    height: 15rem;
+}
+
+section:nth-of-type(3){
+    background-color: white;
+    color: var(--azul);
+}
+
+section > ul > li{
+    text-align: center;
+    margin: 2rem;
+    padding: 1rem 0;
+    background-color: whitesmoke;
+    border-radius: 25px;
+}
+
+
+ul > li > h3 > a:hover, a:last-of-type:hover{
+    color: white;
+}
+
+section > ul > li:hover{
+    background-color: var(--gris);
+}
+

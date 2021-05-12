@@ -6,9 +6,25 @@ class PageController{
 
     public string $viewsDir;
     public array $menu;
+    public array $userOptions;
 
     public function __construct(){
         $this->viewsDir = __DIR__ . "/../views/";
+
+        $this->userOptions = [
+            [
+                'href' => 'tel:+549234642-4593',
+                'name' => '+54 9 2346 42-4593'
+            ],
+            [
+                'href' => '/login',
+                'name' => 'Ingresar'
+            ],
+            [
+                'href' => '/register',
+                'name' => 'Registrarse'
+            ]
+        ];
 
         $this->menu = [
             [ 
@@ -38,6 +54,16 @@ class PageController{
         $main = "HOME AMEO";
         require $this->viewsDir . 'index_view.php';
     }
+
+    public function login(){
+
+        require $this->viewsDir . 'login_view.php';
+    }
+
+    public function register(){
+
+        require $this->viewsDir . 'register_view.php';
+    }   
 
     public function about(){
 

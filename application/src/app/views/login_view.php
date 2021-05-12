@@ -9,12 +9,15 @@
         <link rel="stylesheet" href="styles/icono.min.css">  
         <link rel="stylesheet" href="styles/header_footer.css"/>
         <link rel="stylesheet" href="styles/main.css"/>
+        <link rel="stylesheet" href="styles/form.css"/>
+        <link rel="stylesheet" href="styles/login.css"/>
+    
 
         <title>Dental Medical Group</title>
     </head>
     <body>
         <header>
-            <a href="tel:+549234642-4593">+54 9 2346 42-4593</a>
+            <!-- <a href="tel:+549234642-4593">+54 9 2346 42-4593</a>
             <ul>
                 <li>
                     <a href="login.html" target="_self">Iniciar Sesión</a>        
@@ -22,9 +25,11 @@
                 <li>
                     <a href="register.html" target="_self">Registrarse</a>
                 </li>
-            </ul>
+            </ul> -->
+            <?php 
+                require 'parts/header_view.php';
+            ?>
             <nav>
-                <!-- <h1><a href="index.html" target="_self">Dental Medical Group</a></h1> -->
                 <a href="index.html" target="_self">
                     <h1>Dental Medical Group</h1>
                 </a>
@@ -48,19 +53,29 @@
 
 
         <main>
-            <section style="text-align: left;">
-                <h2>VISIÓN</h2>
-                <p>Convertirnos en una institución modelo para el cuidado de la salud, manteniendo una excelente calidad de atención y respeto por la dignidad humana.</p>
+            <section>
+                <h2>INICIAR SESIÓN</h2>
+                
+                <!-- <img src="../img/Imagen_IniciarSesion.jpg" alt="Imagen para Inicio de Sesión" width="300px"> -->
 
-                <h2>MISIÓN</h2>
-                <p>Aportar a la comunidad la mejor asistencia médica posible, basándonos en: evidencia científica, pensamiento crítico y valores éticos. Asegurarnos de revisar y actualizar: conocimientos, procesos y tecnologías; además de administrar nuestros recursos de manera transparente y honesta; serán nuestra principal misión.</p>
+                <form action="#" method="POST" target="_self">
+                    <fieldset>
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" 
+                        placeholder="usuario@correo.com" 
+                        required autofocus tabindex="1" autocomplete="on"/>
+                        
+                        <label for="contrasenia">Contraseña:</label>
+                        <input type="password" id="contrasenia" name="contrasenia" 
+                        placeholder="ultra secure password" 
+                        required tabindex="2" autocomplete="on"/>
+                    </fieldset>
 
-                <h2>VALORES</h2>
-                <p><b>Responsabilidad:</b> Asumimos un rol activo en nuestra labor diaria y comprendemos la trascendencia de nuestras acciones individuales y colectivas</p>
-                <p><b>Compromiso:</b> Asumimos nuestras tareas comprometidos con la institución, enfocando nuestro esfuerzo en brindar atención de calidad a nuestros pacientes y su familia.</p>
-                <p><b>Eficiencia:</b> Logramos nuestros objetivos utilizando procesos y métodos de trabajo que optimizan nuestro desempeño.</p>
-                <p><b>Ética:</b> Sostenemos una conducta transparente, honesta y preocupada por la dignidad de todos nuestros pacientes.</p>
-                <p><b>Trabajo en equipo:</b> Trabajamos valorando nuestras diferencias, fortaleciendo las relaciones interpersonales y priorizando el éxito del equipo por encima del éxito individual.</p>
+                    <a href="reset_password.html" target="_self">¿Olvidaste tu contraseña?</a>
+                    <a href="register.html" target="_self">Crear cuenta</a>
+
+                    <input type="submit" value="Ingresar" class="boton"/>
+                </form>
             </section>        
         </main>
 

@@ -9,6 +9,10 @@
         <link rel="stylesheet" href="styles/icono.min.css">  
         <link rel="stylesheet" href="styles/header_footer.css"/>
         <link rel="stylesheet" href="styles/main.css"/>
+        <link rel="stylesheet" href="styles/form.css"/>
+        <link rel="stylesheet" href="styles/turnos.css"/>
+        
+    
 
         <title>Dental Medical Group</title>
     </head>
@@ -24,7 +28,6 @@
                 </li>
             </ul>
             <nav>
-                <!-- <h1><a href="index.html" target="_self">Dental Medical Group</a></h1> -->
                 <a href="index.html" target="_self">
                     <h1>Dental Medical Group</h1>
                 </a>
@@ -46,21 +49,43 @@
             </nav>
         </header>
 
-
         <main>
-            <section style="text-align: left;">
-                <h2>VISIÓN</h2>
-                <p>Convertirnos en una institución modelo para el cuidado de la salud, manteniendo una excelente calidad de atención y respeto por la dignidad humana.</p>
+            <section>
+                <h2>HISTORIAL DE TURNOS</h2>
 
-                <h2>MISIÓN</h2>
-                <p>Aportar a la comunidad la mejor asistencia médica posible, basándonos en: evidencia científica, pensamiento crítico y valores éticos. Asegurarnos de revisar y actualizar: conocimientos, procesos y tecnologías; además de administrar nuestros recursos de manera transparente y honesta; serán nuestra principal misión.</p>
-
-                <h2>VALORES</h2>
-                <p><b>Responsabilidad:</b> Asumimos un rol activo en nuestra labor diaria y comprendemos la trascendencia de nuestras acciones individuales y colectivas</p>
-                <p><b>Compromiso:</b> Asumimos nuestras tareas comprometidos con la institución, enfocando nuestro esfuerzo en brindar atención de calidad a nuestros pacientes y su familia.</p>
-                <p><b>Eficiencia:</b> Logramos nuestros objetivos utilizando procesos y métodos de trabajo que optimizan nuestro desempeño.</p>
-                <p><b>Ética:</b> Sostenemos una conducta transparente, honesta y preocupada por la dignidad de todos nuestros pacientes.</p>
-                <p><b>Trabajo en equipo:</b> Trabajamos valorando nuestras diferencias, fortaleciendo las relaciones interpersonales y priorizando el éxito del equipo por encima del éxito individual.</p>
+                <table id="table-mis-turnos">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Especialidad</th><th>Especialista</th><th>Fecha</th><th>Hora</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="especialidad">Resonancia</td>
+                            <td class="especialista">Fulano</td>
+                            <td class="fecha">16/04/2021</td>
+                            <td class="hora">16:30</td>
+                        </tr>
+                        <tr>
+                            <td class="especialidad">Resonancia</td>
+                            <td class="especialista">Fulano</td>
+                            <td class="fecha">16/04/2021</td>
+                            <td class="hora">16:30</td>
+                        </tr>
+                        <tr>
+                            <td class="especialidad">Resonancia</td>
+                            <td class="especialista">Fulano</td>
+                            <td class="fecha">16/04/2021</td>
+                            <td class="hora">16:30</td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>        
         </main>
 
@@ -74,8 +99,7 @@
             <ul>
                 <li><a href="https://www.facebook.com/dentalmedicalgroup"><i class="gg-facebook"></i></a></li>
                 <li><a href="https://www.instagram.com/dentalmedicalgroup"><i class="gg-instagram"></i></a></li>
-                <li><a href="mailto:contacto@dentalmedicalgroup.com"><i class="gg-facebook"></i></a></li>
-                <li><a href="https://www.linkedin.com/dentalmedicalgroup"><i class="gg-facebook"></i></a></li>
+                <li><a href="mailto:contacto@dentalmedicalgroup.com"><i class="gg-mail"></i></a></li>
             </ul>
         </footer>
     </body>

@@ -9,12 +9,7 @@ $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
-
-
 // throw new \Exception('Error message for the dev');
-
-
-
 
 $nombre = htmlspecialchars($_GET['nombre'] ?? 'PAW');
 $main = 'vacio';
@@ -42,11 +37,13 @@ if ($path == '/'){
     
     $controller->turns();
 
-}else{
+}else if($path == '/login'){
+    $controller->login();
+
+}else if($path == '/register'){
+    $controller->register();
+}else {
     $controller = new ErrorController;
     $controller->notFound();
 }
 
-
-
-# front controller
