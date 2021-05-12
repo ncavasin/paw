@@ -2,56 +2,39 @@
 
 require __DIR__ . '/../src/bootstrap.php';
 
-
-use Paw\app\controllers\ErrorController;
-use Paw\app\controllers\PageController; 
-
-$whoops = new \Whoops\Run;
-$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-$whoops->register();
-
-// throw new \Exception('Error message for the dev');
+use Paw\core\exceptions\RouteNotFoundException;
+use Paw\core\Router;
 
 $nombre = htmlspecialchars($_GET['nombre'] ?? 'PAW');
 $main = 'vacio';
 
-# Path router
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$controller = new PageController();
-
 $log->info("Peticion a {$path}");
 
-if ($path == '/'){
-    $controller->index();
-    $log->info('Respuesta exitosa: 200');
-}else if ($path == '/about'){
 
-    $controller->about();
-    $log->info('Respuesta exitosa: 200');
-}else if($path == '/services'){
+$router = new Router;
 
-    $controller->services();
-    $log->info('Respuesta exitosa: 200');
+$router->loadRoute('/', 'PageController@index');
+$router->loadRoute('/about', 'PageController@about');
+$router->loadRoute('/services', 'PageController@services');
+$router->loadRoute('/coverages', 'PageController@coverages');
+$router->loadRoute('/turns', 'PageController@turns');
+$router->loadRoute('/login', 'PageController@login');
+$router->loadRoute('/register', 'PageController@register');
+$router->loadRoute('notFound', 'ErrorController@notFound');
+$router->loadRoute('internalError', 'ErrorController@internalError');
 
-}else if($path == '/coverages'){
-    
-    $controller->coverages();
-    $log->info('Respuesta exitosa: 200');
+try{
 
-}else if($path == '/turns'){
+    $router->direct($path);
 
-    $controller->turns();
-    $log->info('Respuesta exitosa: 200');
+}catch (RouteNotFoundException $e){
 
-}else if($path == '/login'){
-    $controller->login();
-    $log->info('Respuesta exitosa: 200');
-}else if($path == '/register'){
-    $controller->register();
-    $log->info('Respuesta exitosa: 200');
-}else {
-    $controller = new ErrorController;
-    $controller->notFound();
-    $log->info('Path not found: 404');
+    $router->direct('notFound');
+    $log->info('Status code 404 - Path not found', ["Error" => $path]);
+
+} catch(Exception $e){
+
+    $router->direct('internalError');
+    $log->error('Status code 500 - Internal server error', ["Error" => $e]);
 }
-

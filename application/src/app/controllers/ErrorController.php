@@ -41,5 +41,11 @@ class ErrorController{
 
     }
 
+    public function internalError(){
+        http_response_code(500);
+        require $this->viewsDir . 'internal_error_view.php';
+    }
+
+
 }
 ?>
