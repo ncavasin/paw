@@ -11,21 +11,22 @@
         {
             "name": "Cavasin Nicolas",
             "email": "ncavasin97@gmail.com",
-            "role": "Creator"
+            "role": "Owner/Developer"
         },
         {
             "name": "Marcello Diego",
             "email": "diegomarcello_17@gmail.com",
-            "role": "Creator"
+            "role": "Owner/Developer"
         },
         {
             "name": "Tosello Joaquin",
             "email": "tosellojoaquin@gmail.com",
-            "role": "Creator"
+            "role": "Owner/Developer"
         }
     ],
     "require": {
-        "php": ">= 7.4.0"
+        "php": ">= 7.4.0",
+        "filp/whoops": "~2"
     },
     "autoload": {
         "psr-4": {
