@@ -6,10 +6,10 @@ use Paw\core\exceptions\RouteNotFoundException;
 
 # Get requested path
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$http_method = parse_url($_SERVER['REQUEST_METHOD']);
+$http_method = $_SERVER['REQUEST_METHOD'];
 
 # Log it
-// $log->info("Peticion {$http_method} a {$path}");
+$log->info("Peticion {$http_method} a {$path}");
 
 # Deal with it
 try{
