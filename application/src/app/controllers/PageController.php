@@ -55,15 +55,39 @@ class PageController{
         require $this->viewsDir . 'index_view.php';
     }
 
-    public function login(){
+    public function login($procesado = false){
 
         require $this->viewsDir . 'login_view.php';
+
+        # to-do: mostrar mensaje de exito usando el flag procesado 
     }
 
-    public function register(){
+
+    public function loginProcess(){
+
+        $form = $_POST;
+
+        # validation
+
+        $this->login(true);
+    }
+
+
+    public function register($procesado = false){
 
         require $this->viewsDir . 'register_view.php';
-    }   
+    }
+
+
+    public function registerProcess(){
+
+        $form = $_POST;
+
+        # validation
+    
+        $this->register(true);
+    }
+
 
     public function about(){
 
@@ -82,15 +106,20 @@ class PageController{
         require $this->viewsDir . 'coverages_view.php';
     }
 
-    public function turns(){
+    public function turns($procesado = false){
 
         require $this->viewsDir . 'turns_view.php';
     }
 
 
-    public function not_found(){
-        http_response_code(404);
-        require $this->viewsDir . 'not_found_view.php';
-    }
-}
+    public function turnsProcess(){
 
+        $form = $_POST;
+
+        # validation
+
+        $this->turns(true);
+    }
+
+}
+?>

@@ -3,38 +3,26 @@
 require __DIR__ . '/../src/bootstrap.php';
 
 use Paw\core\exceptions\RouteNotFoundException;
-use Paw\core\Router;
 
-$nombre = htmlspecialchars($_GET['nombre'] ?? 'PAW');
-$main = 'vacio';
-
+# Get requested path
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$log->info("Peticion a {$path}");
+$http_method = parse_url($_SERVER['REQUEST_METHOD']);
 
+# Log it
+// $log->info("Peticion {$http_method} a {$path}");
 
-$router = new Router;
-
-$router->loadRoute('/', 'PageController@index');
-$router->loadRoute('/about', 'PageController@about');
-$router->loadRoute('/services', 'PageController@services');
-$router->loadRoute('/coverages', 'PageController@coverages');
-$router->loadRoute('/turns', 'PageController@turns');
-$router->loadRoute('/login', 'PageController@login');
-$router->loadRoute('/register', 'PageController@register');
-$router->loadRoute('notFound', 'ErrorController@notFound');
-$router->loadRoute('internalError', 'ErrorController@internalError');
-
+# Deal with it
 try{
-
-    $router->direct($path);
-
+ 
+    $router->direct($path, $http_method);
+    $log->info("Status code 200 - {$path}");
 }catch (RouteNotFoundException $e){
 
     $router->direct('notFound');
-    $log->info('Status code 404 - Path not found', ["Error" => $path]);
+    $log->info("Status code 404 - Path not found", ["Error" => $path]);
 
 } catch(Exception $e){
 
     $router->direct('internalError');
-    $log->error('Status code 500 - Internal server error', ["Error" => $e]);
+    $log->error("Status code 500 - Internal server error", ["Error" => $e]);
 }

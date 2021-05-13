@@ -6,28 +6,53 @@ use Paw\core\exceptions\RouteNotFoundException;
 
 class Router{
 
+    public array $routes = [
+        "GET" => [],
+        "POST" => []
+    ];
 
-    # List of accepted routes
-    public array $routes;
-
-    public function loadRoute($path, $action){
-
-        # key-value pair: <route, method to process request>
-        $this->routes[$path] = $action;
+    # Add an action method for the <route's_path+http_method> received pair
+    private function loadRoute($path, $action, $http_method = "GET"){
+        $this->routes[$http_method][$path] = $action;
     }
 
 
-    public function direct($path){
+    # Load a route with http_method as GET
+    public function get($path, $action){
+        $this->loadRoute($path, $action, "GET");
+    }
 
-        if (! array_key_exists($path, $this->routes)){
+    # Load a route with http_method as POST
+    public function post($path, $action){
+        $this->loadRoute($path, $action, "POST");
+    }
+
+    # Path existance for the http method received
+    public function exists($path, $http_method){
+        return array_key_exists($path, $this->routes[$http_method]);
+    }
+
+
+    # Return proper controller for http method received
+    public function getController($path, $http_method){
+        return explode('@', $this->routes[$http_method][$path]);
+    }     
+
+
+    # Trigger action method based upon the http method received
+    public function direct($path, $http_method = "GET"){
+
+        if (!$this->exists($path, $http_method)){
             throw new RouteNotFoundException('No existe una ruta para este path');
         }
 
-        list($controller, $method)  = explode('@', $this->routes[$path]);
+        # Parse request
+        list($controller, $action)  = $this->getController($path, $http_method);
         $controller_name = "Paw\\app\controllers\\{$controller}";
-        $objControler = new $controller_name;
-        $objControler->$method();
         
+        # Serve it properly
+        $objControler = new $controller_name;
+        $objControler->$action();
     }
  
 }
