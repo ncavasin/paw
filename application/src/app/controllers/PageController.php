@@ -5,17 +5,20 @@ namespace Paw\app\controllers;
 class PageController{
 
     public string $viewsDir;
-    public array $menu;
+    private array $contact;
     public array $userOptions;
+    public array $menuOptions;
+    public array $footerLinks;
 
     public function __construct(){
         $this->viewsDir = __DIR__ . "/../views/";
 
+        $this->contact = [
+            'href' => 'tel:+549234642-4593',
+            'name' => '+54 9 2346 42-4593'
+        ];
+
         $this->userOptions = [
-            [
-                'href' => 'tel:+549234642-4593',
-                'name' => '+54 9 2346 42-4593'
-            ],
             [
                 'href' => '/login',
                 'name' => 'Ingresar'
@@ -26,11 +29,7 @@ class PageController{
             ]
         ];
 
-        $this->menu = [
-            [ 
-                'href' => '/',
-                'name' => 'Home'
-            ],
+        $this->menuOptions = [
             [
                 'href' => '/about',
                 'name' => '¿Quienes Somos?'
@@ -48,23 +47,42 @@ class PageController{
                 'name' => 'Turnos'
             ]
         ];
+
+
+        $this->footerLinks = [
+            [
+                'href' => 'https://www.facebook.com/dentalmedicalgroup',
+                'name' => 'facebook'
+            ],
+            [
+                'href' => 'https://www.instagram.com/dentalmedicalgroup',
+                'name' => 'instagram'
+            ],
+            [
+                'href' => 'https://www.linkedin.com/dentalmedicalgroup',
+                'name' => 'linkedin'
+            ],
+            [
+                'href' => 'mailto:contacto@dentalmedicalgroup.com',
+                'name' => 'mail'
+            ]
+        ];
     }
 
     public function index(){
-        $main = "HOME AMEO";
+        $titulo = 'Dental Medical Group';
         require $this->viewsDir . 'index_view.php';
     }
 
-    public function login($procesado = false){
 
+    public function login($procesado = false){
+        $titulo = 'Iniciar Sesión';
         require $this->viewsDir . 'login_view.php';
 
         # to-do: mostrar mensaje de exito usando el flag procesado 
     }
-
-
     public function loginProcess(){
-
+        $titulo = 'Iniciar Sesión';
         $form = $_POST;
 
         # validation
@@ -74,13 +92,11 @@ class PageController{
 
 
     public function register($procesado = false){
-
+        $titulo = 'Registrarse';
         require $this->viewsDir . 'register_view.php';
     }
-
-
     public function registerProcess(){
-
+        $titulo = 'Registrarse';
         $form = $_POST;
 
         # validation
@@ -90,30 +106,29 @@ class PageController{
 
 
     public function about(){
-
+        $titulo = '¿Quiénes Somos?';
         require $this->viewsDir . 'about_view.php';
     }
 
 
     public function services(){
-
+        $titulo = 'Nuestros Servicios';
         require $this->viewsDir . 'services_view.php';
     }
 
 
     public function coverages(){
-        $main = htmlspecialchars($_GET["var"] ?? "Nadia");
+        $titulo = 'Coberturas';
         require $this->viewsDir . 'coverages_view.php';
     }
 
-    public function turns($procesado = false){
 
+    public function turns($procesado = false){
+        $titulo = 'Turnos';
         require $this->viewsDir . 'turns_view.php';
     }
-
-
     public function turnsProcess(){
-
+        $titulo = 'Turnos';
         $form = $_POST;
 
         # validation
