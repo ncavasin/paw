@@ -22,6 +22,9 @@ $router = new Router;
 $router->get('/login', 'PageController@login');
 $router->post('/login', 'PageController@loginProcess');
 
+$router->get('/reset_password', 'PageController@resetPassword');
+$router->post('/reset_password', 'PageController@resetPasswordProcess');
+
 $router->get('/register', 'PageController@register');
 $router->post('/register', 'PageController@registerProcess');
 

@@ -84,7 +84,7 @@ class PageController{
     public function loginProcess(){
         $titulo = 'Iniciar Sesión';
         $form = $_POST;
-
+        
         # validation
 
         $this->login(true);
@@ -104,37 +104,48 @@ class PageController{
         $this->register(true);
     }
 
+    public function resetPassword($procesado = false){
+        require $this->viewsDir . 'reset_password_view.php';
+    }
+    public function resetPasswordProcess(){
+        $this->titulo = 'Reestablecer Contraseña';
+        $this->form = $_POST;
+
+        # validation
+
+        $this->resetPassword(true);
+    }
+
 
     public function about(){
-        $titulo = '¿Quiénes Somos?';
+        $this->titulo = '¿Quiénes Somos?';
         require $this->viewsDir . 'about_view.php';
     }
 
 
     public function services(){
-        $titulo = 'Nuestros Servicios';
+        $this->titulo = 'Nuestros Servicios';
         require $this->viewsDir . 'services_view.php';
     }
 
 
     public function coverages(){
-        $titulo = 'Coberturas';
+        $this->titulo = 'Coberturas';
         require $this->viewsDir . 'coverages_view.php';
     }
 
 
     public function turns($procesado = false){
-        $titulo = 'Turnos';
+        $this->titulo = 'Turnos';
         require $this->viewsDir . 'turns_view.php';
     }
     public function turnsProcess(){
-        $titulo = 'Turnos';
-        $form = $_POST;
+        $this->titulo = 'Turnos';
+        $this->form = $_POST;
 
         # validation
 
         $this->turns(true);
     }
-
 }
 ?>

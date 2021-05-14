@@ -24,9 +24,6 @@
             <section>
                 
                 <h2>REESTABLECER CONTRASEÑA</h2>
-
-                <!--<img src="../img/Imagen_RestablecerContraseña.jpg" alt="Imagen para Reestablecer Contraseña" width="300"/>-->
-
                 <form action="#" method="POST" target="_self">
                     <fieldset>
                         <label for="contrasenia">Nueva contraseña:</label>

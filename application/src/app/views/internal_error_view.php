@@ -13,30 +13,17 @@
         <title>Server internal error</title>
     </head>
     <body>
+        <h1>Server Interal Error</h2>    
         <?php 
             require 'parts/header_view.php';
         ?>
 
         <main>
-            <h2>Server Interal Error</h2>    
-            <?php
-                require 'parts/nav_view.php';
-            ?>
+ 
         </main>
 
-        <footer>
-            <address>
-                <p>El Grito de Alcorta N°110</p>
-                <p>B6620 Chivilcoy</p>
-                <p>Provincia de Buenos Aires</p>
-            </address>
-            <small>Dental Medical Group&trade; 2021</small>
-            <ul>
-                <li><a href="https://www.facebook.com/dentalmedicalgroup"><i class="gg-facebook"></i></a></li>
-                <li><a href="https://www.instagram.com/dentalmedicalgroup"><i class="gg-instagram"></i></a></li>
-                <li><a href="mailto:contacto@dentalmedicalgroup.com"><i class="gg-facebook"></i></a></li>
-                <li><a href="https://www.linkedin.com/dentalmedicalgroup"><i class="gg-facebook"></i></a></li>
-            </ul>
-        </footer>
+        <?php 
+            require 'parts/footer_view.php';
+        ?>
     </body>
 </html>

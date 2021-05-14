@@ -13,16 +13,14 @@ $log->info("Peticion {$http_method} a {$path}");
 
 # Deal with it
 try{
- 
     $router->direct($path, $http_method);
     $log->info("Status code 200 - {$path}");
-}catch (RouteNotFoundException $e){
 
+}catch (RouteNotFoundException $e){
     $router->direct('notFound');
     $log->info("Status code 404 - Path not found", ["Error" => $path]);
 
 } catch(Exception $e){
-
     $router->direct('internalError');
     $log->error("Status code 500 - Internal server error", ["Error" => $e]);
 }

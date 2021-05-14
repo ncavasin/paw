@@ -28,47 +28,47 @@
 
                 <form action="#" method="POST" target="_self">
                     <fieldset>
-                        <label for="pnom">Nombre</label>
+                        <label for="pnom">Nombre (*)</label>
                         <input type="text" id="pnom" name="pnom" 
                         placeholder="Fulano" autofocus 
                         required tabindex="1" autocomplete="on"/>
                     
-                        <label for="ape">Apellido</label>
+                        <label for="ape">Apellido (*)</label>
                         <input type="text" id="ape" name="ape" 
                         placeholder="De tal" required tabindex="2" autocomplete="on"/>
                     
-                        <label for="fnac">Fecha de Nacimiento:</label>
+                        <label for="fnac">Fecha de Nacimiento (*)</label>
                         <input type="date" id="fnac" name="fnac" 
                         required tabindex="3" autocomplete="on"/>
                     </fieldset>
                     
                     <fieldset>
                         <!-- pattern="+[0-9]{2}[0-9]{1}[0-9]{4}"-->
-                        <label for="celular">Celular</label>
+                        <label for="celular">Celular (*)</label>
                         <input type="tel" id="celular" name="celular" 
                         placeholder="+54 9 1144556677" 
                         required tabindex="4" autocomplete="on"/>
                     </fieldset>
 
                     <fieldset>
-                        <label for="email">Correo Electrónico:</label>
+                        <label for="email">Correo Electrónico (*)</label>
                         <input type="email" id="email" name="email"
                         placeholder="usuario@correo.com" 
                         required tabindex="5" autocomplete="on"/>
 
-                        <label for="conf_email">Confirmación:</label>
+                        <label for="conf_email">Confirmación (*)</label>
                         <input type="email" id="conf_email" name="conf_email"
                         placeholder="usuario@gmail.com" 
                         required tabindex="6"/>
                     </fieldset>
 
                     <fieldset>
-                        <label for="contrasenia">Contraseña:</label>
+                        <label for="contrasenia">Contraseña (*)</label>
                         <input type="password" id="contrasenia" name="contrasenia" 
                         placeholder="Contraseña" 
                         required tabindex="7"/>
                     
-                        <label for="conf_contrasenia">Confirmación:</label>
+                        <label for="conf_contrasenia">Confirmación (*)</label>
                         <input type="password" id="conf_contrasenia" name="conf_contrasenia" 
                         placeholder="Contraseña" 
                         required tabindex="8"/>

@@ -27,10 +27,8 @@ class Router{
         $this->loadRoute($path, $action, "POST");
     }
 
-    # Path existance for the http method received
+    # Check path existance for the http method received
     public function exists($path, $http_method){
-
-    
         return array_key_exists($path, $this->routes[$http_method]);
     }
 
