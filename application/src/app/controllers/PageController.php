@@ -74,13 +74,13 @@ class PageController{
         require $this->viewsDir . 'index_view.php';
     }
 
-
     public function login($procesado = false){
         $titulo = 'Iniciar Sesión';
         require $this->viewsDir . 'login_view.php';
 
         # to-do: mostrar mensaje de exito usando el flag procesado 
     }
+
     public function loginProcess(){
         $titulo = 'Iniciar Sesión';
         $form = $_POST;
@@ -90,11 +90,11 @@ class PageController{
         $this->login(true);
     }
 
-
     public function register($procesado = false){
         $titulo = 'Registrarse';
         require $this->viewsDir . 'register_view.php';
     }
+
     public function registerProcess(){
         $titulo = 'Registrarse';
         $form = $_POST;
@@ -107,6 +107,7 @@ class PageController{
     public function resetPassword($procesado = false){
         require $this->viewsDir . 'reset_password_view.php';
     }
+
     public function resetPasswordProcess(){
         $this->titulo = 'Reestablecer Contraseña';
         $this->form = $_POST;
@@ -116,29 +117,26 @@ class PageController{
         $this->resetPassword(true);
     }
 
-
     public function about(){
         $this->titulo = '¿Quiénes Somos?';
         require $this->viewsDir . 'about_view.php';
     }
-
 
     public function services(){
         $this->titulo = 'Nuestros Servicios';
         require $this->viewsDir . 'services_view.php';
     }
 
-
     public function coverages(){
         $this->titulo = 'Coberturas';
         require $this->viewsDir . 'coverages_view.php';
     }
 
-
     public function turns($procesado = false){
         $this->titulo = 'Turnos';
         require $this->viewsDir . 'turns_view.php';
     }
+    
     public function turnsProcess(){
         $this->titulo = 'Turnos';
         $this->form = $_POST;

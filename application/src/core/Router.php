@@ -48,7 +48,7 @@ class Router{
 
         # Parse request
         list($controller, $action)  = $this->getController($path, $http_method);
-        $controller_name = "Paw\\app\controllers\\{$controller}";
+        $controller_name = "Paw\\app\\controllers\\{$controller}";
         
         # Serve it properly
         $objControler = new $controller_name;

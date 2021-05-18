@@ -80,6 +80,7 @@ class ErrorController{
 
 
     public function internalError(){
+        $title = "Error interno del servidor"
         http_response_code(500);
         require $this->viewsDir . 'internal_error_view.php';
     }
