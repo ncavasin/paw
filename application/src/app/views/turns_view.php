@@ -4,8 +4,8 @@
         <?php
             require 'parts/head_view.php'
         ?>
-        <link rel="stylesheet" href="/styles/form.css"/>
-        <link rel="stylesheet" href="/styles/turnos.css"/>
+        <link rel="stylesheet" type='text/css' href="assets/css/form.css"/>
+        <link rel="stylesheet" type='text/css' href="assets/css/turnos.css"/>
     </head>
     <body>
         <?php 

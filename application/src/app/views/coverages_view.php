@@ -4,7 +4,7 @@
         <?php
             require 'parts/head_view.php'
         ?>
-        <link rel="stylesheet" href="styles/coberturas.css"/>
+        <link rel="stylesheet" type='text/css' href="assets/css/coberturas.css"/>
     </head>
     <body>
     <?php 

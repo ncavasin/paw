@@ -4,14 +4,8 @@
         <?php
             require 'parts/head_view.php'
         ?>
-        <style>
-            <?php include 'styles/reset.css' ?>
-            <?php include 'styles/icono.min.css' ?>
-            <?php include 'styles/header_footer.css' ?>
-            <?php include 'styles/main.css' ?>
-            <?php include 'styles/form.css' ?>
-            <?php include 'styles/login.css' ?>
-        </style>
+        <link re='stylesheet' type='text/css' href='assets/css/form.css' />
+        <link re='stylesheet' type='text/css' href='assets/css/login.css' />
     </head>
     <body>
         <?php 

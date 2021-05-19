@@ -4,7 +4,7 @@
         <?php
             require 'parts/head_view.php'
         ?>
-        <link rel="stylesheet" href="styles/index.css"/>   
+        <link rel="stylesheet" type='text/css' href="assets/css/index.css"/>   
     </head>
     <body>
         <?php 
