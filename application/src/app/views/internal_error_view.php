@@ -7,7 +7,7 @@
         <link rel="stylesheet" type='text/css' href="assets/css/index.css"/>   
     </head>
     <body>
-        <h1><?= $title ?? "" ?></h2>    
+        <h1><?= $titulo ?? "" ?></h2>    
         <?php 
             require 'parts/header_view.php';
         ?>

@@ -20,6 +20,19 @@
                     placeholder="Galeno" autofocus
                     tabindex="1" autocomplete="on"/>
                 </form>
+                <?php if ($busqueda) : ?>
+                    <?php if ($is_valid) : ?>
+                        <?php if (count($resultado) > 0) : ?>
+                            <?php foreach ($resultado as $item): ?>
+                                <p> <?= $item ?> </p>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <p>No se encontró ningun resultado</p>
+                        <?php endif; ?> 
+                    <?php else : ?>
+                        <p style='color: red'> Ingrese al menos un caracter </p>
+                    <?php endif; ?>
+                <?php endif; ?>
 
                 <h2>OBRAS SOCIALES</h2>
                 <ul>

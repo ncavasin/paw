@@ -6,4 +6,4 @@
 <link rel="stylesheet" type='text/css' href="assets/css/icono.min.css">  
 <link rel="stylesheet" type='text/css' href="assets/css/header_footer.css"/>
 <link rel="stylesheet" type='text/css' href="assets/css/main.css"/>
-<title><?= $title ?? "Dental Medical Group" ?></title>
+<title><?= $titulo ?? "Dental Medical Group" ?></title>

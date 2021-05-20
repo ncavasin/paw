@@ -76,8 +76,8 @@ class ErrorController{
     }
 
     public function internalError(){
-        $title = "Error interno del servidor"
         http_response_code(500);
+        $titulo = 'Error interno del servidor';
         require $this->viewsDir . 'internal_error_view.php';
     }
 }

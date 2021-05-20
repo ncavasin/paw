@@ -14,7 +14,7 @@ $log->info("Peticion {$http_method} a {$path}");
 # Deal with it
 try{
     $router->direct($path, $http_method);
-    $log->info("Status code 200 - {$path}");
+    # $log->info("Status code 200 - {$path}");
 
 }catch (RouteNotFoundException $e){
     $router->direct('notFound');

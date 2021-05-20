@@ -127,9 +127,21 @@ class PageController{
         require $this->viewsDir . 'services_view.php';
     }
 
-    public function coverages(){
+    public function coverages($busqueda = false, $is_valid = false, $resultado = []){
         $this->titulo = 'Coberturas';
         require $this->viewsDir . 'coverages_view.php';
+    }
+
+    public function coveragesProcess(){
+        $this->titulo = 'Coberturas';
+        $busqueda = $_POST["busqueda"];
+        $resultado = [];
+        if (!$busqueda || !strlen($busqueda) > 0)  # Validacion del formulario
+            $this->coverages(true, false, $resultado);
+        else {
+            if (strlen($busqueda) < 6) $resultado = ['opcion 1', 'opcion 2', 'opcion 3']; # Simulo obtener una respuesta de una base de datos
+            $this->coverages(true, true, $resultado);
+        }
     }
 
     public function turns($procesado = false){

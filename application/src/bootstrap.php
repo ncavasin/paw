@@ -19,6 +19,10 @@ $log->pushHandler(new StreamHandler(__DIR__ . '/../logs/app.log', Logger::DEBUG)
 $router = new Router;
 
 # Supported routes
+$router->get('/', 'PageController@index');
+$router->get('/about', 'PageController@about');
+$router->get('/services', 'PageController@services');
+
 $router->get('/login', 'PageController@login');
 $router->post('/login', 'PageController@loginProcess');
 
@@ -28,10 +32,8 @@ $router->post('/reset_password', 'PageController@resetPasswordProcess');
 $router->get('/register', 'PageController@register');
 $router->post('/register', 'PageController@registerProcess');
 
-$router->get('/', 'PageController@index');
-$router->get('/about', 'PageController@about');
-$router->get('/services', 'PageController@services');
 $router->get('/coverages', 'PageController@coverages');
+$router->post('/coverages', 'PageController@coveragesProcess');
 
 $router->get('/turns', 'PageController@turns');
 $router->post('/turns', 'PageController@turnsProcess');
