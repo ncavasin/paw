@@ -5,6 +5,7 @@
             require 'parts/head_view.php'
         ?>
         <link rel="stylesheet" type='text/css' href="assets/css/coberturas.css"/>
+        <link rel="stylesheet" type='text/css' href="assets/css/form.css"/>
     </head>
     <body>
     <?php 

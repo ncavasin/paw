@@ -3,7 +3,6 @@
 namespace Paw\app\controllers;
 use Paw\app\controllers\PageController;
 
-
 class ErrorController{
     
     public $viewsDir;
@@ -71,20 +70,16 @@ class ErrorController{
         ];
     }
 
-
     public function notFound(){
-
         http_response_code(404);
         require $this->viewsDir . 'not_found_view.php';
     }
-
 
     public function internalError(){
         $title = "Error interno del servidor"
         http_response_code(500);
         require $this->viewsDir . 'internal_error_view.php';
     }
-
-
 }
+
 ?>
