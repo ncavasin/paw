@@ -82,9 +82,14 @@ class PageController{
     public function loginProcess(){
         $email = $_POST['email'];
         $contrasenia = $_POST['contrasenia'];
-        # expresion regular de un formato de email valido
-        $re = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
-        if (!$email || !preg_match($re, $email) || !$contrasenia) $this->login(false, false);
+
+        #$re = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $emailNotValid = true;
+        }
+
+        if (!$email || $emailNotValid || !$contrasenia) $this->login(false, false);
         else {
             # simulacion de consulta a la base de datos sobre si el usuario y contraseña esta bien
             if ($email == 'admin@admin.com' && $contrasenia == 'admin') $this->login(true, true);
