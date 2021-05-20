@@ -20,24 +20,17 @@ thead{
     display: none;
 }
 
-
 tr{
     display: flex;
     flex-flow: column;
     border-radius: 20px;
-    padding: 1.25rem 6rem 1.25rem 6rem;
-    margin-top: 2rem;
-    background-image: url('../../img/NuestrosServicios_Resonancia.jpg');
-    background-size: cover;
-    background-attachment: scroll;
-    background-repeat: no-repeat;
-    /*background-color: var(--celeste);*/
+    padding: 1.25rem 5rem 1.25rem 5rem;
+    background-color: var(--celeste);
     color: white;    
 }
 
 td{
     margin-top: .25rem;
-    left: -3rem;
     font-weight: bolder;   
 }
 
@@ -47,11 +40,10 @@ td{
 
 .especialidad{
     font-size: x-large;
-    left: -6rem;
+    left: -40%;
 }
 
 .especialista::before{
-    content: 'Especialista: ';
     white-space: nowrap;
 }
 
@@ -61,8 +53,11 @@ td{
 
 .especialista, .fecha, .hora{
     align-self: flex-start;
+    left: -25%;
 }
 
 .fecha, .hora{
-    margin-top: .75rem; 
+    position: relative;
+    font-size: small;
 }
+

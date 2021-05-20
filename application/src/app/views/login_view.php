@@ -4,8 +4,8 @@
         <?php
             require 'parts/head_view.php'
         ?>
-        <link re='stylesheet' type='text/css' href='assets/css/form.css' />
-        <link re='stylesheet' type='text/css' href='assets/css/login.css' />
+        <link rel='stylesheet' type='text/css' href='assets/css/form.css' />
+        <link rel='stylesheet' type='text/css' href='assets/css/login.css' />
     </head>
     <body>
         <?php 
