@@ -15,6 +15,13 @@
         <main>
             <section>
                 <h2>INICIAR SESIÓN</h2>
+                <?php if ($procesado) : ?>
+                    <?php if ($is_valid) : ?>
+                        <p style='color: green'>Logeado con éxito</p>
+                    <?php else : ?>
+                        <p style='color: red'>Usuario o contraseña incorrecto</p>
+                    <?php endif; ?>
+                <?php endif; ?>
                 <form action="#" method="POST" target="_self">
                     <fieldset>
                         <label for="email">Correo Electrónico:</label>

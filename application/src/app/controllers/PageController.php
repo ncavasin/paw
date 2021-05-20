@@ -74,20 +74,22 @@ class PageController{
         require $this->viewsDir . 'index_view.php';
     }
 
-    public function login($procesado = false){
+    public function login($procesado = false, $is_valid = false){
         $titulo = 'Iniciar Sesión';
         require $this->viewsDir . 'login_view.php';
-
-        # to-do: mostrar mensaje de exito usando el flag procesado 
     }
 
     public function loginProcess(){
-        $titulo = 'Iniciar Sesión';
-        $form = $_POST;
-        
-        # validation
-
-        $this->login(true);
+        $email = $_POST['email'];
+        $contrasenia = $_POST['contrasenia'];
+        # expresion regular de un formato de email valido
+        $re = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
+        if (!$email || !preg_match($re, $email) || !$contrasenia) $this->login(false, false);
+        else {
+            # simulacion de consulta a la base de datos sobre si el usuario y contraseña esta bien
+            if ($email == 'admin@admin.com' && $contrasenia == 'admin') $this->login(true, true);
+            else $this->login(true, false);
+        }
     }
 
     public function register($procesado = false){
@@ -136,7 +138,7 @@ class PageController{
         $this->titulo = 'Coberturas';
         $busqueda = $_POST["busqueda"];
         $resultado = [];
-        if (!$busqueda || !strlen($busqueda) > 0)  # Validacion del formulario
+        if (!$busqueda)  # Validacion del formulario
             $this->coverages(true, false, $resultado);
         else {
             if (strlen($busqueda) < 6) $resultado = ['opcion 1', 'opcion 2', 'opcion 3']; # Simulo obtener una respuesta de una base de datos
