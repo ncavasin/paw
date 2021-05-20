@@ -40,7 +40,10 @@ header{
     grid-template-areas: 
                         "opciones"
                         "nav";
-    background-color: var(--white);
+    background-color: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 
