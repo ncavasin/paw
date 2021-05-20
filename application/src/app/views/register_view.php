@@ -54,7 +54,7 @@
 
                         <label for="conf_email">Confirmación (*)</label>
                         <input type="email" id="conf_email" name="conf_email"
-                        placeholder="usuario@gmail.com" 
+                        placeholder="usuario@correo.com" 
                         required tabindex="6"/>
                     </fieldset>
 
