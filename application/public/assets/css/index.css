@@ -45,10 +45,10 @@ section > ul > li{
     border-radius: 25px;
 }
 
-
+/* 
 ul > li > h3 > a:hover, a:last-of-type:hover{
     color: white;
-}
+} */
 
 section > ul > li:hover{
     background-color: var(--gris);
