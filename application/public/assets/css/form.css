@@ -28,3 +28,10 @@ input:placeholder-shown{
     font-size: large;
 }
 
+.file {
+    border: none;
+    border-radius: 0;
+    justify-items: center;
+    background-color: transparent;
+    margin-top: .5rem;
+}

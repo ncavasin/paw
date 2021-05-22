@@ -17,7 +17,7 @@
                 <h2>BÚSQUEDA DE TURNOS</h2>
                 <form action="#" method="POST" id="form-turnos" target="_self">
                     <fieldset>
-                        <label for="especialidad">Especialidad:</label>
+                        <label for="especialidad">Especialidad</label>
                         <input list="especialidad-lista" id="especialidad" name="especialidad" 
                         placeholder="Kinesiología" 
                         autofocus tabindex="1"/>
@@ -29,7 +29,7 @@
                             <option value="Ecografía Doppler">
                         </datalist>
 
-                        <label for="especialista">Especialista:</label>
+                        <label for="especialista">Especialista</label>
                         <input list="especialista-lista" id="especialista" name="especialista" 
                         placeholder="Fulano" 
                         tabindex="2"/>
@@ -40,10 +40,14 @@
                             <option value="Juan Doe">
                         </datalist>
 
-                        <label for="dia">Dia:</label>
+                        <label for="dia">Dia</label>
                         <input type="date" id="dia" name="dia" 
                         required tabindex="3"/>
-                    </fieldset>             
+
+                        <label for='orden_medica'>Orden Médica (*)</label>
+                        <input type="file" name='orden_medica' id='orden_medica' class="file"
+                        required tabindex="4"/>
+                    </fieldset>
                            
                     <input type="submit" name="busqueda" value="Buscar" class="boton"/>
                     <input type="reset" name="reset" value="Limpiar" class="limpiar"/>
