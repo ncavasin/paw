@@ -20,7 +20,7 @@
             <section>
                 <h2>REGISTRARSE</h2>
                 
-                <!--<img src="../img/Imagen_Registrar.jpg" alt="Imagen para Registrarse" width="300">-->
+                <!--<img src="/assets/img/Imagen_Registrar.jpg" alt="Imagen para Registrarse" width="300">-->
 
                 <form action="#" method="POST" target="_self">
                     <fieldset>

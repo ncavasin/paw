@@ -18,7 +18,7 @@ section{
 }
 
 section:first-of-type{
-    background-image: url('../../img/Carrusel_2.jpg');
+    background-image: url('/assets/img/Carrusel_2.jpg');
     background-repeat: no-repeat;
     background-position: center; 
     height: 15rem;
