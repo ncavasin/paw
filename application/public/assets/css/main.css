@@ -18,12 +18,6 @@ section{
 }
 
 h2{
-    background-image: url('/assets/img/Carrusel_3.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: scroll;
-    border-radius: 20px;
     margin-top: 2rem;
     margin-bottom: 2rem;
     font-size: x-large;
