@@ -48,10 +48,8 @@
                         <input type="file" name='orden_medica' id='orden_medica' class="file"
                         required tabindex="4"/>
                     </fieldset>
-                           
-                    <input type="submit" name="busqueda" value="Buscar" class="boton"/>
-                    <input type="reset" name="reset" value="Limpiar" class="limpiar"/>
                 </form>
+
                 <h2>TURNOS DISPONIBLES</h2>
                 <table>
                     <colgroup>
@@ -74,7 +72,10 @@
                         </tr>
                     </tbody>
                 </table>
-            </section>        
+
+                <input type="submit" form="form-turnos" name="busqueda" value="Reservar" class="boton"/>
+                <input type="reset" form="form-turnos" name="reset" value="Limpiar" class="limpiar"/>
+            </section>
         </main>
 
         <?php 

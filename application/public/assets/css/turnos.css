@@ -1,3 +1,7 @@
+h2:last-of-type{
+    margin-top: -2rem;
+}
+
 .limpiar{
     width: 10rem;
     border: 1px solid var(--gris);
