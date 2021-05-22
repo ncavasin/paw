@@ -5,6 +5,7 @@ h2{
 form{
     display: flex;
     flex-flow: column;
+    margin: 0px 25%
 }
 
 form > a{

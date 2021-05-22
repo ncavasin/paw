@@ -74,8 +74,10 @@ class PageController{
         require $this->viewsDir . 'index_view.php';
     }
 
-    public function login($procesado = false, $is_valid = false){
+    public function login($notification = false, $is_valid = false){
         $titulo = 'Iniciar Sesión';
+        $notification_type = $is_valid ? SUCCESS : ERROR;
+        $notification_text = $is_valid ? 'Sesión iniciada con éxito' : 'Usuario o contraseña incorrecto';
         require $this->viewsDir . 'login_view.php';
     }
 

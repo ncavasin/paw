@@ -6,6 +6,12 @@ use \Monolog\Logger;
 use \Monolog\Handler\StreamHandler;
 use Paw\core\Router;
 
+# Constants
+
+const SUCCESS = 'success';
+const ERROR = 'error';
+const WARN = 'warn';
+
 # Error handler
 $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);

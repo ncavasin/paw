@@ -6,13 +6,14 @@
         ?>
         <link rel='stylesheet' type='text/css' href='assets/css/form.css' />
         <link rel='stylesheet' type='text/css' href='assets/css/login.css' />
+        <link rel='stylesheet' type='text/css' href='assets/css/notification.css' />
     </head>
     <body>
         <?php 
             require 'parts/header_view.php';
         ?>
-
         <main>
+            <?php require 'parts/notification_view.php'; ?>
             <section>
                 <h2>INICIAR SESIÓN</h2>
                 <?php if ($procesado) : ?>
