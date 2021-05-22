@@ -1,3 +1,14 @@
+:root{
+    font-family: 'Roboto', sans-serif;
+    --celeste: #183f6e;
+    --azul: #003b70;
+    --violeta: #4f2c7f;
+    --gris: #8a8a8d;
+    --success: #357a38;
+    --error: #f44336;
+    --warn: #b26a00;
+}
+
 main{
     margin: 6rem 1rem 1rem 1rem;
 }
@@ -38,4 +49,8 @@ section > ul > li{
 
 b{
     font-weight: bolder;
+}
+
+input:focus, textarea:focus, select:focus{
+    outline: none;
 }

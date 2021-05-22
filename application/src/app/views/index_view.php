@@ -15,7 +15,6 @@
                 <h2>CARROUSEL</h2>
                 <!-- <img src="../img/doctores2.jpg" width="300" alt="Imagen doctor"> -->
             </section>
-
             <section>
                 <h2>NUESTROS SERVICIOS</h2>
                 <ul>
