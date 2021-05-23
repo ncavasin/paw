@@ -74,10 +74,10 @@ class PageController{
         require $this->viewsDir . 'index_view.php';
     }
 
-    public function login($notification = false, $is_valid = false){
+    public function login($notification = false, $isValid = false){
         $titulo = 'Iniciar Sesión';
-        $notification_type = $is_valid ? SUCCESS : ERROR;
-        $notification_text = $is_valid ? 'Sesión iniciada con éxito' : 'Usuario o contraseña incorrecto';
+        $notification_type = $isValid ? SUCCESS : ERROR;
+        $notification_text = $isValid ? 'Sesión iniciada con éxito' : 'Usuario o contraseña incorrecto';
         require $this->viewsDir . 'login_view.php';
     }
 
@@ -99,10 +99,10 @@ class PageController{
         }
     }
 
-    public function register($notification = false, $is_valid = false){
+    public function register($notification = false, $isValid = false){
         $titulo = 'Registrarse';
-        $notification_type = $is_valid? SUCCESS : ERROR;
-        $notification_text = $is_valid? 'Registro completado con éxito' : 'Uno o mas campos no son validos';
+        $notification_type = $isValid? SUCCESS : ERROR;
+        $notification_text = $isValid? 'Registro completado con éxito' : 'Uno o mas campos no son validos';
         require $this->viewsDir . 'register_view.php';
     }
 
@@ -111,20 +111,20 @@ class PageController{
         $apellido = $_POST['apellido'];
         $celular = $_POST['celular'];
         $email = $_POST['email'];
-        $conf_email = $_POST['conf_email'];
+        $confEmail = $_POST['conf_email'];
         $contrasenia = $_POST['contrasenia'];
-        $conf_contrasenia = $_POST['conf_contrasenia'];
+        $confContrasenia = $_POST['conf_contrasenia'];
 
-        $parsed_date = explode('-', $_POST['fecha_nacimiento']); # llega con el formato aaaa-mm-dd
-        $is_date_valid = false;
-        if((count($parsed_date) == 3) && checkdate($parsed_date[1], $parsed_date[2], $parsed_date[0])) $is_date_valid = true;
+        $parsedDate = explode('-', $_POST['fecha_nacimiento']); # llega con el formato aaaa-mm-dd
+        $isDateValid = false;
+        if((count($parsedDate) == 3) && checkdate($parsedDate[1], $parsedDate[2], $parsedDate[0])) $isDateValid = true;
 
-        $is_email_valid = $email == $conf_email;
-        if ($is_email_valid && filter_var($email, FILTER_VALIDATE_EMAIL)) $is_email_valid = true;
+        $isEmailValid = $email == $confEmail;
+        if ($isEmailValid && filter_var($email, FILTER_VALIDATE_EMAIL)) $isEmailValid = true;
 
-        $is_pass_valid = ($contrasenia == $conf_contrasenia) && (strlen($contrasenia) > 7);
+        $isPassValid = ($contrasenia == $confContrasenia) && (strlen($contrasenia) > 7);
 
-        if ($nombre && $apellido && $celular && $is_date_valid && $celular && $is_email_valid  && $is_pass_valid) $this->register(true, true);
+        if ($nombre && $apellido && $celular && $isEmailValid && $celular && $isEmailValid  && $isPassValid) $this->register(true, true);
         else $this->register(true, false);
     }
 
@@ -168,8 +168,11 @@ class PageController{
         }
     }
 
-    public function turns($notification = false, $procesado = false){
+    public function turns($notification = false, $isValid = false){
         $this->titulo = 'Turnos';
+
+        $notification_type = $isValid ? SUCCESS : ERROR;
+        $notification_text = $isValid ? 'Sesión iniciada con éxito' : 'Usuario o contraseña incorrecto';
         require $this->viewsDir . 'turns_view.php';
     }
     
@@ -177,14 +180,17 @@ class PageController{
         $this->titulo = 'Turnos';
         
         foreach ($_POST as $field){
-            $field = $this->sanityCheck($field);
+            $_POST[$field] = $this->sanityCheck($field);
         }
 
-        #$especialista = $this->sanityCheck($_POST['especialista']);
+        $especialista = $_POST['especialista'];
         $especialidad = $_POST['especialidad'];
-        $dia = $_POST['dia'];
+        $dia = $this->parseDate($_POST['dia']);
+        $this->turns(true, true);
+    }
 
-        $this->turns(true);
+    public function parseDate($field){
+        return explode('-', $field);
     }
 
     public function sanityCheck($field){
