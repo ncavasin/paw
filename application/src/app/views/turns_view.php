@@ -17,7 +17,8 @@
             <?php require 'parts/notification_view.php'; ?>
             <section>
                 <h2>BÚSQUEDA DE TURNOS</h2>
-                <form action="PageController.php" method="POST" id="form-turnos" target="_self" enctype="multipart/form-data">
+                <form action="" method="POST" id="form-turnos" 
+                      target="_self" enctype="multipart/form-data">
                     <fieldset>
                         <label for="especialidad">Especialidad</label>
                         <input list="especialidad-lista" id="especialidad" name="especialidad" 
@@ -46,14 +47,16 @@
                         <input type="date" id="dia" name="dia" 
                         required 
                         tabindex="3"/>
-
+                        
+                        <!-- Recomendado por php para evitar que archivos grandes fallen -->
+                        <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo constant('_MAXFILESIZE'); ?>"/>
+                        
                         <label for='orden_medica'>Orden Médica (*)</label>
-                        <input type="file" name='orden_medica' id='orden_medica' class="file"
+                        <input type="file" name='orden_medica' class="file"
                         required accept=".pdf"
-                        required tabindex="4"/>
+                        tabindex="4"/>
                     </fieldset>
                 </form>
-
                 <h2>TURNOS DISPONIBLES</h2>
                 <table>
                     <colgroup>

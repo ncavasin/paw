@@ -9,8 +9,13 @@ class PageController{
     public array $userOptions;
     public array $menuOptions;
     public array $footerLinks;
+    private $__MAXFSIZE;
 
     public function __construct(){
+
+        # 10Mb = 10.000Kb
+        define ("_MAXFILESIZE", 10000, true);
+
         $this->viewsDir = __DIR__ . "/../views/";
 
         $this->contact = [
@@ -181,7 +186,7 @@ class PageController{
         $keys = [];
         $values = [];
         foreach ($_POST as $key => $value){
-            array_push($keys, $key);
+            array_push($keys, $this->sanityCheck($key));
             array_push($values, $this->sanityCheck($value));
         }
         $post = array_combine($keys, $values);
@@ -191,38 +196,39 @@ class PageController{
         $dia =          $post['dia'];
         $orden =        $post['orden_medica']; 
 
-        # Error si dan vacio: dia o (especialidad Y especialista) u orden.
         if(empty($dia) || (empty($especialidad) && empty($especialista)) || empty($orden)){
-            $this->turns(true, false);
+            return $this->turns(true, false);            
         }
 
         $dia = $this->parseDate($dia);
 
-        # verificar si es un pdf
+        # Handling upload
+        $timestamp =    time();
+        $targetDir =    '/public/';
+        $targetName =   $targetDir . $_FILES['orden_medica']['name'];
+        $targetDbName = $targetDir . $timestamp;
+        $targetType =   $_FILES['orden_medica']['type'];
+        $targetSize =   $_FILES['orden_medica']['size'];
 
-        # verificar nombrado
-
-        # verificar 
-        var_dump($_FILES);
-        die;
-
-        $targetDir = 'todefine';
-        $targetName = $targetDir . $_FILES['orden_medica']['name'];
-        $targetType = $_FILES['orden_medica']['type'];
-        $targetSize = $_FILES['orden_medica']['size'];
 
         if (file_exists($targetName)){
-            # error 
+            return $this->turns(true, false);
         }
 
-        if ($targetSize > MAX_FILE_SIZE){
-            # error
+        if ($targetSize > constant('_MAXFILESIZE')){
+            return $this->turns(true, false);
+        }
+
+        if (! $targetType == 'application/pdf'){
+            return $this->turns(true, false);
         }
 
         
-        # Agregar golpe a la db
+        # Add db hit
+        # Mapping between timestamp and filename
+        #. $_FILES['orden_medica']['name'];
 
-        $this->turns(true, true);
+        return $this->turns(true, true);
     }
 
     public function parseDate($field){
