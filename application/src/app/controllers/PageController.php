@@ -99,18 +99,33 @@ class PageController{
         }
     }
 
-    public function register($procesado = false){
+    public function register($notification = false, $is_valid = false){
         $titulo = 'Registrarse';
+        $notification_type = $is_valid? SUCCESS : ERROR;
+        $notification_text = $is_valid? 'Registro completado con éxito' : 'Uno o mas campos no son validos';
         require $this->viewsDir . 'register_view.php';
     }
 
     public function registerProcess(){
-        $titulo = 'Registrarse';
-        $form = $_POST;
+        $nombre = $_POST['nombre'];
+        $apellido = $_POST['apellido'];
+        $celular = $_POST['celular'];
+        $email = $_POST['email'];
+        $conf_email = $_POST['conf_email'];
+        $contrasenia = $_POST['contrasenia'];
+        $conf_contrasenia = $_POST['conf_contrasenia'];
 
-        # validation
-    
-        $this->register(true);
+        $parsed_date = explode('-', $_POST['fecha_nacimiento']); # llega con el formato aaaa-mm-dd
+        $is_date_valid = false;
+        if((count($parsed_date) == 3) && checkdate($parsed_date[1], $parsed_date[2], $parsed_date[0])) $is_date_valid = true;
+
+        $is_email_valid = $email == $conf_email;
+        if ($is_email_valid && filter_var($email, FILTER_VALIDATE_EMAIL)) $is_email_valid = true;
+
+        $is_pass_valid = ($contrasenia == $conf_contrasenia) && (strlen($contrasenia) > 7);
+
+        if ($nombre && $apellido && $celular && $is_date_valid && $celular && $is_email_valid  && $is_pass_valid) $this->register(true, true);
+        else $this->register(true, false);
     }
 
     public function resetPassword($procesado = false){
