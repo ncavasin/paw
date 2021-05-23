@@ -88,10 +88,12 @@ class PageController{
         return strlen($pass) > 7;
     }
 
-    private function formValidate($requiredValues) {
+    private function validateForm($requiredValues) {
         $sanitized = [];
         foreach ($requiredValues as $key => $value){
-            $sanitized[$key] = $this->sanityCheck($_POST[$key]); # guardo el sanitizado para las validaciones y su posterior devolucion como resultado
+            # guardo el sanitizado para las validaciones y su posterior devolucion como resultado
+            # si es el campo contrasenia no lo sanitizo !!!
+            $sanitized[$key] = $key == 'contrasenia' ? $_POST[$key] : $this->sanityCheck($_POST[$key]); 
             if ($value['validate']) { # me fijo si tiene un metodo para validar especifico
                 if (!$value['validate']($sanitized[$key])) # si lo tiene, lo ejecuto
                     return [$sanitized, false, "El campo \"{$value['label']}\" no tiene un formato valido"]; # si no es valido respondo con mensaje personalizado
@@ -120,17 +122,17 @@ class PageController{
     }
 
     public function loginProcess(){
-        $email = $_POST['email'];
-        $contrasenia = $_POST['contrasenia'];
-
-        #$re = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
-
-        $emailNotValid = $this->validateEmail($email);
-
-        if (!$email || $emailNotValid || !$contrasenia) $this->login(true, false);
+        $requiredValues = [
+            'email' => ['label' => 'Email', 'validate' => function ($email) {
+                return $this->validateEmail($email);
+            }],
+            'contrasenia' => ['label' => 'Contraseña'],
+        ];
+        list($validated, $isValid, $notification_text) = $this->validateForm($requiredValues);
+        if (!$isValid) $this->login(true, false, $notification_text);
         else {
             # simulacion de consulta a la base de datos sobre si el usuario y contraseña esta bien
-            if ($email == 'admin@admin.com' && $contrasenia == 'admin') $this->login(true, true, 'Sesión iniciada con éxito');
+            if ($validated['email'] == 'admin@admin.com' && $validated['contrasenia'] == 'admin') $this->login(true, true, 'Sesión iniciada con éxito');
             else $this->login(true, false, 'Usuario y contraseña incorrectos');
         }
     }
@@ -155,7 +157,7 @@ class PageController{
             'fecha_nacimiento' => ['label' => 'Fecha de nacimiento', 'validate' => function ($date) {return $this->validateDate($date);}],
         ];
         # valido los campos
-        list($validated, $isValid, $notification_text) = $this->formValidate($requiredValues); # validated viene sanitizado
+        list($validated, $isValid, $notification_text) = $this->validateForm($requiredValues); # validated viene sanitizado
         if (!$isValid) $this->register(true, false, $notification_text);
         # valido los campos que requieren confirmacion
         else if ($validated['email'] != $validated['conf_email']) $this->register(true, false, 'Los email no coinciden');
