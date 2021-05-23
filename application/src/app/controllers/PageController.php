@@ -194,41 +194,37 @@ class PageController{
         $especialista = $post['especialista'];
         $especialidad = $post['especialidad'];
         $dia =          $post['dia'];
-        $orden =        $post['orden_medica']; 
 
-        if(empty($dia) || (empty($especialidad) && empty($especialista)) || empty($orden)){
-            return $this->turns(true, false);            
+        if(empty($dia) or (empty($especialidad) and empty($especialista)) or empty($_FILES)){
+            $this->turns(true, false); 
         }
+        else{
+            
+            # Handling upload
+            $finfo =        finfo_open(FILEINFO_MIME);
+            $timestamp =    time();
+            $targetDir =    '/public/';
+            $targetName =   $_FILES['orden_medica']['name'];
+            $targetSize =   $_FILES['orden_medica']['size'];
+            $targetDbName = $targetDir . $timestamp;
+            $targetMime =   finfo_file($finfo, $targetName);
+            #$targetMime =   mime_content_type($_FILES['orden_medica']);
+            finfo_close($finfo);
 
-        $dia = $this->parseDate($dia);
 
-        # Handling upload
-        $timestamp =    time();
-        $targetDir =    '/public/';
-        $targetName =   $targetDir . $_FILES['orden_medica']['name'];
-        $targetDbName = $targetDir . $timestamp;
-        $targetType =   $_FILES['orden_medica']['type'];
-        $targetSize =   $_FILES['orden_medica']['size'];
+            if ((file_exists($targetName)) or ($targetSize > constant('_MAXFILESIZE')) or (! $targetMime == 'application/pdf')){
+                $this->turns(true, false);
+            }
+            else{
 
+                $dia = $this->parseDate($dia);
+                # Format dia
+                # Add db hit
+                # Mapping between timestamp and filename
 
-        if (file_exists($targetName)){
-            return $this->turns(true, false);
+                $this->turns(true, true);
+            }
         }
-
-        if ($targetSize > constant('_MAXFILESIZE')){
-            return $this->turns(true, false);
-        }
-
-        if (! $targetType == 'application/pdf'){
-            return $this->turns(true, false);
-        }
-
-        
-        # Add db hit
-        # Mapping between timestamp and filename
-        #. $_FILES['orden_medica']['name'];
-
-        return $this->turns(true, true);
     }
 
     public function parseDate($field){

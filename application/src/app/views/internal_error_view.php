@@ -7,15 +7,13 @@
         <link rel="stylesheet" type='text/css' href="assets/css/index.css"/>   
     </head>
     <body>
-        <h1><?= $titulo ?? "" ?></h2>    
         <?php 
             require 'parts/header_view.php';
         ?>
-
+        
         <main>
- 
+            <h1><?= $titulo ?? "" ?></h2>   
         </main>
-
         <?php 
             require 'parts/footer_view.php';
         ?>

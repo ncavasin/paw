@@ -5,11 +5,11 @@
         <title>Página no encontrada</title>
     </head>
     <body>
-        <h1> Error 404: Página no encontrada </h1>
         <?php 
             require 'parts/header_view.php';
         ?>
         <main> 
+            <h1> Error 404: Página no encontrada </h1>
         </main>
 
         <?php 
