@@ -197,6 +197,28 @@ class PageController{
         }
 
         $dia = $this->parseDate($dia);
+
+        # verificar si es un pdf
+
+        # verificar nombrado
+
+        # verificar 
+        var_dump($_FILES);
+        die;
+
+        $targetDir = 'todefine';
+        $targetName = $targetDir . $_FILES['orden_medica']['name'];
+        $targetType = $_FILES['orden_medica']['type'];
+        $targetSize = $_FILES['orden_medica']['size'];
+
+        if (file_exists($targetName)){
+            # error 
+        }
+
+        if ($targetSize > MAX_FILE_SIZE){
+            # error
+        }
+
         
         # Agregar golpe a la db
 

@@ -17,7 +17,7 @@
             <?php require 'parts/notification_view.php'; ?>
             <section>
                 <h2>BÚSQUEDA DE TURNOS</h2>
-                <form action="#" method="POST" id="form-turnos" target="_self">
+                <form action="PageController.php" method="POST" id="form-turnos" target="_self" enctype="multipart/form-data">
                     <fieldset>
                         <label for="especialidad">Especialidad</label>
                         <input list="especialidad-lista" id="especialidad" name="especialidad" 
