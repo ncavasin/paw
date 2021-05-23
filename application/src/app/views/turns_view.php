@@ -48,8 +48,8 @@
                         required 
                         tabindex="3"/>
                         
-                        <!-- Recomendado por php para evitar que archivos grandes fallen -->
-                        <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo constant('_MAXFILESIZE'); ?>"/>
+                        <!-- Recomendado por php para evitar que archivos grandes fallen y el usuario no se entere-->
+                        <input type="hidden" name="MAX_FILE_SIZE" value="<?= constant('_MAXFILESIZE') ?>"/>
                         
                         <label for='orden_medica'>Orden Médica (*)</label>
                         <input type="file" name='orden_medica' class="file"
