@@ -53,7 +53,7 @@
                         
                         <label for='orden_medica'>Orden Médica (*)</label>
                         <input type="file" name='orden_medica' class="file"
-                        required accept=".pdf"
+                        required accept="application/pdf"
                         tabindex="4"/>
                     </fieldset>
                 </form>

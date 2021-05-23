@@ -13,8 +13,8 @@ class PageController{
 
     public function __construct(){
 
-        # 10Mb = 10.000Kb
-        define ("_MAXFILESIZE", 10000, true);
+        # 10Mb = 10.000.000Kb
+        define ("_MAXFILESIZE", 10000000, true);
 
         $this->viewsDir = __DIR__ . "/../views/";
 
@@ -230,30 +230,40 @@ class PageController{
         }
         else{
             
-            # Handling upload
-            $finfo =        finfo_open(FILEINFO_MIME);
-            $timestamp =    time();
-            $targetDir =    '/public/';
-            $targetName =   $_FILES['orden_medica']['name'];
-            $targetSize =   $_FILES['orden_medica']['size'];
-            $targetDbName = $targetDir . $timestamp;
-            $targetMime =   finfo_file($finfo, $targetName);
-            #$targetMime =   mime_content_type($_FILES['orden_medica']);
-            finfo_close($finfo);
-
-
-            if ((file_exists($targetName)) or ($targetSize > constant('_MAXFILESIZE')) or (! $targetMime == 'application/pdf')){
+            if($_FILES['orden_medica']['error'] != 0){
                 $this->turns(true, false);
             }
             else{
 
-                $dia = $this->parseDate($dia);
-                # Format dia
-                # Add db hit
-                # Mapping between timestamp and filename
+                # Handling upload
+                $finfo =        finfo_open(FILEINFO_MIME_TYPE);
+                $timestamp =    time();
+                $targetDir =    '/public/';
+                $targetName =   $targetDir . $_FILES['orden_medica']['name'];
+                $targetSize =   $_FILES['orden_medica']['size'];
+                $targetDbName = $targetDir . $timestamp;
+                $targetMime =   finfo_file($finfo, $targetName);
+                #$targetMime =   mime_content_type($targetName);
+                finfo_close($finfo);
 
-                $this->turns(true, true);
+                echo "<pre>";
+                var_dump($targetMime);
+                die;
+
+                if ((file_exists($targetName)) or ($targetSize > constant('_MAXFILESIZE')) or (! $targetMime == 'application/pdf')){
+                    $this->turns(true, false);
+                }
+                else{
+
+                    $dia = $this->parseDate($dia);
+                    # Format dia
+                    # Add db hit
+                    # Mapping between timestamp and filename
+
+                    $this->turns(true, true);
+                }
             }
+
         }
     }
 
