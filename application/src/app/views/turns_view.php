@@ -13,6 +13,7 @@
         ?>
 
         <main>
+            <?php require 'parts/notification_view.php'; ?>
             <section>
                 <h2>BÚSQUEDA DE TURNOS</h2>
                 <form action="#" method="POST" id="form-turnos" target="_self">

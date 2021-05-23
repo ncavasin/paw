@@ -115,7 +115,7 @@ class PageController{
         $contrasenia = $_POST['contrasenia'];
         $confContrasenia = $_POST['conf_contrasenia'];
 
-        $parsedDate = explode('-', $_POST['fecha_nacimiento']); # llega con el formato aaaa-mm-dd
+        $parsedDate = $this->parseDate($_POST['fecha_nacimiento']); # llega con el formato aaaa-mm-dd
         $isDateValid = false;
         if((count($parsedDate) == 3) && checkdate($parsedDate[1], $parsedDate[2], $parsedDate[0])) $isDateValid = true;
 
@@ -151,7 +151,7 @@ class PageController{
         require $this->viewsDir . 'services_view.php';
     }
 
-    public function coverages($busqueda = false, $is_valid = false, $resultado = []){
+    public function coverages($busqueda = false, $isValid = false, $resultado = []){
         $this->titulo = 'Coberturas';
         require $this->viewsDir . 'coverages_view.php';
     }
@@ -170,22 +170,36 @@ class PageController{
 
     public function turns($notification = false, $isValid = false){
         $this->titulo = 'Turnos';
-
         $notification_type = $isValid ? SUCCESS : ERROR;
-        $notification_text = $isValid ? 'Sesión iniciada con éxito' : 'Usuario o contraseña incorrecto';
+        $notification_text = $isValid ? 'Turno reservado con éxito' : 'Error en la reserva del turno';
         require $this->viewsDir . 'turns_view.php';
     }
     
     public function turnsProcess(){
         $this->titulo = 'Turnos';
         
-        foreach ($_POST as $field){
-            $_POST[$field] = $this->sanityCheck($field);
+        $keys = [];
+        $values = [];
+        foreach ($_POST as $key => $value){
+            array_push($keys, $key);
+            array_push($values, $this->sanityCheck($value));
+        }
+        $post = array_combine($keys, $values);
+
+        $especialista = $post['especialista'];
+        $especialidad = $post['especialidad'];
+        $dia =          $post['dia'];
+        $orden =        $post['orden_medica']; 
+
+        # Error si dan vacio: dia o (especialidad Y especialista) u orden.
+        if(empty($dia) || (empty($especialidad) && empty($especialista)) || empty($orden)){
+            $this->turns(true, false);
         }
 
-        $especialista = $_POST['especialista'];
-        $especialidad = $_POST['especialidad'];
-        $dia = $this->parseDate($_POST['dia']);
+        $dia = $this->parseDate($dia);
+        
+        # Agregar golpe a la db
+
         $this->turns(true, true);
     }
 
