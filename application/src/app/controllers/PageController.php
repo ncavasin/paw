@@ -203,10 +203,9 @@ class PageController{
         }
     }
 
-    public function turns($notification = false, $isValid = false){
+    public function turns($notification = false, $isValid = false, $notification_text = 'error'){
         $this->titulo = 'Turnos';
         $notification_type = $isValid ? SUCCESS : ERROR;
-        $notification_text = $isValid ? 'Turno reservado con éxito' : 'Error en la reserva del turno';
         require $this->viewsDir . 'turns_view.php';
     }
     
@@ -236,25 +235,32 @@ class PageController{
                     # Handling upload
                     $finfo =        finfo_open(FILEINFO_MIME_TYPE);
                     $timestamp =    time();
-                    $targetDir =    '/public/';
-                    $targetName =   $_FILES['orden_medica']['tmp_name'];
-                    $targetSize =   $_FILES['orden_medica']['size'];
-                    $targetDbName = $targetDir . $timestamp;
-                    $targetMime =   finfo_file($finfo, $targetName);
+                    $targetDir =    "./files/";
+                    $tempName =   $_FILES['orden_medica']['tmp_name'];
+                    $fileSize =   $_FILES['orden_medica']['size'];
+                    $newFileName = $targetDir . $_FILES['orden_medica']['name']; #. '--' . $timestamp; # el -- es para despues parsear el nombre y devolver el original
+                    $mimeType =   finfo_file($finfo, $tempName);
 
                     finfo_close($finfo);
 
-                if ((file_exists($targetName)) or ($targetSize > constant('_MAXFILESIZE')) or (! $targetMime == 'application/pdf')){
-                    $this->turns(true, false);
+                if (file_exists($newFileName))
+                    $this->turns(true, false, 'Archivo ya existe');
+                else if ($fileSize > constant('_MAXFILESIZE'))
+                    $this->turns(true, false, 'supero el tamaño');
+                else if (! $mimeType == 'application/pdf'){
+                    $this->turns(true, false, 'extension no valida');
                 }
                 else{
-
+                    if (move_uploaded_file($_FILES["orden_medica"]["tmp_name"], $newFileName)) {
+                        $this->turns(true, true, "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.");
+                    } else {
+                        $this->turns(true, false, "Sorry, there was an error uploading your file.");
+                    }
                     $dia = $this->parseDate($dia);
                     # Format dia
                     # Add db hit
                     # Mapping between timestamp and filename
 
-                    $this->turns(true, true);
                 }
             }
 
