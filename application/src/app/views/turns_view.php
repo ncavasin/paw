@@ -6,6 +6,7 @@
         ?>
         <link rel="stylesheet" type='text/css' href="assets/css/form.css"/>
         <link rel="stylesheet" type='text/css' href="assets/css/turnos.css"/>
+        <link rel='stylesheet' type='text/css' href='assets/css/notification.css' />
     </head>
     <body>
         <?php 
