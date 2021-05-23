@@ -222,7 +222,6 @@ class PageController{
         if(empty($dia) or (empty($especialidad) and empty($especialista)) or empty($_FILES)){
             $this->turns(true, false); 
         }
-<<<<<<< HEAD
         else{
             
             # Handling upload
@@ -249,44 +248,6 @@ class PageController{
 
                 $this->turns(true, true);
             }
-||||||| 7a72863
-
-        $dia = $this->parseDate($dia);
-
-        # Handling upload
-        $timestamp =    time();
-        $targetDir =    '/public/';
-        $targetName =   $targetDir . $_FILES['orden_medica']['name'];
-        $targetDbName = $targetDir . $timestamp;
-        $targetType =   $_FILES['orden_medica']['type'];
-        $targetSize =   $_FILES['orden_medica']['size'];
-
-
-        if (file_exists($targetName)){
-            return $this->turns(true, false);
-        }
-
-        if ($targetSize > constant('_MAXFILESIZE')){
-            return $this->turns(true, false);
-=======
-
-        $dia = $this->parseDate($dia);
-
-        # Handling upload
-        $timestamp =    time();
-        $targetDir =    '/public/';
-        $targetName =   $targetDir . $_FILES['orden_medica']['name'];
-        $targetDbName = $targetDir . $timestamp;
-        $targetType =   $_FILES['orden_medica']['type'];
-        $targetSize =   $_FILES['orden_medica']['size'];
-
-        if (file_exists($targetName)){
-            return $this->turns(true, false);
-        }
-
-        if ($targetSize > constant('_MAXFILESIZE')){
-            return $this->turns(true, false);
->>>>>>> 34876c9e7d44c3489bb03b1f984a9876bc209772
         }
     }
 
