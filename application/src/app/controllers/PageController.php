@@ -53,7 +53,6 @@ class PageController{
             ]
         ];
 
-
         $this->footerLinks = [
             [
                 'href' => 'https://www.facebook.com/dentalmedicalgroup',
@@ -104,33 +103,58 @@ class PageController{
         }
     }
 
-    public function register($notification = false, $isValid = false){
+    public function register($notification = false, $isValid = false, $notification_text = 'Uno o mas campos no son validos'){
         $titulo = 'Registrarse';
         $notification_type = $isValid? SUCCESS : ERROR;
         $notification_text = $isValid? 'Registro completado con éxito' : 'Uno o mas campos no son validos';
         require $this->viewsDir . 'register_view.php';
     }
 
-    public function registerProcess(){
-        $nombre = $_POST['nombre'];
-        $apellido = $_POST['apellido'];
-        $celular = $_POST['celular'];
-        $email = $_POST['email'];
-        $confEmail = $_POST['conf_email'];
-        $contrasenia = $_POST['contrasenia'];
-        $confContrasenia = $_POST['conf_contrasenia'];
+    private function validateEmail($email) {
+        if ($this->sanityCheck($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) return true;
+        return false;
+    }
 
+    private function validateDate($date) {
+        if (!$this->sanityCheck($date)) return false;
         $parsedDate = $this->parseDate($_POST['fecha_nacimiento']); # llega con el formato aaaa-mm-dd
-        $isDateValid = false;
-        if((count($parsedDate) == 3) && checkdate($parsedDate[1], $parsedDate[2], $parsedDate[0])) $isDateValid = true;
+        if((count($parsedDate) == 3) && checkdate($parsedDate[1], $parsedDate[2], $parsedDate[0])) return true;  
+        return false;
+    }
 
-        $isEmailValid = $email == $confEmail;
-        if ($isEmailValid && filter_var($email, FILTER_VALIDATE_EMAIL)) $isEmailValid = true;
+    private function validatePassword($pass) {
+        return $this->sanityCheck($pass) && strlen($pass) > 7;
+    }
 
-        $isPassValid = ($contrasenia == $confContrasenia) && (strlen($contrasenia) > 7);
+    public function registerProcess(){
+        # array para saber si vienen los campos requeridos y validarlos segun sus requisitos
+        $requiredValues = [
+            'nombre' => ['label' => 'Nombre'],
+            'apellido' => ['label' => 'Apellido'],
+            'celular' => ['label' => 'Celular'],
+            'email' => ['label' => 'Email', 'validate' => function ($email) {return $this->validateEmail($email);}],
+            'contrasenia' => ['label' => 'Confirmar contraseña', 'validate' => function ($pass) { return $this->validatePassword($pass);}],
+            'fecha_nacimiento' => ['label' => 'Fecha de nacimiento', 'validate' => function ($date) {$this->validateDate($date);}],
+        ];
+        # valido los campos
+        foreach($requiredValues as $key => $value)
+            if ($value['validate']) { # me fijo si tiene un metodo para validar especifico
+                if (!$value['validate']($_POST[$key])) # si lo tiene, lo ejecuto
+                    $this->register(true, false, "El campo \"{$value['label']}\" no tiene un formato valido"); # si no es valido respondo con mensaje personalizado
+            } else if(!$this->sanityCheck($_POST[$key])) # si no tiene personalizado, uso el general
+                $this->register(true, false, "El campo  \"{$value['label']}\" no puede estar vacío");
+        # valido los campos que requieren confirmacion
+        if ($_POST['email'] != $_POST['conf_email']) $this->register(true, false, 'Los email no coinciden');
+        if ($_POST['contrasenia'] != $_POST['conf_contrasenia']) $this->register(true, false, 'Las contraseñas no coinciden');
 
-        if ($nombre && $apellido && $celular && $isEmailValid && $celular && $isEmailValid  && $isPassValid) $this->register(true, true);
-        else $this->register(true, false);
+        # en este punto los datos estan validados y se guardarian en la base de datos
+        # try{
+        #    guardar formulario
+        #    if ok then $this->register(true, true, 'Registro completado con éxito');
+        #    else error
+        #} catch then error
+
+        $this->register(true, true, 'Registro completado con éxito');
     }
 
     public function resetPassword($procesado = false){
@@ -210,7 +234,6 @@ class PageController{
         $targetType =   $_FILES['orden_medica']['type'];
         $targetSize =   $_FILES['orden_medica']['size'];
 
-
         if (file_exists($targetName)){
             return $this->turns(true, false);
         }
@@ -243,4 +266,3 @@ class PageController{
     }
 
 }
-?>
