@@ -42,10 +42,12 @@
 
                         <label for="dia">Dia</label>
                         <input type="date" id="dia" name="dia" 
-                        required tabindex="3"/>
+                        required 
+                        tabindex="3"/>
 
                         <label for='orden_medica'>Orden Médica (*)</label>
                         <input type="file" name='orden_medica' id='orden_medica' class="file"
+                        required accept=".pdf"
                         required tabindex="4"/>
                     </fieldset>
                 </form>
