@@ -13,7 +13,7 @@ class PageController{
 
     public function __construct(){
 
-        # 10Mb = 10.000Kb
+        # 10Mb = 10.000.000Kb
         define ("_MAXFILESIZE", 10000000, true);
 
         $this->viewsDir = __DIR__ . "/../views/";
@@ -229,30 +229,35 @@ class PageController{
             $this->turns(true, false);
         }
         else{
-            # Handling upload
-            $finfo =        finfo_open(FILEINFO_MIME_TYPE);
-            $timestamp =    time();
-            $targetDir =    '/public/';
-            $targetName =   $_FILES['orden_medica']['tmp_name'];
-            $targetSize =   $_FILES['orden_medica']['size'];
-            $targetDbName = $targetDir . $timestamp;
-            $targetMime =   finfo_file($finfo, $targetName);
-
-            finfo_close($finfo);
-
-
-            if ((file_exists($targetName)) or ($targetSize > constant('_MAXFILESIZE')) or (! $targetMime == 'application/pdf')){
+            if($_FILES['orden_medica']['error'] != 0){
                 $this->turns(true, false);
             }
             else{
+                    # Handling upload
+                    $finfo =        finfo_open(FILEINFO_MIME_TYPE);
+                    $timestamp =    time();
+                    $targetDir =    '/public/';
+                    $targetName =   $_FILES['orden_medica']['tmp_name'];
+                    $targetSize =   $_FILES['orden_medica']['size'];
+                    $targetDbName = $targetDir . $timestamp;
+                    $targetMime =   finfo_file($finfo, $targetName);
 
-                $dia = $this->parseDate($dia);
-                # Format dia
-                # Add db hit
-                # Mapping between timestamp and filename
+                    finfo_close($finfo);
 
-                $this->turns(true, true);
+                if ((file_exists($targetName)) or ($targetSize > constant('_MAXFILESIZE')) or (! $targetMime == 'application/pdf')){
+                    $this->turns(true, false);
+                }
+                else{
+
+                    $dia = $this->parseDate($dia);
+                    # Format dia
+                    # Add db hit
+                    # Mapping between timestamp and filename
+
+                    $this->turns(true, true);
+                }
             }
+
         }
     }
 
