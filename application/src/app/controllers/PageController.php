@@ -175,16 +175,24 @@ class PageController{
     
     public function turnsProcess(){
         $this->titulo = 'Turnos';
-        $especialista = $_POST['especialista'];
+        
+        foreach ($_POST as $field){
+            $field = $this->sanityCheck($field);
+        }
+
+        #$especialista = $this->sanityCheck($_POST['especialista']);
         $especialidad = $_POST['especialidad'];
         $dia = $_POST['dia'];
-        
-        var_dump($this->form);
-
-        die;
-        
 
         $this->turns(true);
     }
+
+    public function sanityCheck($field){
+        $field = trim($field);
+        $field = stripslashes($field);
+        $field = htmlspecialchars($field);
+        return $field;
+    }
+
 }
 ?>

@@ -75,7 +75,7 @@
                     </tbody>
                 </table>
 
-                <input type="submit" form="form-turnos" name="busqueda" value="Reservar" class="boton"/>
+                <input type="submit" form="form-turnos" name="reservar" value="Reservar" class="boton"/>
                 <input type="reset" form="form-turnos" name="reset" value="Limpiar" class="limpiar"/>
             </section>
         </main>
