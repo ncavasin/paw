@@ -73,15 +73,49 @@ class PageController{
         ];
     }
 
+    private function validateEmail($email) {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) return true;
+        return false;
+    }
+
+    private function validateDate($date) {
+        $parsedDate = $this->parseDate($date); # llega con el formato aaaa-mm-dd
+        if ((count($parsedDate) == 3) && checkdate($parsedDate[1], $parsedDate[2], $parsedDate[0])) return true;
+        return false;
+    }
+
+    private function validatePassword($pass) {
+        return strlen($pass) > 7;
+    }
+
+    private function formValidate($requiredValues) {
+        $sanitized = [];
+        foreach ($requiredValues as $key => $value){
+            $sanitized[$key] = $this->sanityCheck($_POST[$key]); # guardo el sanitizado para las validaciones y su posterior devolucion como resultado
+            if ($value['validate']) { # me fijo si tiene un metodo para validar especifico
+                if (!$value['validate']($sanitized[$key])) # si lo tiene, lo ejecuto
+                    return [$sanitized, false, "El campo \"{$value['label']}\" no tiene un formato valido"]; # si no es valido respondo con mensaje personalizado
+            } else if (!$sanitized[$key]) # si no tiene personalizado, uso el general
+                return [$sanitized, false, "El campo  \"{$value['label']}\" no puede estar vacío"];
+        }
+        return [$sanitized, true, ''];
+    }
+
+    public function sanityCheck($field) {
+        $field = trim($field);
+        $field = stripslashes($field);
+        $field = htmlspecialchars($field);
+        return $field;
+    }
+
     public function index(){
         $titulo = 'Dental Medical Group';
         require $this->viewsDir . 'index_view.php';
     }
 
-    public function login($notification = false, $isValid = false){
+    public function login($notification = false, $isValid = false, $notification_text = 'Uno o mas campos no son validos'){
         $titulo = 'Iniciar Sesión';
         $notification_type = $isValid ? SUCCESS : ERROR;
-        $notification_text = $isValid ? 'Sesión iniciada con éxito' : 'Usuario o contraseña incorrecto';
         require $this->viewsDir . 'login_view.php';
     }
 
@@ -91,48 +125,21 @@ class PageController{
 
         #$re = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $emailNotValid = true;
-        }
+        $emailNotValid = $this->validateEmail($email);
 
-        if (!$email || $emailNotValid || !$contrasenia) $this->login(false, false);
+        if (!$email || $emailNotValid || !$contrasenia) $this->login(true, false);
         else {
             # simulacion de consulta a la base de datos sobre si el usuario y contraseña esta bien
-            if ($email == 'admin@admin.com' && $contrasenia == 'admin') $this->login(true, true);
-            else $this->login(true, false);
+            if ($email == 'admin@admin.com' && $contrasenia == 'admin') $this->login(true, true, 'Sesión iniciada con éxito');
+            else $this->login(true, false, 'Usuario y contraseña incorrectos');
         }
     }
-    
-    private function validateEmail($email) {
-        if ($this->sanityCheck($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) return true;
-        return false;
-    }
-    
-    private function validateDate($date) {
-        if (!$this->sanityCheck($date)) return false;
-        $parsedDate = $this->parseDate($date); # llega con el formato aaaa-mm-dd
-        if((count($parsedDate) == 3) && checkdate($parsedDate[1], $parsedDate[2], $parsedDate[0])) return true;  
-        return false;
-    }
-    
-    private function validatePassword($pass) {
-        return $this->sanityCheck($pass) && strlen($pass) > 7;
-    }
+
 
     public function register($notification = false, $isValid = false, $notification_text = 'Uno o mas campos no son validos'){
         $titulo = 'Registrarse';
         $notification_type = $isValid? SUCCESS : ERROR;
         require $this->viewsDir . 'register_view.php';
-    }
-
-    private function formValidate($requiredValues){
-        foreach ($requiredValues as $key => $value)
-            if ($value['validate']) { # me fijo si tiene un metodo para validar especifico
-                if (!$value['validate']($_POST[$key])) # si lo tiene, lo ejecuto
-                    return [false, "El campo \"{$value['label']}\" no tiene un formato valido"]; # si no es valido respondo con mensaje personalizado
-            } else if (!$this->sanityCheck($_POST[$key])) # si no tiene personalizado, uso el general
-                return [false, "El campo  \"{$value['label']}\" no puede estar vacío"];
-        return [true];
     }
 
     public function registerProcess(){
@@ -142,15 +149,17 @@ class PageController{
             'apellido' => ['label' => 'Apellido'],
             'celular' => ['label' => 'Celular'],
             'email' => ['label' => 'Email', 'validate' => function ($email) {return $this->validateEmail($email);}],
-            'contrasenia' => ['label' => 'Confirmar contraseña', 'validate' => function ($pass) { return $this->validatePassword($pass);}],
+            'conf_email' => ['label' => 'Email', 'validate' => function ($email) {return $this->validateEmail($email);}],
+            'contrasenia' => ['label' => 'Contraseña', 'validate' => function ($pass) { return $this->validatePassword($pass);}],
+            'conf_contrasenia' => ['label' => 'Contraseña', 'validate' => function ($pass) { return $this->validatePassword($pass);}],
             'fecha_nacimiento' => ['label' => 'Fecha de nacimiento', 'validate' => function ($date) {return $this->validateDate($date);}],
         ];
         # valido los campos
-        $validated = $this->formValidate($requiredValues);
-        if (!$validated[0]) $this->register(true, false, $validated[1]);
+        list($validated, $isValid, $notification_text) = $this->formValidate($requiredValues); # validated viene sanitizado
+        if (!$isValid) $this->register(true, false, $notification_text);
         # valido los campos que requieren confirmacion
-        else if ($_POST['email'] != $_POST['conf_email']) $this->register(true, false, 'Los email no coinciden');
-        else if ($_POST['contrasenia'] != $_POST['conf_contrasenia']) $this->register(true, false, 'Las contraseñas no coinciden');
+        else if ($validated['email'] != $validated['conf_email']) $this->register(true, false, 'Los email no coinciden');
+        else if ($validated['contrasenia'] != $validated['conf_contrasenia']) $this->register(true, false, 'Las contraseñas no coinciden');
         else $this->register(true, true, 'Registro completado con éxito');
 
         # en este punto los datos estan validados y se guardarian en la base de datos
@@ -160,7 +169,6 @@ class PageController{
         #    else error
         #} catch then error
 
-        
     }
 
     public function resetPassword($procesado = false){
@@ -270,13 +278,6 @@ class PageController{
 
     public function parseDate($field){
         return explode('-', $field);
-    }
-
-    public function sanityCheck($field){
-        $field = trim($field);
-        $field = stripslashes($field);
-        $field = htmlspecialchars($field);
-        return $field;
     }
 
 }
