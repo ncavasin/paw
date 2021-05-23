@@ -153,16 +153,21 @@ class PageController{
         }
     }
 
-    public function turns($procesado = false){
+    public function turns($notification = false, $procesado = false){
         $this->titulo = 'Turnos';
         require $this->viewsDir . 'turns_view.php';
     }
     
     public function turnsProcess(){
         $this->titulo = 'Turnos';
-        $this->form = $_POST;
+        $especialista = $_POST['especialista'];
+        $especialidad = $_POST['especialidad'];
+        $dia = $_POST['dia'];
+        
+        var_dump($this->form);
 
-        # validation
+        die;
+        
 
         $this->turns(true);
     }
