@@ -14,7 +14,7 @@ class PageController{
     public function __construct(){
 
         # 10Mb = 10.000Kb
-        define ("_MAXFILESIZE", 10000, true);
+        define ("_MAXFILESIZE", 10000000, true);
 
         $this->viewsDir = __DIR__ . "/../views/";
 
@@ -226,19 +226,18 @@ class PageController{
         $dia =          $post['dia'];
 
         if(empty($dia) or (empty($especialidad) and empty($especialista)) or empty($_FILES)){
-            $this->turns(true, false); 
+            $this->turns(true, false);
         }
         else{
-            
             # Handling upload
-            $finfo =        finfo_open(FILEINFO_MIME);
+            $finfo =        finfo_open(FILEINFO_MIME_TYPE);
             $timestamp =    time();
             $targetDir =    '/public/';
-            $targetName =   $_FILES['orden_medica']['name'];
+            $targetName =   $_FILES['orden_medica']['tmp_name'];
             $targetSize =   $_FILES['orden_medica']['size'];
             $targetDbName = $targetDir . $timestamp;
             $targetMime =   finfo_file($finfo, $targetName);
-            #$targetMime =   mime_content_type($_FILES['orden_medica']);
+
             finfo_close($finfo);
 
 
