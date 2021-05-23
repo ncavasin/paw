@@ -251,6 +251,7 @@ class PageController{
                     $this->turns(true, false, 'extension no valida');
                 }
                 else{
+                    if(!is_dir($targetDir)) mkdir($targetDir);
                     if (move_uploaded_file($_FILES["orden_medica"]["tmp_name"], $newFileName)) {
                         $this->turns(true, true, "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.");
                     } else {
