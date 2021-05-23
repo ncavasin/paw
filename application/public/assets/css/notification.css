@@ -1,12 +1,12 @@
 .notification {
     background-color: var(--gris);
     color: white;
-    width: calc(100% - 50%);
-    margin: 0em 25%;
+    width: calc(100% + 2rem); /* 2 rem de los margenes negativos */
+    margin: 0rem -1rem;
+    margin-top: -1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 25px;
 }
 
 .success {
