@@ -229,7 +229,8 @@ class PageController{
         $requiredValues= [
             'especialidad' => ['label' => 'Especialidad'],
             'especialista' => ['label' => 'Especialista'],
-            'dia' => ['label' => 'Dia', 'validate' => function ($date) { return $this->validateDate($date);}],
+            'dia' => [  'label' => 'Dia', 
+                        'validate' => function ($date) { return $this->validateDate($date);}]
             # falta validar la hora que no podemos por falta de js
         ];
 
@@ -245,17 +246,17 @@ class PageController{
                 $finfo =        finfo_open(FILEINFO_MIME_TYPE);
                 $timestamp =    time();
                 $targetDir =    "./files/";
-                $tempName =   $_FILES['orden_medica']['tmp_name'];
-                $fileSize =   $_FILES['orden_medica']['size'];
-                $newFileName = $targetDir . $_FILES['orden_medica']['name']. '--' . $timestamp; # el -- es para despues parsear el nombre y devolver el original
-                $mimeType =   finfo_file($finfo, $tempName);
+                $tempName =     $_FILES['orden_medica']['tmp_name'];
+                $fileSize =     $_FILES['orden_medica']['size'];
+                $newFileName =  $targetDir . $_FILES['orden_medica']['name']. '--' . $timestamp; # el -- es para despues parsear el nombre y devolver el original
+                $mimeType =     finfo_file($finfo, $tempName);
 
                 finfo_close($finfo);
 
                 if (file_exists($newFileName))
                     $this->turns(true, false, 'Error al subir el archivo: Ya existe');
                 else if ($fileSize > constant('_MAXFILESIZE'))
-                    $this->turns(true, false, "Tamaño de archivo excedido");
+                    $this->turns(true, false, "Tamaño de archivo excedido. Limite 10Mb.");
                 else if (! $mimeType == 'application/pdf'){
                     $this->turns(true, false, 'El archivo no tiene una extensión válida (PDF)');
                 }
@@ -266,6 +267,7 @@ class PageController{
                     } else {
                         $this->turns(true, false, "Error interno del servidor, no se pudo guardar el archivo");
                     }
+
                     # Format dia
                     # Add db hit
                     # Mapping between timestamp and filename
