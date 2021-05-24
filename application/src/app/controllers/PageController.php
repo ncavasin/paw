@@ -13,7 +13,7 @@ class PageController{
 
     public function __construct(){
 
-        # 10Mb = 10.000.000Kb
+        # 10Mb = 10.000.000b
         define ("_MAXFILESIZE", 10000000, true);
 
         $this->viewsDir = __DIR__ . "/../views/";
@@ -219,68 +219,59 @@ class PageController{
         }
     }
 
-    public function turns($notification = false, $isValid = false, $notification_text = 'error'){
+    public function turns($notification = false, $isValid = false, $notification_text = 'Uno o mas campos no son validos'){
         $this->titulo = 'Turnos';
         $notification_type = $isValid ? SUCCESS : ERROR;
         require $this->viewsDir . 'turns_view.php';
     }
     
     public function turnsProcess(){
-        $this->titulo = 'Turnos';
-        
-        $keys = [];
-        $values = [];
-        foreach ($_POST as $key => $value){
-            array_push($keys, $this->sanityCheck($key));
-            array_push($values, $this->sanityCheck($value));
-        }
-        $post = array_combine($keys, $values);
+        $requiredValues= [
+            'especialidad' => ['label' => 'Especialidad'],
+            'especialista' => ['label' => 'Especialista'],
+            'dia' => ['label' => 'Dia', 'validate' => function ($date) { return $this->validateDate($date);}],
+            # falta validar la hora que no podemos por falta de js
+        ];
 
-        $especialista = $post['especialista'];
-        $especialidad = $post['especialidad'];
-        $dia =          $post['dia'];
-
-        if(empty($dia) or (empty($especialidad) and empty($especialista)) or empty($_FILES)){
-            $this->turns(true, false);
-        }
-        else{
-            if($_FILES['orden_medica']['error'] != 0){
-                $this->turns(true, false);
-            }
+        if(empty($_FILES)){
+            $this->turns(true, false, 'El campo Orden Médica es obligatorio');
+        } else if($_FILES['orden_medica']['error'] != 0){
+            $this->turns(true, false, "El archivo no se envió correctamente");
+        }else{
+            list($validated, $isValid, $notification_text) = $this->validateForm($requiredValues);
+            if (!$isValid) $this->turns(true, false, $notification_text);
             else{
-                    # Handling upload
-                    $finfo =        finfo_open(FILEINFO_MIME_TYPE);
-                    $timestamp =    time();
-                    $targetDir =    "./files/";
-                    $tempName =   $_FILES['orden_medica']['tmp_name'];
-                    $fileSize =   $_FILES['orden_medica']['size'];
-                    $newFileName = $targetDir . $_FILES['orden_medica']['name']; #. '--' . $timestamp; # el -- es para despues parsear el nombre y devolver el original
-                    $mimeType =   finfo_file($finfo, $tempName);
+                # Handling upload
+                $finfo =        finfo_open(FILEINFO_MIME_TYPE);
+                $timestamp =    time();
+                $targetDir =    "./files/";
+                $tempName =   $_FILES['orden_medica']['tmp_name'];
+                $fileSize =   $_FILES['orden_medica']['size'];
+                $newFileName = $targetDir . $_FILES['orden_medica']['name']. '--' . $timestamp; # el -- es para despues parsear el nombre y devolver el original
+                $mimeType =   finfo_file($finfo, $tempName);
 
-                    finfo_close($finfo);
+                finfo_close($finfo);
 
                 if (file_exists($newFileName))
-                    $this->turns(true, false, 'Archivo ya existe');
+                    $this->turns(true, false, 'Error al subir el archivo: Ya existe');
                 else if ($fileSize > constant('_MAXFILESIZE'))
-                    $this->turns(true, false, 'supero el tamaño');
+                    $this->turns(true, false, "Tamaño de archivo excedido");
                 else if (! $mimeType == 'application/pdf'){
-                    $this->turns(true, false, 'extension no valida');
+                    $this->turns(true, false, 'El archivo no tiene una extensión válida (PDF)');
                 }
                 else{
                     if(!is_dir($targetDir)) mkdir($targetDir);
                     if (move_uploaded_file($_FILES["orden_medica"]["tmp_name"], $newFileName)) {
-                        $this->turns(true, true, "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.");
+                        $this->turns(true, true, "Turno reservado con éxito");
                     } else {
-                        $this->turns(true, false, "Sorry, there was an error uploading your file.");
+                        $this->turns(true, false, "Error interno del servidor, no se pudo guardar el archivo");
                     }
-                    $dia = $this->parseDate($dia);
                     # Format dia
                     # Add db hit
                     # Mapping between timestamp and filename
 
                 }
             }
-
         }
     }
 
