@@ -7,6 +7,7 @@
     ?>
     <link rel="stylesheet" type='text/css' href="assets/css/coberturas.css" />
     <link rel="stylesheet" type='text/css' href="assets/css/form.css" />
+    <link rel="stylesheet" type='text/css' href="assets/css/notification.css" />
 </head>
 
 <body>
@@ -15,18 +16,17 @@
     ?>
 
     <main>
+        <?php require 'parts/notification_view.php' ?>
         <section>
-            <?php require 'parts/notification_view.php' ?>
             <form action="#" method="POST" target="_self">
                 <label for="busqueda">Buscar:</label>
                 <input type="search" id="busqueda" name="busqueda" placeholder="Galeno" autofocus tabindex="1" autocomplete="on" />
             </form>
-            <?php if ($busqueda && $is_valid && (count($resutlado) > 0)) : ?>
+            <?php if ($busqueda && $isValid && (count($resultado) > 0)) : ?>
                 <?php foreach ($resultado as $item) : ?>
                     <p> <?= $item ?> </p>
                 <?php endforeach; ?>
             <?php endif; ?>
-
             <h2>OBRAS SOCIALES</h2>
             <ul>
                 <li>

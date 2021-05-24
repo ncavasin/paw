@@ -198,20 +198,24 @@ class PageController{
         require $this->viewsDir . 'services_view.php';
     }
 
-    public function coverages($busqueda = false, $isValid = false, $resultado = []){
+    public function coverages($busqueda = false, $isValid = false, $resultado = [], $notification = false, $notification_text = 'Uno o mas campos no son validos'){
         $this->titulo = 'Coberturas';
+        var_dump($resultado);
+        $notification_type = $isValid? SUCCESS : ERROR;
         require $this->viewsDir . 'coverages_view.php';
     }
 
     public function coveragesProcess(){
-        $this->titulo = 'Coberturas';
-        $busqueda = $_POST["busqueda"];
+        $requiredValues = [
+            'busqueda' => ['label' => 'Busqueda'],
+        ];
         $resultado = [];
-        if (!$busqueda)  # Validacion del formulario
-            $this->coverages(true, false, $resultado);
+        list($validated, $isValid, $notification_text) = $this->validateForm($requiredValues);
+        if (!$isValid)
+            $this->coverages(false, false, $resultado, true, $notification_text);
         else {
-            if (strlen($busqueda) < 6) $resultado = ['opcion 1', 'opcion 2', 'opcion 3']; # Simulo obtener una respuesta de una base de datos
-            $this->coverages(true, true, $resultado);
+            if (strlen($validated['busqueda']) >= 3) $this->coverages(true, true, ['busqueda valida']); # Simulo obtener una respuesta de una base de datos
+            else $this->coverages(false, false, $resultado, true, 'Ingrese al menos 3 caracteres');
         }
     }
 
