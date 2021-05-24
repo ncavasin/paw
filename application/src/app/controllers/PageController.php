@@ -173,17 +173,19 @@ class PageController{
 
     }
 
-    public function resetPassword($procesado = false){
+    public function resetPassword($notification = false, $isValid = false, $notification_text = 'Uno o mas campos no son validos'){
+        $notification_type = $isValid? SUCCESS : ERROR;
         require $this->viewsDir . 'reset_password_view.php';
     }
 
     public function resetPasswordProcess(){
-        $this->titulo = 'Reestablecer Contraseña';
-        $this->form = $_POST;
+        $requiredValues = [
+            'email' => ['label' => 'Email', 'validate' => function ($email) {return $this->validateEmail($email); }],
+        ];
 
-        # validation
-
-        $this->resetPassword(true);
+        list($validated, $isValid, $notification_text) = $this->validateForm($requiredValues);
+        if (!$isValid) $this->resetPassword(true, false, $notification_text);
+        else $this->resetPassword(true, true, 'Revise su casilla de email para continuar con el proceso');
     }
 
     public function about(){
