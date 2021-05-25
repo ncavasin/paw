@@ -14,20 +14,6 @@ html{
     text-decoration: none;
 }
 
-.boton{
-    border-radius: 10px;
-    background-color: var(--azul);
-    color: white;
-    border: 1px solid white;
-    width: 10rem;
-}
-
-.boton:hover{
-    background-color: white;
-    color: var(--azul);
-    border: 1px var(--azul) solid;
-}
-
 body{
     min-height: 100vh;
     width: 100%;

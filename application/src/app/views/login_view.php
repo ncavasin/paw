@@ -7,6 +7,7 @@
         <link rel='stylesheet' type='text/css' href='assets/css/form.css' />
         <link rel='stylesheet' type='text/css' href='assets/css/login.css' />
         <link rel='stylesheet' type='text/css' href='assets/css/notification.css' />
+        <link rel='stylesheet' type='text/css' href='assets/css/botones.css'/>
     </head>
     <body>
         <?php 
@@ -39,7 +40,7 @@
                     <a href="/reset_password" target="_self">¿Olvidaste tu contraseña?</a>
                     <a href="/register" target="_self">Registrarse</a>
 
-                    <input type="submit" value="Ingresar" class="boton"/>
+                    <input type="submit" value="Ingresar" class="submit"/>
                 </form>
             </section>        
         </main>

@@ -6,7 +6,8 @@
         ?>
         <link rel="stylesheet" type='text/css' href="assets/css/form.css"/>
         <link rel="stylesheet" type='text/css' href="assets/css/turnos.css"/>
-        <link rel='stylesheet' type='text/css' href='assets/css/notification.css' />
+        <link rel='stylesheet' type='text/css' href='assets/css/notification.css'/>
+        <link rel='stylesheet' type='text/css' href='assets/css/botones.css'/>
     </head>
     <body>
         <?php 
@@ -80,7 +81,7 @@
                     </tbody>
                 </table>
 
-                <input type="submit" form="form-turnos" name="reservar" value="Reservar" class="boton"/>
+                <input type="submit" form="form-turnos" name="reservar" value="Reservar" class="submit"/>
                 <input type="reset" form="form-turnos" name="reset" value="Limpiar" class="limpiar"/>
             </section>
         </main>

@@ -1,0 +1,30 @@
+.submit{
+    align-self: center;
+    justify-self: stretch;
+    border-radius: 10px;
+    background-color: var(--azul);
+    color: white;
+    border: 1px solid white;
+    width: 10rem;
+}
+
+.submit:hover{
+    transition: .25s;
+    color: var(--azul);
+    background-color: white;
+    border: 1px var(--azul) solid;
+    padding: 0 .125rem 0 .125rem;
+}
+
+.limpiar{
+    width: 10rem;
+    color: var(--azul);
+    border: 1px solid var(--azul);
+    border-radius: 10px;
+}
+
+.limpiar:hover{
+    transition: .25s;
+    background-color: var(--azul);
+    color: white;
+}

@@ -2,17 +2,6 @@ h2:last-of-type{
     margin-top: -2rem;
 }
 
-.limpiar{
-    width: 10rem;
-    border: 1px solid var(--gris);
-    border-radius: 10px;
-}
-
-.limpiar:hover{
-    background-color: white;
-    color: var(--gris)
-}
-
 table{
     display: flex;
     flex-flow: column;

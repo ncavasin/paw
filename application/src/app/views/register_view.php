@@ -5,6 +5,7 @@
     <?php require 'parts/head_view.php'    ?>
     <link rel='stylesheet' type='text/css' href='assets/css/form.css' />
     <link rel='stylesheet' type='text/css' href='assets/css/notification.css' />
+    <link rel='stylesheet' type='text/css' href='assets/css/botones.css'/>
 </head>
 
 <body>
@@ -49,7 +50,7 @@
                     <label for="conf_contrasenia">Confirmación (*)</label>
                     <input type="password" id="conf_contrasenia" name="conf_contrasenia" placeholder="Contraseña" required tabindex="8" />
                 </fieldset>
-                <input type="submit" value="Registrarse" class="boton" />
+                <input type="submit" value="Registrarse" class="submit" />
             </form>
         </section>
     </main>
