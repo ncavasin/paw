@@ -19,12 +19,19 @@
 
 ## Instrucciones de uso
 
-El servidor se encuentra dockerizado por lo que para poder ejecutarlo es necesario tener instalado [Docker][docker] según su SO. 
+- ``git clone https://github.com/ncavasin/paw.git``
+- ``cd paw/application/``
+- ``cp .env.example .env``
+- Modificar ``.env`` a gusto.
+- ``cd ../``
+- ``docker-compose up`` (ver abajo).
 
-Una vez instalado, solo necesita ejecutar el comando ``docker-compose up``. Si es la primera vez que lo ejecuta, la instrucción demorará algunos segundos/minutos ya que deberá descargar por única vez la imagen del contenedor. 
 
-Por último, una vez iniciado Docker, puede dirigirse al socket ``localhost:8888`` para interactuar con el sitio web.
+## Docker 
 
+El servidor se encuentra *dockerizado* por lo que para poder ejecutarlo es necesario tener instalado [Docker][docker] según su SO. 
+
+Una vez instalado, solo necesita el comando ``docker-compose up`` para inicializarlo. Si es la primera vez que lo ejecuta, la instrucción demorará algunos segundos/minutos ya que deberá descargar por única vez la imagen del contenedor. Una vez iniciado Docker, puede dirigirse al socket ``localhost:8888`` para interactuar con el sitio web.
 
 [docker]: https://docs.docker.com/get-docker/
 
