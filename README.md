@@ -21,7 +21,9 @@
 
 El servidor se encuentra dockerizado por lo que para poder ejecutarlo es necesario tener instalado [Docker][docker] según su SO. 
 
-Una vez instalado, solo necesita ejecutar el comando ``docker-compose up`` y luego dirigirse al socket ``localhost:8888`` para poder interactuar con el sitio web cuyo servidor ``PHP`` ha levantado.
+Una vez instalado, solo necesita ejecutar el comando ``docker-compose up``. Si es la primera vez que lo ejecuta, la instrucción demorará algunos segundos/minutos ya que deberá descargar por única vez la imagen del contenedor. 
+
+Por último, una vez iniciado Docker, puede dirigirse al socket ``localhost:8888`` para interactuar con el sitio web.
 
 
 [docker]: https://docs.docker.com/get-docker/
