@@ -8,6 +8,8 @@ use Dotenv\Dotenv;
 
 use Paw\core\Router;
 use Paw\core\Config;
+use Paw\core\Request;
+
 
 # Constants
 const SUCCESS = 'success';
@@ -33,6 +35,9 @@ $handler->setLevel($config->get('LOG_LEVEL'));
 $log->pushHandler($handler);
 
 
+# Requests handler
+$request = new Request();
+
 # Routes handler
 $router = new Router;
 
@@ -55,8 +60,5 @@ $router->post('/coverages', 'PageController@coveragesProcess');
 
 $router->get('/turns', 'PageController@turns');
 $router->post('/turns', 'PageController@turnsProcess');
-
-$router->get('notFound', 'ErrorController@notFound');
-$router->get('internalError', 'ErrorController@internalError');
 
 ?>
