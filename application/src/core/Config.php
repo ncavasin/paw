@@ -17,7 +17,7 @@ class Config{
         $this->configs['DB_DBNAME'] = getenv("DB_DBNAME") ?? 'database_name';
         $this->configs['DB_USERNAME'] = getenv("DB_USERNAME") ?? 'postgres';
         $this->configs['DB_PASSWORD'] = getenv("DB_PASSWORD") ?? 'postgres';
-        $this->configs['DB_PORT'] = getenv("DB_PORT") ?? '54322';
+        $this->configs['DB_PORT'] = getenv("DB_INTERNAL_PORT") ?? '5432';
         $this->configs['DB_CHARSET'] = getenv("DB_CHARSET") ?? 'utf8';
 
         // $this->configs['PGADMIN_DEFAULT_EMAIL'] = getenv('PGADMIN_DEFAULT_EMAIL') ?? 'admin@admin';

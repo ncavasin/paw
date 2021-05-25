@@ -23,7 +23,7 @@ class ConnectionBuilder{
             return new PDO(
                 # Connection is different because of docker presence
                 # name = paw | hostname = paw_db | port = 5432 | username = admin | password = admin
-                "{$adapter}:host={$hostname};dbname={$dbname};port={$port};charset={$charset}",
+                "{$adapter}:host={$hostname};dbname={$dbname};port={$port}",
                 $config->get("DB_USERNAME"),
                 $config->get("DB_PASSWORD"),
                 [
