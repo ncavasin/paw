@@ -21,11 +21,12 @@ $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
-# Log handler
-$dotenv = Dotenv::createUnsafeImmutable(__DIR__ . '/../');
+
 # Load enviroment vars
+$dotenv = Dotenv::createUnsafeImmutable(__DIR__ . '/../');
 $dotenv->load();
 
+# Object to handle config file
 $config = new Config();
 
 # Use them to initialize the logger
