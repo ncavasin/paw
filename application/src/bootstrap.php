@@ -40,6 +40,7 @@ $request = new Request();
 
 # Routes handler
 $router = new Router;
+$router->setLogger($log);
 
 # Supported routes
 $router->get('/', 'PageController@index');
