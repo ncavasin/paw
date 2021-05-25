@@ -9,7 +9,7 @@ use Dotenv\Dotenv;
 use Paw\core\Router;
 use Paw\core\Config;
 use Paw\core\Request;
-
+use Paw\core\database\ConnectionBuilder;
 
 # Constants
 const SUCCESS = 'success';
@@ -34,6 +34,9 @@ $handler = new StreamHandler($config->get('LOG_PATH'));
 $handler->setLevel($config->get('LOG_LEVEL'));
 $log->pushHandler($handler);
 
+$connectionBuilder = new ConnectionBuilder();
+$connectionBuilder->setLogger($log);
+$connection = $connectionBuilder->make($config);
 
 # Requests handler
 $request = new Request();
