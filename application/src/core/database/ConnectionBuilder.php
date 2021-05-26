@@ -1,4 +1,4 @@
-<?
+<?php
 
 namespace Paw\core\database;
 
