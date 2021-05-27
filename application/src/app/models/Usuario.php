@@ -22,7 +22,7 @@ class Usuario extends Model{
     ];
 
     public function setNombre(string $nombre){
-        if (strlen($nombre ) > constant('_NOMAP_MAX')){
+        if (strlen($nombre ) > constant('_NOM_AP_MAX')){
 
             throw new InvalidFormatException('Nombre de Usuario demasiado largo. Limite: '. constant('_NOMAP_MAX') . ' caracteres.');
         }
@@ -30,7 +30,7 @@ class Usuario extends Model{
     }
 
     public function setApellido(string $apellido){
-        if (strlen($apellido ) > constant('NOMAP_MAX')){
+        if (strlen($apellido ) > constant('NOM_AP_MAX')){
 
             throw new InvalidFormatException('Apellido de Usuario demasiado largo. Limite: ' . constant('_NOMAP_MAX') . ' caracteres.');
         }

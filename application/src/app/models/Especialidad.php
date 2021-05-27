@@ -18,7 +18,7 @@ class Especialidad extends Model{
 
     public function setNombre(string $nombre){
 
-        if(strlen($nombre) > constant('_ESPNOM_MAX')){
+        if(strlen($nombre) > constant('_ESP_NOM_MAX')){
             throw new InvalidFormatException('Nombre de Especialidad  demasiado largo. Limite ' . constant('_ESPNOM_MAX') . ' caracteres.');
         }
 
@@ -26,7 +26,7 @@ class Especialidad extends Model{
     }
 
     public function setDescripcion($descripcion){
-        if(strlen($descripcion) > constant('_ESPDESC_MAX')){
+        if(strlen($descripcion) > constant('_ESP_DESC_MAX')){
             throw new InvalidFormatException('Descripcion de la Especialidad demasiado largo. Limite ' . constant('_ESPDESC_MAX') . ' caracteres.');
         }
 

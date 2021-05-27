@@ -15,6 +15,7 @@ class UsuariosController extends Controller{
         
     }
 
+    
     public function index(){
 
     }
@@ -22,7 +23,6 @@ class UsuariosController extends Controller{
     public function get(){
 
     }
-     
 
 }
 
