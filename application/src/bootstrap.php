@@ -66,4 +66,7 @@ $router->post('/coverages', 'PageController@coveragesProcess');
 $router->get('/turns', 'PageController@turns');
 $router->post('/turns', 'PageController@turnsProcess');
 
+# $router->get('/turns/', 'TurnsController@index');
+# Add all needed routes 
+
 ?>

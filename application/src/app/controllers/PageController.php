@@ -2,75 +2,20 @@
 
 namespace Paw\app\controllers;
 
-class PageController{
+use Paw\core\Controller;
+
+class PageController extends Controller{
 
     public string $viewsDir;
     private array $contact;
     public array $userOptions;
     public array $menuOptions;
     public array $footerLinks;
-    private $__MAXFSIZE;
 
     public function __construct(){
 
         # 10Mb = 10.000.000b
         define ("_MAXFILESIZE", 10000000, true);
-
-        $this->viewsDir = __DIR__ . "/../views/";
-
-        $this->contact = [
-            'href' => 'tel:+549234642-4593',
-            'name' => '+54 9 2346 42-4593'
-        ];
-
-        $this->userOptions = [
-            [
-                'href' => '/login',
-                'name' => 'Ingresar'
-            ],
-            [
-                'href' => '/register',
-                'name' => 'Registrarse'
-            ]
-        ];
-
-        $this->menuOptions = [
-            [
-                'href' => '/about',
-                'name' => '¿Quienes Somos?'
-            ],
-            [
-                'href' => '/services',
-                'name' => 'Nuestros Servicios'
-            ],
-            [
-                'href' => '/coverages',
-                'name' => 'Coberturas'
-            ],
-            [
-                'href' => '/turns',
-                'name' => 'Turnos'
-            ]
-        ];
-
-        $this->footerLinks = [
-            [
-                'href' => 'https://www.facebook.com/dentalmedicalgroup',
-                'name' => 'facebook'
-            ],
-            [
-                'href' => 'https://www.instagram.com/dentalmedicalgroup',
-                'name' => 'instagram'
-            ],
-            [
-                'href' => 'https://www.linkedin.com/dentalmedicalgroup',
-                'name' => 'linkedin'
-            ],
-            [
-                'href' => 'mailto:contacto@dentalmedicalgroup.com',
-                'name' => 'mail'
-            ]
-        ];
     }
 
     private function validateEmail($email) {
