@@ -2,15 +2,24 @@
 
 namespace Paw\core;
 
+use Paw\core\Model;
+use Paw\core\database\QueryBuiler;
+
 class Controller{
 
-    public $viewsDir;
+    # 1-1 relation against a model
+    public ?string $modelName = null;
+
+
     private array $contact;
     private array $userOptions;
     private array $menuOptions;
     private array $footerLinks;
 
     public function __construct(){
+
+        global $connection, $log;
+
         $this->viewsDir = __DIR__ . "/../views/";
 
         $this->contact = [
@@ -67,6 +76,23 @@ class Controller{
                 'name' => 'mail'
             ]
         ];
+
+        if(! is_null($this->modelName)){
+            
+            # Construct QB
+            $qb = new QueryBuiler($connection, $log);
+
+            # Construct Model dynamically
+            $model = new $this->modelName;
+
+            # Inject QB to Model
+            $model->setQueryBuilder($qb);
+            $this->setModel($model);
+        }
+    }
+
+    private function setModel(Model $model){
+        $this->model = $model; 
     }
 }
 
