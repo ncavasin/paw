@@ -1,5 +1,7 @@
 <?php
 
+namespace Paw\core\database;
+
 use PDO;
 use Monolog\Logger;
 
