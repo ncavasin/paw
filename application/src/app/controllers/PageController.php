@@ -6,16 +6,13 @@ use Paw\core\Controller;
 
 class PageController extends Controller{
 
-    public string $viewsDir;
-    private array $contact;
-    public array $userOptions;
-    public array $menuOptions;
-    public array $footerLinks;
-
     public function __construct(){
+        
+        parent::__construct();
 
         # 10Mb = 10.000.000b
         define ("_MAXFILESIZE", 10000000, true);
+
     }
 
     private function validateEmail($email) {
@@ -145,7 +142,6 @@ class PageController extends Controller{
 
     public function coverages($busqueda = false, $isValid = false, $resultado = [], $notification = false, $notification_text = 'Uno o mas campos no son validos'){
         $this->titulo = 'Coberturas';
-        var_dump($resultado);
         $notification_type = $isValid? SUCCESS : ERROR;
         require $this->viewsDir . 'coverages_view.php';
     }

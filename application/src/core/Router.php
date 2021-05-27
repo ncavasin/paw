@@ -65,8 +65,8 @@ class Router {
         $controller_name = "Paw\\app\\controllers\\{$controller}";
             
         # Serve it properly
-        $objControler = new $controller_name;
-        $objControler->$method();
+        $objController = new $controller_name;
+        $objController->$method();
         
     }
 

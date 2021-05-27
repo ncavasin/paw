@@ -10,6 +10,11 @@ class UsuariosController extends Controller{
 
     public ?string $modelName = Usuario::class;
 
+    public function __construct(){
+        parent::__construct();
+        
+    }
+
     public function index(){
 
     }

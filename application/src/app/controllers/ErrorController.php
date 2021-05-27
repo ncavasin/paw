@@ -5,6 +5,12 @@ namespace Paw\app\controllers;
 use Paw\core\Controller;
 
 class ErrorController extends Controller{
+
+
+    public function __construct(){
+        parent::__construct();
+    }
+
     
     public function notFound(){
         http_response_code(404);

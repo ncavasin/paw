@@ -10,10 +10,11 @@ class Controller{
     # 1-1 relation against a model
     public ?string $modelName = null;
 
-    private array $contact;
-    private array $userOptions;
-    private array $menuOptions;
-    private array $footerLinks;
+    protected string $viewsDir;
+    protected array $contact;
+    protected array $userOptions;
+    protected array $menuOptions;
+    protected array $footerLinks;
 
     public function __construct(){
 
