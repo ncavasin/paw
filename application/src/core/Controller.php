@@ -10,7 +10,6 @@ class Controller{
     # 1-1 relation against a model
     public ?string $modelName = null;
 
-
     private array $contact;
     private array $userOptions;
     private array $menuOptions;
@@ -20,7 +19,7 @@ class Controller{
 
         global $connection, $log;
 
-        $this->viewsDir = __DIR__ . "/../views/";
+        $this->viewsDir = __DIR__ . "/../app/views/";
 
         $this->contact = [
             'href' => 'tel:+549234642-4593',

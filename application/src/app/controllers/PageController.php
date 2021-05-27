@@ -14,8 +14,7 @@ class PageController extends Controller{
 
     public function __construct(){
 
-        # 10Mb = 10.000.000b
-        define ("_MAXFILESIZE", 10000000, true);
+        
     }
 
     private function validateEmail($email) {
