@@ -1,3 +1,2 @@
-composer update 
-./configure --with-pdo-pgsql
+phinx --version
 php -S 0.0.0.0:8888 -t public

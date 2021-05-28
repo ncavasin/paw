@@ -1,7 +1,8 @@
 FROM php:7.4.19-buster
-RUN apt -y update && apt -y upgrade && apt -y install wget unzip
-RUN wget -O composer-setup.php https://getcomposer.org/installer
-RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
+RUN apt-get -y update && apt-get -y upgrade && apt-get -y install wget unzip libpq-dev
+RUN docker-php-ext-install pdo pdo_pgsql
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+RUN composer global require robmorgan/phinx
+ENV PATH="${PATH}:/root/.composer/vendor/bin"
 WORKDIR /usr/src/app
-CMD ["composer", "--version"]
+CMD ["phinx", "--version"]
