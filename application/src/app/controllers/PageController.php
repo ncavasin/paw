@@ -198,7 +198,7 @@ class PageController extends Controller{
                     $this->turns(true, false, 'Error al subir el archivo: Ya existe');
                 else if ($fileSize > constant('_MAXFILESIZE'))
                     $this->turns(true, false, "Tamaño de archivo excedido. Limite 10Mb.");
-                else if (! $mimeType == 'application/pdf'){
+                else if (! ($mimeType == 'application/pdf')){
                     $this->turns(true, false, 'El archivo no tiene una extensión válida (PDF)');
                 }
                 else{
