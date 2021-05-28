@@ -1,4 +1,4 @@
-.submit{
+.main_button{
     align-self: center;
     justify-self: stretch;
     border-radius: 10px;
@@ -8,8 +8,8 @@
     width: 10rem;
 }
 
-.submit:hover{
-    transition: .25s;
+.main_button:hover{
+    transition: var(--transition_time);
     color: var(--azul);
     background-color: white;
     border: 1px var(--azul) solid;
@@ -24,7 +24,7 @@
 }
 
 .limpiar:hover{
-    transition: .25s;
+    transition: var(--transition_time);
     background-color: var(--azul);
     color: white;
 }

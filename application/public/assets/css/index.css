@@ -9,17 +9,18 @@ section{
     font-weight: bolder;
     align-items: center;
     justify-items: center;
-    background-color: var(--azul);
+    background-color: #C4C4C4;
     color: white;
     margin-top: 2rem;
     margin-bottom: 2rem;
+    border-radius: var(--border_value);
 }
 
 section:first-of-type{
     background-image: url('/assets/img/Carrusel_2.jpg');
     background-repeat: no-repeat;
     background-position: center; 
-    height: 15rem;
+    height: 60vh;
 }
 
 section:nth-of-type(3){
@@ -27,15 +28,45 @@ section:nth-of-type(3){
     color: var(--azul);
 }
 
-section > ul > li{
-    text-align: center;
-    margin: 2rem;
+
+section ul li{
+    margin: 2rem 0;
+}
+
+
+h3 > a{
     padding: 1rem 0;
-    background-color: whitesmoke;
-    border-radius: 25px;
 }
 
-section > ul > li:hover{
-    background-color: var(--gris);
+h3, a{
+    display: inline-block;
+    width: 85%;
 }
 
+
+ul .button{
+    align-self: center;
+    justify-self: stretch;        
+    border-radius: var(--border_value);
+    background-color: var(--azul);
+    color: white;
+}
+    
+ul .button:hover{
+    transition: var(--transition_time);
+    background-color: var(--celeste);
+}
+
+@media (min-width: 480px){
+
+    section ul li{
+        margin: 4rem 0;
+    }
+
+    h3 > a{
+        padding-top: 5%;
+        padding-bottom: 5%;
+        font-size: xx-large;
+    }
+
+}

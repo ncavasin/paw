@@ -81,7 +81,7 @@
                     </tbody>
                 </table>
 
-                <input type="submit" form="form-turnos" name="reservar" value="Reservar" class="submit"/>
+                <input type="submit" form="form-turnos" name="reservar" value="Reservar" class="main_button"/>
                 <input type="reset" form="form-turnos" name="reset" value="Limpiar" class="limpiar"/>
             </section>
         </main>

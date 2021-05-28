@@ -2,7 +2,6 @@
 
 namespace Paw\core;
 
-
 use Paw\core\traits\Loggable;
 use Paw\core\database\QueryBuiler;
 
@@ -18,7 +17,7 @@ class Model{
         define('_ESP_DESC_MAX', 250, true);
         define('_SERVICES_MAX', 250, true);
 
-        $this->$queryBuilder = $qb;
+        $this->queryBuilder = $qb;
 
     }
 }

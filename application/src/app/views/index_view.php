@@ -5,6 +5,7 @@
             require 'parts/head_view.php'
         ?>
         <link rel="stylesheet" type='text/css' href="assets/css/index.css"/>   
+        <link rel="stylesheet" type='text/css' href="assets/css/botones.css"/>   
     </head>
     <body>
         <?php 
@@ -17,13 +18,13 @@
             <section>
                 <h2>NUESTROS SERVICIOS</h2>
                 <ul>
-                   <li><h3><a href="servicios/audiologia.html" target="_self">Audiología</a></h3></li>
-                   <li><h3><a href="servicios/cardiologia.html" target="_self">Cardiología</a></h3></li>
-                   <li><h3><a href="servicios/densitometria.html" target="_self">Densitometría</a></h3></li>
-                   <li><h3><a href="servicios/ecografia_doppler.html" target="_self">Ecografía Doppler</a></h3></li>
+                   <li><h3><a href="services/audiologia" target="_self" class='button'>Audiología</a></h3></li>
+                   <li><h3><a href="services/cardiologia" target="_self"class='button'>Cardiología</a></h3></li>
+                   <li><h3><a href="services/densitometria" target="_self" class='button'>Densitometría</a></h3></li>
+                   <li><h3><a href="services/ecografia_doppler" target="_self" class='button'>Ecografía Doppler</a></h3></li>
+                   <li><h3><a href="services" target="_self" class='button'>Ver más</a></h3></li>
                 </ul>
-                <a href="services.html" target="_self" class="boton">Ver más</a>
-            </section>        
+            </section>
         </main>
 
         <?php 
