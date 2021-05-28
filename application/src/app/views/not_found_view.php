@@ -3,6 +3,7 @@
     <head>
         <meta lang="es" charset="utf-8"/>
         <title>Página no encontrada</title>
+        <?php require 'parts/head_view.php' ?>
     </head>
     <body>
         <?php 

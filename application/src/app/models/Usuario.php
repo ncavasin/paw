@@ -23,7 +23,6 @@ class Usuario extends Model{
 
     public function setNombre(string $nombre){
         if (strlen($nombre ) > constant('_NOM_AP_MAX')){
-
             throw new InvalidFormatException('Nombre de Usuario demasiado largo. Limite: '. constant('_NOMAP_MAX') . ' caracteres.');
         }
         $this->fields['nombre'] = $nombre;
@@ -80,9 +79,8 @@ class Usuario extends Model{
         
         # Hash it!!!
     }
-    
 
-    public function setCobertura{
+    public function setCobertura(){
         
         
         # Handle new cobertura
@@ -91,19 +89,15 @@ class Usuario extends Model{
     }
 
     public function set(array $values){
-        
         foreach(array_keys($this->fields) as $key){
-
             if(! isset($values[$key])){
-                continue;
+                continue; # TODO si no encuentra la variable deberia tirar un error 
             }
-
+            # Armo el nombre de la funcion a ejecutar para el setter correspondiente
             $method = 'set' . ucfirst($key);
-            $this->method($values[$key]);
+            $method($values[$key]);
         }
-
     }
-
 
 }
 

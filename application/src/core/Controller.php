@@ -9,7 +9,7 @@ class Controller{
 
     # 1-1 relation against a model
     public ?string $modelName = null;
-
+    
     protected string $viewsDir;
     protected array $contact;
     protected array $userOptions;
@@ -17,16 +17,12 @@ class Controller{
     protected array $footerLinks;
 
     public function __construct(){
-
         global $connection, $log;
-
         $this->viewsDir = __DIR__ . "/../app/views/";
-
         $this->contact = [
             'href' => 'tel:+549234642-4593',
             'name' => '+54 9 2346 42-4593'
         ];
-
         $this->userOptions = [
             [
                 'href' => '/login',
@@ -37,7 +33,6 @@ class Controller{
                 'name' => 'Registrarse'
             ]
         ];
-
         $this->menuOptions = [
             [
                 'href' => '/about',
@@ -52,12 +47,10 @@ class Controller{
                 'name' => 'Coberturas'
             ],
             [
-                'href' => '/turns',
+                'href' => '/newturn',
                 'name' => 'Turnos'
             ]
         ];
-
-
         $this->footerLinks = [
             [
                 'href' => 'https://www.facebook.com/dentalmedicalgroup',
@@ -76,7 +69,6 @@ class Controller{
                 'name' => 'mail'
             ]
         ];
-
         if(! is_null($this->modelName)){
             
             # Construct QB

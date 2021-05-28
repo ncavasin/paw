@@ -63,8 +63,9 @@ $router->post('/register', 'PageController@registerProcess');
 $router->get('/coverages', 'PageController@coverages');
 $router->post('/coverages', 'PageController@coveragesProcess');
 
-$router->get('/turns', 'PageController@turns');
-$router->post('/turns', 'PageController@turnsProcess');
+$router->get('/newturn', 'PageController@turns');
+$router->post('/newturn', 'TurnosController@nuevoTurno');
+$router->get('/myturns', 'TurnosController@getTurnos');
 
 # $router->get('/turns/', 'TurnsController@index');
 # Add all needed routes 

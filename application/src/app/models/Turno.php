@@ -54,7 +54,7 @@ class Turno extends Model{
             }
 
             $method = 'set' . ucfirst($key);
-            $this->method($values[$key]);
+            $method($values[$key]);
         }
 
     }
