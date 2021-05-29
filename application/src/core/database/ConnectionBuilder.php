@@ -18,7 +18,6 @@ class ConnectionBuilder{
         # Do nothing
     }
 
-
     private function make(Config $config){
         try{
             $adapter =  $config->get("DB_ADAPTER");
