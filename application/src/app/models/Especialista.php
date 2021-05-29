@@ -5,6 +5,8 @@ namespace Paw\app\models;
 use Paw\core\Model;
 use Paw\core\exceptions\InvalidFormatException;
 
+use const Paw\core\database\USER_NOM_AP_MAX;
+
 class Especialista extends Model{
 
     # 1-1 relation against Especialista table
@@ -18,9 +20,9 @@ class Especialista extends Model{
 
     public function setNombre(string $nombre){
         
-        if (strlen($nombre ) > constant('_NOM_AP_MAX')){
+        if (strlen($nombre ) > USER_NOM_AP_MAX){
 
-            throw new InvalidFormatException('Nombre de Usuario demasiado largo. Limite: ' . constant('_NOMAP_MAX') . ' caracteres.');
+            throw new InvalidFormatException('Nombre de Usuario demasiado largo. Limite: ' . USER_NOM_AP_MAX . ' caracteres.');
         }
 
         $this->fields['nombre'] = $nombre;
@@ -28,9 +30,9 @@ class Especialista extends Model{
 
     public function setApellido(string $apellido){
 
-        if (strlen($apellido ) > constant('_NOM_AP_MAX')){
+        if (strlen($apellido ) > USER_NOM_AP_MAX){
 
-            throw new InvalidFormatException('Apellido de Usuario demasiado largo. Limite: ' . constant('_NOMAP_MAX') . ' caracteres.');
+            throw new InvalidFormatException('Apellido de Usuario demasiado largo. Limite: ' . USER_NOM_AP_MAX . ' caracteres.');
         }
         
         $this->fields['apellido'] = $apellido;
@@ -45,7 +47,7 @@ class Especialista extends Model{
             }
 
             $method = 'set' . ucfirst($key);
-            $this->method($values[$key]);
+            $method($values[$key]);
         }
 
     }

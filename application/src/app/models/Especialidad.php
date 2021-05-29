@@ -5,6 +5,9 @@ namespace Paw\app\models;
 use Paw\core\exceptions\InvalidFormatException;
 use Paw\core\Model;
 
+use const Paw\core\database\ESPECIALIDAD_DESC_MAX;
+use const Paw\core\database\ESPECIALIDAD_NOM_MAX;
+
 class Especialidad extends Model{
 
     # 1-1 relation against Especialista table
@@ -18,16 +21,16 @@ class Especialidad extends Model{
 
     public function setNombre(string $nombre){
 
-        if(strlen($nombre) > constant('_ESP_NOM_MAX')){
-            throw new InvalidFormatException('Nombre de Especialidad  demasiado largo. Limite ' . constant('_ESPNOM_MAX') . ' caracteres.');
+        if(strlen($nombre) > ESPECIALIDAD_NOM_MAX){
+            throw new InvalidFormatException('Nombre de Especialidad  demasiado largo. Limite ' . ESPECIALIDAD_NOM_MAX . ' caracteres.');
         }
 
         $this->field['nombre'] = $nombre;
     }
 
     public function setDescripcion($descripcion){
-        if(strlen($descripcion) > constant('_ESP_DESC_MAX')){
-            throw new InvalidFormatException('Descripcion de la Especialidad demasiado largo. Limite ' . constant('_ESPDESC_MAX') . ' caracteres.');
+        if(strlen($descripcion) > ESPECIALIDAD_DESC_MAX){
+            throw new InvalidFormatException('Descripcion de la Especialidad demasiado largo. Limite ' . ESPECIALIDAD_DESC_MAX . ' caracteres.');
         }
 
         $this->field['descripcion'] = $descripcion;
@@ -43,7 +46,7 @@ class Especialidad extends Model{
             }
 
             $method = 'set' . ucfirst($key);
-            $this->method($values[$key]);
+            $method($values[$key]);
         }
 
     }
