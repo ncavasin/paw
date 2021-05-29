@@ -4,7 +4,7 @@ namespace Paw\app\models;
 
 use Paw\core\Model;
 use Paw\core\exceptions\InvalidFormatException;
-use const Paw\core\database\USER_NOM_AP_MAX;
+use Paw\core\database\Constants;
 
 class Usuario extends Model{
     
@@ -23,16 +23,16 @@ class Usuario extends Model{
     ];
 
     public function setNombre(string $nombre){
-        if (strlen($nombre ) > USER_NOM_AP_MAX){
-            throw new InvalidFormatException('Nombre de Usuario demasiado largo. Limite: '. USER_NOM_AP_MAX . ' caracteres.');
+        if (strlen($nombre ) > Constants::getNomApMax()){
+            throw new InvalidFormatException('Nombre de Usuario demasiado largo. Limite: '. Constants::getNomApMax() . ' caracteres.');
         }
         $this->fields['nombre'] = $nombre;
     }
 
     public function setApellido(string $apellido){
-        if (strlen($apellido ) > USER_NOM_AP_MAX){
+        if (strlen($apellido ) > Constants::getNomApMax()){
 
-            throw new InvalidFormatException('Apellido de Usuario demasiado largo. Limite: ' . USER_NOM_AP_MAX . ' caracteres.');
+            throw new InvalidFormatException('Apellido de Usuario demasiado largo. Limite: ' . Constants::getNomApMax() . ' caracteres.');
         }
         $this->fields['apellido'] = $apellido;
     }
