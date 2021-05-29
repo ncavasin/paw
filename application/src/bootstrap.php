@@ -35,9 +35,9 @@ $handler = new StreamHandler($config->get('LOG_PATH'));
 $handler->setLevel($config->get('LOG_LEVEL'));
 $log->pushHandler($handler);
 
-$connectionBuilder = new ConnectionBuilder();
+$connectionBuilder = ConnectionBuilder::getInstance();
 $connectionBuilder->setLogger($log);
-$connection = $connectionBuilder->make($config);
+$connection = $connectionBuilder->getConnection($config);
 
 # Requests handler
 $request = new Request();
