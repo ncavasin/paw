@@ -21,15 +21,12 @@ final class FirstMigrations extends AbstractMigration
     public function change(): void
     {
 
-        $tableObrasSociales = $this->table('obras_sociales', 
-                                          ['id' => false, 'primary_key' => ['nombre']]);
+        $tableObrasSociales = $this->table('obras_sociales');
         $tableObrasSociales->addColumn('nombre', 'string', ['limit' => Constants::getOsNomMax(),
                                                             'null' => false])
                             ->create();
-
         
-        $tableEspecialidad = $this->table('especialidades',
-                                         ['id' => false, 'primary_key' => ['nombre']]);
+        $tableEspecialidad = $this->table('especialidades');
         $tableEspecialidad->addColumn('nombre', 'string', ['limit' => Constants::getEspNomMax(),
                                                             'null' => false])
                           ->addColumn('descripcion', 'string', ['limit' => Constants::getEspDescMax(),
@@ -38,25 +35,23 @@ final class FirstMigrations extends AbstractMigration
 
         # PK => nombre + apellido
         # Restriccion => sin nombres duplicados
-        $tableEspecialista = $this->table('especialistas',
-                                         ['id' => false, 'primary_key' => ['nombre','apellido']]);
+        $tableEspecialista = $this->table('especialistas');
         $tableEspecialista->addColumn('nombre', 'string', ['limit' => Constants::getNomApMax(),
                                                            'null' => false])
                           ->addColumn('apellido', 'string', ['limit' => Constants::getNomApMax(),
                                                              'null'  => false])
                           ->create();
 
-        # PK compuesta => FK(especialidad) + FK(especialista)
-        $tableIntermedia = $this->table('intermedia', 
-                                       ['id' => false, 'primary_key' => ['especialidad', 'especialista']]);
-        $tableIntermedia->addColumn('especialidad', 'string', ['limit' => Constants::getEspNomMax(),
+        # PK compuesta => FK(especialidad_id) + FK(especialista_id)
+        $tableIntermedia = $this->table('intermedia');
+        $tableIntermedia->addColumn('id_especialidad', 'integer', ['limit' => Constants::getEspNomMax(),
                                                          'null' => false])
-                        ->addColumn('especialista', 'string', ['limit' => Constants::getNomApMax(),
+                        ->addColumn('id_especialista', 'integer', ['limit' => Constants::getNomApMax(),
                                                          'null' => false])
                                         # col local   | tbl externa  | col externa
-                        ->addForeignKey('especialidad', 'especialidades', 'nombre')
+                        ->addForeignKey('id_especialidad', 'especialidades', 'id')
                                         # col local   | tbl externa  | col externa
-                        ->addForeignKey('especialista', 'especialistas', 'nombre')
+                        ->addForeignKey('id_especialista', 'especialistas', 'id')
                         ->create();
 
         # PK => mail
@@ -67,16 +62,16 @@ final class FirstMigrations extends AbstractMigration
                         ->addColumn('apellido', 'string', ['limit' => Constants::getNomApMax(),
                                                             'null'  => false])
                         ->addColumn('fnac', 'date', ['null' => false])
-                        ->addColumn('celular', 'string'. ['limit' => Constants::getCelMax(),
+                        ->addColumn('celular', 'string', ['limit' => Constants::getCelMax(),
                                                           'null' => false])
                         ->addColumn('mail', 'string', ['limit' => Constants::getMailMax(),
-                                                       'null' => false)
+                                                       'null' => false])
                         ->addColumn('password', 'string', ['limit' => Constants::getPwdMax(),
                                                            'null' => false])
-                        ->addColumn('obra_social', 'string', ['limit' => Constants::getOsNomMax(),
+                        ->addColumn('id_obra_social', 'integer', ['limit' => Constants::getOsNomMax(),
                                                               'null' => true])
                                        # col local   | tbl externa  | col externa
-                        ->addForeignKey('obra_social', 'obra_social', 'id')
+                        ->addForeignKey('id_obra_social', 'obras_sociales', 'id')
                         ->create();
     }
 }
