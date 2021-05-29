@@ -21,20 +21,13 @@ final class FirstMigrations extends AbstractMigration
     public function change(): void
     {
 
-        $tableObrasSociales = $this->table('obras_sociales');
-        $tableObrasSociales->addColumn('nombre', 'string', ['limit' => Constants::getOsNomMax(),
-                                                            'null' => false])
-                            ->create();
-        
         $tableEspecialidad = $this->table('especialidades');
         $tableEspecialidad->addColumn('nombre', 'string', ['limit' => Constants::getEspNomMax(),
                                                             'null' => false])
-                          ->addColumn('descripcion', 'string', ['limit' => Constants::getEspDescMax(),
-                                                                'null'  => false])
+                          ->addColumn('descripcion', 'string', ['limit' => Constants::getEspDescMax()])
                           ->create();
 
-        # PK => nombre + apellido
-        # Restriccion => sin nombres duplicados
+        # Se permite la repeticion de nombres
         $tableEspecialista = $this->table('especialistas');
         $tableEspecialista->addColumn('nombre', 'string', ['limit' => Constants::getNomApMax(),
                                                            'null' => false])
@@ -42,7 +35,7 @@ final class FirstMigrations extends AbstractMigration
                                                              'null'  => false])
                           ->create();
 
-        # PK compuesta => FK(especialidad_id) + FK(especialista_id)
+        # PK compuesta => id_especialidad id_especialista
         $tableIntermedia = $this->table('intermedia');
         $tableIntermedia->addColumn('id_especialidad', 'integer', ['limit' => Constants::getEspNomMax(),
                                                          'null' => false])
@@ -54,11 +47,15 @@ final class FirstMigrations extends AbstractMigration
                         ->addForeignKey('id_especialista', 'especialistas', 'id')
                         ->create();
 
-        # PK => mail
-        # Restriccion => no puede existir un mail asociado a dos cuentas diferentes
-        $tableUsuario = $this->table('usuarios', ['id' => false, 'primary_key' => ['mail']]);
-        $tableUsuario->addColumn('nombre', 'string', ['limit' => Constants::getNomApMax(),
+        $tableObrasSociales = $this->table('obras_sociales');
+        $tableObrasSociales->addColumn('nombre', 'string', ['limit' => Constants::getOsNomMax(),
                                                             'null' => false])
+                            ->create();
+
+        # Restriccion => no puede existir un mail asociado a dos cuentas diferentes
+        $tableUsuario = $this->table('usuarios');
+        $tableUsuario->addColumn('nombre', 'string', ['limit' => Constants::getNomApMax(),
+                                                      'null' => false])
                         ->addColumn('apellido', 'string', ['limit' => Constants::getNomApMax(),
                                                             'null'  => false])
                         ->addColumn('fnac', 'date', ['null' => false])
@@ -66,10 +63,9 @@ final class FirstMigrations extends AbstractMigration
                                                           'null' => false])
                         ->addColumn('mail', 'string', ['limit' => Constants::getMailMax(),
                                                        'null' => false])
-                        ->addColumn('password', 'string', ['limit' => Constants::getPwdMax(),
+                        ->addColumn('pwd', 'string', ['limit' => Constants::getPwdMax(),
                                                            'null' => false])
-                        ->addColumn('id_obra_social', 'integer', ['limit' => Constants::getOsNomMax(),
-                                                              'null' => true])
+                        ->addColumn('id_obra_social', 'integer', ['limit' => Constants::getOsNomMax()])
                                        # col local   | tbl externa  | col externa
                         ->addForeignKey('id_obra_social', 'obras_sociales', 'id')
                         ->create();
