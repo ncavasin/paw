@@ -2,7 +2,10 @@
 <html lang="es-AR">
     <head>
         <?php
-            require 'parts/head_view.php'
+
+use const Paw\core\database\FILE_SIZE_MAX;
+
+require 'parts/head_view.php'
         ?>
         <link rel="stylesheet" type='text/css' href="assets/css/form.css"/>
         <link rel="stylesheet" type='text/css' href="assets/css/turnos.css"/>
@@ -50,7 +53,7 @@
                         tabindex="3"/>
                         
                         <!-- Recomendado por php para evitar que archivos grandes fallen y el usuario no se entere-->
-                        <input type="hidden" name="MAX_FILE_SIZE" value="<?= constant('_MAXFILESIZE') ?>"/>
+                        <input type="hidden" name="FILE_SIZE_MAX" value="<?= FILE_SIZE_MAX; ?>"/>
                         
                         <label for='orden_medica'>Orden Médica (*)</label>
                         <input type="file" name='orden_medica' class="file"
