@@ -42,7 +42,7 @@
 
                     <input type="submit" value="Ingresar" class="main_button"/>
                 </form>
-            </section>        
+            </section>
         </main>
         
         <?php 
