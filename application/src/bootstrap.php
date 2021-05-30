@@ -39,6 +39,10 @@ $connectionBuilder = ConnectionBuilder::getInstance();
 $connectionBuilder->setLogger($log);
 $connection = $connectionBuilder->getConnection($config);
 
+# Test singleton
+# $conb = ConnectionBuilder::getInstance();
+# $con = $conb->getConnection($config);
+
 # Requests handler
 $request = new Request();
 

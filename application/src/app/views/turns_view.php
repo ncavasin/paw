@@ -52,9 +52,6 @@ require 'parts/head_view.php'
                         required 
                         tabindex="3"/>
                         
-                        <!-- Recomendado por php para evitar que archivos grandes fallen y el usuario no se entere-->
-                        <input type="hidden" name="FILE_SIZE_MAX" value="<?= FILE_SIZE_MAX; ?>"/>
-                        
                         <label for='orden_medica'>Orden Médica (*)</label>
                         <input type="file" name='orden_medica' class="file"
                         required accept="application/pdf"
