@@ -16,6 +16,6 @@ class UsuariosCollection extends Model {
             $nuevoUsuario->set($usuario);
             $usuariosCollection[] = $nuevoUsuario;
         }
-        return  $usuariosCollection;
+        return $usuariosCollection;
     }
 }
