@@ -4,7 +4,7 @@ namespace Paw\core\database;
 
 const FILE_SIZE_MAX = 10000000;
 const NOM_AP_MAX = 50;
-const CEL_MAX = 15;
+const CEL_MAX = 30;
 const MAIL_MAX = 50;
 const PWD_MIN = 7;
 const PWD_MAX = 50;
