@@ -36,9 +36,5 @@ services:
         ports:
             - "${PGADMIN_PORT-5000}:${PGADMIN_LISTEN_PORT}"
 
-networks:
-    paw_default:
-        external: true
-
 volumes:
     postgres-data: {}
