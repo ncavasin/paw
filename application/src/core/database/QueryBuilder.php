@@ -26,31 +26,41 @@ class QueryBuiler{
         return $sentencia->fetchAll();
     }
 
+    private function dispatcher($table){
+        if($table == 'usuarios'){
+            return '(:nombre, :apellido, :fnac, :celular, :mail, :pwd, :id_obra_social)';
+        }
+        else if($table == 'turnos'){
+            return '(:id_fecha, :id_hora, :id_intermedia, :path_orden, :nombre_orden)';
+                
+        }else if($table == 'fecha'){
+            # Como manejamos esto?
+            return '(:fecha, :hora)';
+            
+        }
+        return null;
+    }
+
     # Params: <colname, value_to_insert>
     # Se asume que el controlador envia valores validos y/o no nulos
     public function insert($table, $params = []){
         
         if(! isset($params)){
+            $this->logger->error('Error insertando. No se recibieron valores.');
             throw new QBMissingValues('No se recibieron los valores necesarios para insertar.');
         }else{
 
-            $query = "insert into {$table} values (";
+            $query = "insert into {$table} values ";
 
-            if($table == 'usuarios'){
-                $query = $query . ':nombre, :apellido, :fnac, :celular, :mail, :pwd, :id_obra_social)';
-            }
-            else if($table == 'turnos'){
-                $query = $query . ':id_fecha, :id_hora, :id_intermedia, :path_orden, :nombre_orden)';
-                    
-            }else if($table == 'fecha'){
-                # Como manejamos esto?
-                $query = $query . ':fecha, :hora)';
-                
-            }else{
+            $values = $this->dispatcher($table);
+            
+            if(! $values){
                 $this->logger->debug('ERROR insertando en tabla ' . $table . '. No existe.');
-                throw new QBInvalidTable('No existe la tabla recibida');
+                throw new QBInvalidTable('No existe la tabla ' . $table);
             }
-    
+
+            $query = $query . $values;
+
             try{
                 
                 $statement = $this->pdo->preparare($query);
@@ -71,9 +81,11 @@ class QueryBuiler{
         #TODO
     }
 
-    public function delete(){
+    public function delete($table, $params[]){
 
-        # TODO
+        #$query = "delete from {$table} values {$where}";
+        #$values = $this->dispatcher($table);
+        #$count = $this->execute($query);
     }
 
 

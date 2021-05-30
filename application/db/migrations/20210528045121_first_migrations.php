@@ -69,5 +69,15 @@ final class FirstMigrations extends AbstractMigration
                                        # col local   | tbl externa  | col externa
                         ->addForeignKey('id_obra_social', 'obras_sociales', 'id')
                         ->create();
+
+        $tableFecha = $this->table('fecha', ['id' => false, 'primary_key' => 'fecha']);
+        $tableFecha->addColumn('fecha', 'date')
+                   ->create();
+
+        $tableHora = $this->table('hora');
+        $tableHora->addColumn('fecha', 'date')
+                  ->addColumn('hora', 'time')
+                  ->addForeignKey('fecha', 'fecha', 'fecha')
+                  ->create();
     }
 }
