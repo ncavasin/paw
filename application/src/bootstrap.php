@@ -62,7 +62,7 @@ $router->get('/reset_password', 'PageController@resetPassword');
 $router->post('/reset_password', 'PageController@resetPasswordProcess');
 
 $router->get('/register', 'PageController@register');
-$router->post('/register', 'PageController@registerProcess');
+$router->post('/register', 'UsuariosController@register');
 
 $router->get('/coverages', 'PageController@coverages');
 $router->post('/coverages', 'PageController@coveragesProcess');

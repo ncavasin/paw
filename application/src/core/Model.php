@@ -3,15 +3,15 @@
 namespace Paw\core;
 
 use Paw\core\traits\Loggable;
-use Paw\core\database\QueryBuiler;
+use Paw\core\database\QueryBuilder;
 
 class Model {
     use Loggable;
 
     public $queryBuilder;
 
-    public function setQueryBuilder(QueryBuiler $qb) {
-
+    public function setQueryBuilder(QueryBuilder $qb) {
+        
         $this->queryBuilder = $qb;
 
     }

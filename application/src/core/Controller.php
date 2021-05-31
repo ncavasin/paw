@@ -2,10 +2,10 @@
 
 namespace Paw\core;
 
+use Paw\core\database\QueryBuilder;
 use Paw\core\Model;
-use Paw\core\database\QueryBuiler;
 
-class Controller{
+class Controller {
 
     # 1-1 relation against a model
     public ?string $modelName = null;
@@ -72,7 +72,8 @@ class Controller{
         if(! is_null($this->modelName)){
             
             # Construct QB
-            $qb = new QueryBuiler($connection, $log);
+            # var_dump($connection);die;
+            $qb = new QueryBuilder($connection, $log);
 
             # Construct Model dynamically
             $model = new $this->modelName;

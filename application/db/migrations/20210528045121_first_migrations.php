@@ -69,25 +69,20 @@ final class FirstMigrations extends AbstractMigration
         $tableUsuario = $this->table('usuarios');
         $tableUsuario->addColumn('nombre', 'string', [
             'limit' => Constants::getNomApMax(),
-            'null' => false
-        ])
+            'null' => false ])
             ->addColumn('apellido', 'string', [
                 'limit' => Constants::getNomApMax(),
-                'null'  => false
-            ])
+                'null'  => false ])
             ->addColumn('fnac', 'date', ['null' => false])
             ->addColumn('celular', 'string', [
                 'limit' => Constants::getCelMax(),
-                'null' => false
-            ])
+                'null' => false ])
             ->addColumn('mail', 'string', [
                 'limit' => Constants::getMailMax(),
-                'null' => false
-            ])
+                'null' => false ])
             ->addColumn('pwd', 'string', [
                 'limit' => Constants::getPwdMax(),
-                'null' => false
-            ])
+                'null' => false ])
             ->addColumn('id_obra_social', 'integer', ['limit' => Constants::getOsNomMax(), 'null' => true])
             # col local   | tbl externa  | col externa
             ->addForeignKey('id_obra_social', 'obras_sociales', 'id')

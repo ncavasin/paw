@@ -55,7 +55,7 @@ class ConnectionBuilder{
 
     public static function getInstance(){
         if(self::$instance == null){
-            echo '[ConnectionBuilder] - Instance created';
+            # echo '[ConnectionBuilder] - Instance created';
             self::$instance = new ConnectionBuilder();
         }
         else{
