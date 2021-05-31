@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use Paw\core\database\Constants;
@@ -22,62 +23,98 @@ final class FirstMigrations extends AbstractMigration
     {
 
         $tableEspecialidad = $this->table('especialidades');
-        $tableEspecialidad->addColumn('nombre', 'string', ['limit' => Constants::getEspNomMax(),
-                                                            'null' => false])
-                          ->addColumn('descripcion', 'string', ['limit' => Constants::getEspDescMax()])
-                          ->create();
+        $tableEspecialidad->addColumn('nombre', 'string', [
+            'limit' => Constants::getEspNomMax(),
+            'null' => false
+        ])
+            ->addColumn('descripcion', 'string', ['limit' => Constants::getEspDescMax()])
+            ->create();
 
         # Se permite la repeticion de nombres
         $tableEspecialista = $this->table('especialistas');
-        $tableEspecialista->addColumn('nombre', 'string', ['limit' => Constants::getNomApMax(),
-                                                           'null' => false])
-                          ->addColumn('apellido', 'string', ['limit' => Constants::getNomApMax(),
-                                                             'null'  => false])
-                          ->create();
+        $tableEspecialista->addColumn('nombre', 'string', [
+            'limit' => Constants::getNomApMax(),
+            'null' => false
+        ])
+            ->addColumn('apellido', 'string', [
+                'limit' => Constants::getNomApMax(),
+                'null'  => false
+            ])
+            ->create();
 
         # PK compuesta => id_especialidad id_especialista
-        $tableIntermedia = $this->table('intermedia');
-        $tableIntermedia->addColumn('id_especialidad', 'integer', ['limit' => Constants::getEspNomMax(),
-                                                         'null' => false])
-                        ->addColumn('id_especialista', 'integer', ['limit' => Constants::getNomApMax(),
-                                                         'null' => false])
-                                        # col local   | tbl externa  | col externa
-                        ->addForeignKey('id_especialidad', 'especialidades', 'id')
-                                        # col local   | tbl externa  | col externa
-                        ->addForeignKey('id_especialista', 'especialistas', 'id')
-                        ->create();
+        $tableIntermedia = $this->table('intermedia', ['id' => false, 'primary_key' => ['id_especialista', 'id_especialidad']]);
+        $tableIntermedia->addColumn('id_especialidad', 'integer', [
+            'limit' => Constants::getEspNomMax(),
+            'null' => false
+        ])
+            ->addColumn('id_especialista', 'integer', [
+                'limit' => Constants::getNomApMax(),
+                'null' => false
+            ])
+            # col local   | tbl externa  | col externa
+            ->addForeignKey('id_especialidad', 'especialidades', 'id')
+            # col local   | tbl externa  | col externa
+            ->addForeignKey('id_especialista', 'especialistas', 'id')
+            ->create();
 
         $tableObrasSociales = $this->table('obras_sociales');
-        $tableObrasSociales->addColumn('nombre', 'string', ['limit' => Constants::getOsNomMax(),
-                                                            'null' => false])
-                            ->create();
+        $tableObrasSociales->addColumn('nombre', 'string', [
+            'limit' => Constants::getOsNomMax(),
+            'null' => false
+        ])
+            ->create();
 
         # Restriccion => no puede existir un mail asociado a dos cuentas diferentes
         $tableUsuario = $this->table('usuarios');
-        $tableUsuario->addColumn('nombre', 'string', ['limit' => Constants::getNomApMax(),
-                                                      'null' => false])
-                        ->addColumn('apellido', 'string', ['limit' => Constants::getNomApMax(),
-                                                            'null'  => false])
-                        ->addColumn('fnac', 'date', ['null' => false])
-                        ->addColumn('celular', 'string', ['limit' => Constants::getCelMax(),
-                                                          'null' => false])
-                        ->addColumn('mail', 'string', ['limit' => Constants::getMailMax(),
-                                                       'null' => false])
-                        ->addColumn('pwd', 'string', ['limit' => Constants::getPwdMax(),
-                                                           'null' => false])
-                        ->addColumn('id_obra_social', 'integer', ['limit' => Constants::getOsNomMax()])
-                                       # col local   | tbl externa  | col externa
-                        ->addForeignKey('id_obra_social', 'obras_sociales', 'id')
-                        ->create();
+        $tableUsuario->addColumn('nombre', 'string', [
+            'limit' => Constants::getNomApMax(),
+            'null' => false
+        ])
+            ->addColumn('apellido', 'string', [
+                'limit' => Constants::getNomApMax(),
+                'null'  => false
+            ])
+            ->addColumn('fnac', 'date', ['null' => false])
+            ->addColumn('celular', 'string', [
+                'limit' => Constants::getCelMax(),
+                'null' => false
+            ])
+            ->addColumn('mail', 'string', [
+                'limit' => Constants::getMailMax(),
+                'null' => false
+            ])
+            ->addColumn('pwd', 'string', [
+                'limit' => Constants::getPwdMax(),
+                'null' => false
+            ])
+            ->addColumn('id_obra_social', 'integer', ['limit' => Constants::getOsNomMax(), 'null' => true])
+            # col local   | tbl externa  | col externa
+            ->addForeignKey('id_obra_social', 'obras_sociales', 'id')
+            ->create();
 
-        $tableFecha = $this->table('fecha', ['id' => false, 'primary_key' => 'fecha']);
+        $tableFecha = $this->table('fecha');
         $tableFecha->addColumn('fecha', 'date')
-                   ->create();
+            ->create();
 
-        $tableHora = $this->table('hora');
-        $tableHora->addColumn('fecha', 'date')
-                  ->addColumn('hora', 'time')
-                  ->addForeignKey('fecha', 'fecha', 'fecha')
-                  ->create();
+        $tableHora = $this->table('hora', ['id' => false, 'primary_key' => ['id', 'id_fecha']]);
+        $tableHora->addColumn('id', 'integer', ['identity'=> true])
+            ->addColumn('id_fecha', 'integer')
+            ->addColumn('hora', 'time')
+            ->addForeignKey('id_fecha', 'fecha', 'id')
+            ->create();
+
+        $tableTurno = $this->table('turnos');
+        $tableTurno->addColumn('id_usuario', 'integer')
+            ->addColumn('id_fecha', 'integer')
+            ->addColumn('id_hora', 'integer')
+            ->addColumn('id_especialista', 'integer')
+            ->addColumn('id_especialidad', 'integer')
+            ->addColumn('orden_medica', 'string')
+            ->addcolumn('nombre_orden_medica', 'string')
+            ->addForeignKey('id_usuario', 'usuarios', 'id')
+            ->addForeignKey(['id_fecha', 'id_hora'], 'hora', ['id_fecha', 'id'])
+            ->addForeignKey(['id_especialista', 'id_especialidad'], 'intermedia', ['id_especialista', 'id_especialidad'])
+            ->create();
     }
 }
