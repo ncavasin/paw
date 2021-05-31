@@ -70,7 +70,7 @@ class Usuario extends Model{
     }
 
     public function setMail($mail){
-        if (! filter_var($mail, FILTER_VALIDATE_EMAIL)){
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)){
             $this->fields['mail']['error'] = 'Mail de Usuario con formato invalido.';
         } 
         $this->fields['mail']['value'] = $mail;
