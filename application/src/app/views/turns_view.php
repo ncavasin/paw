@@ -50,6 +50,12 @@ require 'parts/head_view.php'
                         <label for="dia">Dia</label>
                         <input type="date" id="dia" name="dia" 
                         required 
+                        min=<?php
+                            echo date('Y-m-d', time());
+                        ?>
+                        max=<?php
+                            echo date('Y-m-d', strtotime(' +1 week'));
+                        ?>
                         tabindex="3"/>
                         
                         <label for='orden_medica'>Orden Médica (*)</label>

@@ -30,6 +30,7 @@ class TurnosController extends Controller{
         else if (!($mimeType == 'application/pdf')) {
             null; # $this->turns(true, false, 'El archivo no tiene una extensión válida (PDF)');
         }
+        require $this->viewsDir . 'turns_view.php';
     }
 
     # Lista un solo turno
