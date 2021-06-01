@@ -16,14 +16,29 @@ class QueryBuilder {
         $this->logger = $logger;
     }
 
+    public function selectUsuario($table, $params){
+        if((! isset($params['mail'])) || (!isset($params['pwd']))) {
+            return false;
+        }
+        $where =  "mail = :mail and pwd = :pwd";
+        $query = "select * from {$table} where {$where}";
+        $sentencia = $this->pdo->prepare($query);
+        if (isset($params['mail'])) $sentencia->bindValue(":mail", $params['mail']);
+        if (isset($params['pwd'])) $sentencia->bindValue(":pwd", $params['pwd']);
+        $sentencia->setFetchMode(PDO::FETCH_ASSOC);
+        $sentencia->execute();
+        return $sentencia->fetchAll();
+    }
+
     public function select($table, $params = [], $join = []){
         $where = '1 = 1';
         if (isset($params['id'])) $where = "id = :id";
         $query = "select * from {$table} where {$where}";
         $sentencia = $this->pdo->prepare($query);
         if (isset($params['id'])) $sentencia->bindValue(":id", $params['id']);
-        $sentencia = $this->pdo->setFetchMode(PDO::FETCH_ASSOC)->execute();
-        #var_dump($sentencia->fetchAll());die;
+        if (isset($params['id'])) $sentencia->bindValue(":mail", $params['mail']);
+        $sentencia->setFetchMode(PDO::FETCH_ASSOC);
+        $sentencia->execute();
         return $sentencia->fetchAll();
     }
 

@@ -14,13 +14,13 @@ class Usuario extends Model{
 
     # Table columns
     public $fields = [
-        "nombre"        => ["value" => null, "error" => null],
-        "apellido"      => ["value" => null, "error" => null],
-        "fnac"          => ["value" => null, "error" => null],
-        "celular"       => ["value" => null, "error" => null],
-        "mail"          => ["value" => null, "error" => null],
-        "pwd"   => ["value" => null, "error" => null], # TODO: hash password
-        "id_obra_social"     => ["value" => null, "error" => null]  # Only one cobertura per user
+        "nombre"            => ["value" => null, "error" => null],
+        "apellido"          => ["value" => null, "error" => null],
+        "fnac"              => ["value" => null, "error" => null],
+        "celular"           => ["value" => null, "error" => null],
+        "mail"              => ["value" => null, "error" => null],
+        "pwd"               => ["value" => null, "error" => null], # TODO: hash password
+        "id_obra_social"    => ["value" => null, "error" => null]  # Only one cobertura per user
     ];
 
     public function setNombre(string $nombre){
@@ -57,20 +57,20 @@ class Usuario extends Model{
         $this->fields['fnac']['value'] = $fnac;
     }
 
-    private function validPhone(){
+    private function validarCelular(){
         # Handle verification: regex?
         return true;
     }
 
     public function setCelular($celular){
-        if(! $this->validPhone($celular)){
+        if(! $this->validarCelular($celular)){
             $this->fields['celular']['error'] = 'Celular del Usuario inválido.';
         }
         $this->fields['celular']['value'] = $celular;
     }
 
     public function setMail($mail){
-        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)){
+        if (! $this->validarMail($mail)){
             $this->fields['mail']['error'] = 'Mail de Usuario con formato invalido.';
         } 
         $this->fields['mail']['value'] = $mail;
@@ -78,7 +78,7 @@ class Usuario extends Model{
 
     public function setPwd($pwd){
         $this->fields['pwd']['value'] = $pwd;
-        # TODO ash it!!!
+        # TODO hash it!!!
     }
 
     public function setId_obra_social($id_obra_social){
@@ -95,6 +95,39 @@ class Usuario extends Model{
             $this->$method($values[$key]);
         }
         return $this->fields;
+    }
+
+    private function validarMail($mail){
+        if(! filter_var($mail, FILTER_VALIDATE_EMAIL)){
+            return false;
+        }
+        return true;
+    }
+ 
+    public function login(array $values){
+        $this->fields['mail']['value'] = $values['mail'];
+        $this->fields['pwd']['value'] =  $values['pwd'];
+        $isValid = true;
+
+        if(! $this->validarMail($values['mail'])){
+            $this->fields['mail']['error'] = 'Mail inválido.';
+            $isValid = false;
+        }
+        
+        if(! isset($values['pwd'])){
+            $this->fields['pwd']['error'] = 'Completar contraseña.';
+            $isValid = false;
+        }
+
+        if(! $isValid){
+            return $isValid;
+        }
+
+        $result = $this->queryBuilder->selectUsuario($this->table, $values);
+
+        if(! count($result)) return false;
+        $result['pwd'] = null;
+        return [$isValid, $result];
     }
 
     public function save () {

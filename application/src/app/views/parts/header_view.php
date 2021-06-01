@@ -1,6 +1,6 @@
 <header>
     <a href="<?= $this->contact['href']?>"><?= $this->contact['name']?></a>
-    <ul>        
+    <ul>
         <?php foreach($this->userOptions as $uOpt):?>
             <li><a href="<?= $uOpt['href']?>" target="_self"><?=$uOpt['name']?></a></li>
         <?php endforeach; ?>

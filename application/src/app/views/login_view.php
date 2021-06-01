@@ -26,13 +26,13 @@
                 <?php endif; ?>
                 <form action="#" method="POST" target="_self">
                     <fieldset>
-                        <label for="email">Correo Electrónico:</label>
-                        <input type="email" id="email" name="email" 
+                        <label for="mail">Correo Electrónico:</label>
+                        <input type="email" id="mail" name="mail" 
                         placeholder="usuario@correo.com" 
                         required tabindex="1" autocomplete="on"/>
                         
-                        <label for="contrasenia">Contraseña:</label>
-                        <input type="password" id="contrasenia" name="contrasenia" 
+                        <label for="pwd">Contraseña:</label>
+                        <input type="password" id="pwd" name="pwd" 
                         placeholder="ultra secure password" 
                         required tabindex="2" autocomplete="on"/>
                     </fieldset>

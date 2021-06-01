@@ -59,7 +59,7 @@ $router->get('/about', 'PageController@about');
 $router->get('/services', 'PageController@services');
 
 $router->get('/login', 'PageController@login');
-$router->post('/login', 'PageController@loginProcess');
+$router->post('/login', 'UsuariosController@loginProcess');
 
 $router->get('/reset_password', 'PageController@resetPassword');
 $router->post('/reset_password', 'PageController@resetPasswordProcess');

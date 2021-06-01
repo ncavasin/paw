@@ -79,7 +79,8 @@ final class FirstMigrations extends AbstractMigration
                 'null' => false ])
             ->addColumn('mail', 'string', [
                 'limit' => Constants::getMailMax(),
-                'null' => false ])
+                'null' => false,
+                'unique' => true ])
             ->addColumn('pwd', 'string', [
                 'limit' => Constants::getPwdMax(),
                 'null' => false ])

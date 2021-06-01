@@ -2,6 +2,7 @@
 
 namespace Paw\app\controllers;
 
+use GrahamCampbell\ResultType\Result;
 use Paw\core\Controller;
 use Paw\app\models\Usuario;
 
@@ -12,8 +13,28 @@ class UsuariosController extends Controller{
 
     }
 
-    public function get() {
+    public function loginProcess() {
+        global $log;
+        
+        $isValid = true;
+        $notification_text = 'Sesion iniciada con éxito';
 
+        $values = [
+            'mail' => $_POST['mail'],
+            'pwd' => $_POST['pwd']
+        ];
+
+        list($isValid, $result) = $this->model->login($values);
+
+        if(! $isValid){
+            $notification_text = 'El usuario no existe. Por favor regístrese.';
+        }
+
+        $titulo = 'Iniciar sesión';
+        $notification = true;
+        $notification_type = $isValid ? SUCCESS : ERROR;
+        require $this->viewsDir . 'login_view.php';
+        
     }
 
     public function register() {
@@ -50,8 +71,8 @@ class UsuariosController extends Controller{
             }
             if ($isValid) $this->model->save();
             else {
-                $notification_text = 'Error al ingresar datos desde el formulario, revise los logs para mas informacion';
-                $log->debug('error en el modelo', [$result, $isValid]);
+                $notification_text = 'Error al ingresar datos desde el formulario, revise los logs para mas información';
+                $log->debug('Error en el modelo', [$result, $isValid]);
             }
             # si salio bien le damos save
             # si hay problemas devolvemos error

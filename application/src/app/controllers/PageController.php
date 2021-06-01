@@ -56,7 +56,7 @@ class PageController extends Controller{
         require $this->viewsDir . 'login_view.php';
     }
 
-    public function loginProcess(){
+/*     public function loginProcess(){
         $requiredValues = [
             'email' => ['label' => 'Email', 'validate' => function ($email) {
                 return $this->validateEmail($email);
@@ -71,7 +71,7 @@ class PageController extends Controller{
             else $this->login(true, false, 'Usuario y contraseña incorrectos');
         }
     }
-
+ */
 
     public function register($notification = false, $isValid = false, $notification_text = 'Uno o mas campos no son validos'){
         $titulo = 'Registrarse';
