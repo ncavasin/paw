@@ -3,11 +3,12 @@
 namespace Paw\app\controllers;
 
 use Paw\core\Controller;
-use Paw\app\models\Turnos;
+use Paw\app\models\Turno;
+use PhpOption\None;
 
 class TurnosController extends Controller{
 
-    public ?string $modelName = Turnos::class;
+    public ?string $modelName = Turno::class;
 
     # Lista todos los turnos disponibles a una fecha y hora det
     public function nuevoTurno(){
@@ -22,11 +23,11 @@ class TurnosController extends Controller{
         finfo_close($finfo);
 
         if (file_exists($newFileName))
-            continue; #$this->turns(true, false, 'Error al subir el archivo: Ya existe');
+            null; #$this->turns(true, false, 'Error al subir el archivo: Ya existe');
         else if ($fileSize > constant('_MAXFILESIZE'))
-            continue; # $this->turns(true, false, "Tamaño de archivo excedido. Limite 10Mb.");
+            null; # $this->turns(true, false, "Tamaño de archivo excedido. Limite 10Mb.");
         else if (!($mimeType == 'application/pdf')) {
-            continue; # $this->turns(true, false, 'El archivo no tiene una extensión válida (PDF)');
+            null; # $this->turns(true, false, 'El archivo no tiene una extensión válida (PDF)');
         }
     }
 
