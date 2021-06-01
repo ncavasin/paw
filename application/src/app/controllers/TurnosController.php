@@ -5,6 +5,7 @@ namespace Paw\app\controllers;
 use Paw\core\Controller;
 use Paw\app\models\Turno;
 use PhpOption\None;
+use Paw\core\database\Constants;
 
 class TurnosController extends Controller{
 
@@ -24,7 +25,7 @@ class TurnosController extends Controller{
 
         if (file_exists($newFileName))
             null; #$this->turns(true, false, 'Error al subir el archivo: Ya existe');
-        else if ($fileSize > constant('_MAXFILESIZE'))
+        else if ($fileSize > Constants::getFileSize())
             null; # $this->turns(true, false, "Tamaño de archivo excedido. Limite 10Mb.");
         else if (!($mimeType == 'application/pdf')) {
             null; # $this->turns(true, false, 'El archivo no tiene una extensión válida (PDF)');
