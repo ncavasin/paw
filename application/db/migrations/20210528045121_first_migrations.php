@@ -79,14 +79,16 @@ final class FirstMigrations extends AbstractMigration
                 'null' => false ])
             ->addColumn('mail', 'string', [
                 'limit' => Constants::getMailMax(),
-                'null' => false,
-                'unique' => true ])
+                'null' => false])
             ->addColumn('pwd', 'string', [
                 'limit' => Constants::getPwdMax(),
                 'null' => false ])
             ->addColumn('id_obra_social', 'integer', ['limit' => Constants::getOsNomMax(), 'null' => true])
             # col local   | tbl externa  | col externa
             ->addForeignKey('id_obra_social', 'obras_sociales', 'id')
+            ->addIndex(['mail'], [
+                'unique' => true,
+                'name' => 'idx_ususarios_mail'])
             ->create();
 
         $tableFecha = $this->table('fecha');
