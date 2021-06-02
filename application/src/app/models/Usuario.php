@@ -2,6 +2,7 @@
 
 namespace Paw\app\models;
 
+use Dotenv\Util\Str;
 use Exception;
 use Paw\core\Model;
 use Paw\core\exceptions\InvalidFormatException;
@@ -19,7 +20,7 @@ class Usuario extends Model{
         "fnac"              => ["value" => null, "error" => null],
         "celular"           => ["value" => null, "error" => null],
         "mail"              => ["value" => null, "error" => null],
-        "pwd"               => ["value" => null, "error" => null], # TODO: hash password
+        "pwd"               => ["value" => null, "error" => null], 
         "id_obra_social"    => ["value" => null, "error" => null]  # Only one cobertura per user
     ];
 
@@ -69,16 +70,29 @@ class Usuario extends Model{
         $this->fields['celular']['value'] = $celular;
     }
 
+    private function validarMail($mail){
+        if(! filter_var($mail, FILTER_VALIDATE_EMAIL)){
+            return false;
+        }
+        return true;
+    }
+
     public function setMail($mail){
         if (! $this->validarMail($mail)){
-            $this->fields['mail']['error'] = 'Mail de Usuario con formato invalido.';
+            $this->fields['mail']['error'] = 'Mail inválido.';
+            return false;
         } 
         $this->fields['mail']['value'] = $mail;
+        return true;
     }
 
     public function setPwd($pwd){
-        $this->fields['pwd']['value'] = $pwd;
-        # TODO hash it!!!
+        if (! isset($pwd)){
+            $this->fields['pwd']['error'] = 'Contraseña vacía.';
+            return false;
+        }
+        $this->fields['pwd']['value'] = password_hash($pwd, PASSWORD_DEFAULT);
+        return true;
     }
 
     public function setId_obra_social($id_obra_social){
@@ -97,35 +111,34 @@ class Usuario extends Model{
         return $this->fields;
     }
 
-    private function validarMail($mail){
-        if(! filter_var($mail, FILTER_VALIDATE_EMAIL)){
-            return false;
-        }
-        return true;
-    }
- 
     public function login(array $values){
-        $this->fields['mail']['value'] = $values['mail'];
-        $this->fields['pwd']['value'] =  $values['pwd'];
         $isValid = true;
 
-        if(! $this->validarMail($values['mail'])){
-            $this->fields['mail']['error'] = 'Mail inválido.';
-            $isValid = false;
-        }
-        
-        if(! isset($values['pwd'])){
-            $this->fields['pwd']['error'] = 'Completar contraseña.';
-            $isValid = false;
-        }
-
-        if(! $isValid){
-            return $isValid;
-        }
+        if (! isset($values['mail']) || ! isset($values['pwd'])) return false;
 
         $result = $this->queryBuilder->selectUsuario($this->table, $values);
 
+        # Si no hay coincidencia en la base el usuario no se puede loguear
         if(! count($result)) return false;
+        
+        # Desencripta pwd y verifica si coincide
+        $pwdMatch = password_verify($values['pwd'], $result['pwd']);
+
+        # Hash directo de la db
+        $dbHash = '$2y$10$d85GFOszBhjvDbEItSwyteQ3uSWSxFUQdtLbJuzHhpphge7Nd5g7G';
+        $pwdMatchDb = password_verify($values['pwd'], $dbHash);
+        
+        echo'<pre>'; 
+        var_dump('Password original: ' . $values['pwd']);
+        var_dump('Password hasheada en db: ' . $dbHash);
+        var_dump($values);
+        var_dump($result); 
+        var_dump('Match por query:' . $pwdMatch);
+        var_dump('Match por valor hardcodeado: ' . $pwdMatchDb);
+        die;
+
+        if (! $pwdMatch) return false;
+
         $result['pwd'] = null;
         return [$isValid, $result];
     }
