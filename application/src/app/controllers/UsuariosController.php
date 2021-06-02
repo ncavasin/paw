@@ -56,12 +56,12 @@ class UsuariosController extends Controller{
 
         if (strtolower($values['mail']) != strtolower($_POST['conf_mail'])) {
             $isValid = false;
-            $notification_text = 'Los emails no coninciden';
+            $notification_text = 'Los emails no coinciden';
         }
 
         if ($values['pwd'] != $_POST['conf_pwd']) {
             $isValid = false;
-            $notification_text = 'Las contraseñas no coninciden';
+            $notification_text = 'Las contraseñas no coinciden';
         }
 
         if ($isValid) {
