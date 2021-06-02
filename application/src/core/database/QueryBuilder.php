@@ -12,19 +12,22 @@ use PDOException;
 class QueryBuilder {
     public function __construct(PDO $pdo, Logger $logger){
         $this->pdo = $pdo;
-        #var_dump($pdo);die;
         $this->logger = $logger;
     }
 
     public function selectUsuario($table, $params){
-        if((! isset($params['mail'])) || (!isset($params['pwd']))) {
-            return false;
-        }
-        $where =  "mail = :mail and pwd = :pwd";
+
+        if((! isset($params['mail'])) || (! isset($params['pwd']))) return false;
+
+        #$hash = password_hash($params['pwd'], PASSWORD_DEFAULT);
+
+        $where =  "mail = :mail";
         $query = "select * from {$table} where {$where}";
+
         $sentencia = $this->pdo->prepare($query);
-        if (isset($params['mail'])) $sentencia->bindValue(":mail", $params['mail']);
-        if (isset($params['pwd'])) $sentencia->bindValue(":pwd", $params['pwd']);
+        $sentencia->bindValue(":mail", $params['mail']);
+        #$sentencia->bindValue(":pwd", $params['pwd']);
+        
         $sentencia->setFetchMode(PDO::FETCH_ASSOC);
         $sentencia->execute();
         return $sentencia->fetchAll();
@@ -42,60 +45,93 @@ class QueryBuilder {
         return $sentencia->fetchAll();
     }
 
-    private function dispatcher($table){
+    private function dispatcher($table, $keyword){
         if($table == 'usuarios'){
             # IMPORTANTE sin la especificacion de las columnas antes, no anda (porque sino espera que le pases el id tambien y es autoincremental)
-            return '(nombre, apellido, fnac, celular, mail, pwd, id_obra_social) VALUES (:nombre, :apellido, :fnac, :celular, :mail, :pwd, :id_obra_social)';
+            return '(nombre, apellido, fnac, celular, mail, pwd, id_obra_social) '. $keyword .' (:nombre, :apellido, :fnac, :celular, :mail, :pwd, :id_obra_social)';
         }
         else if($table == 'turnos'){
-            return '(id_fecha, id_hora, id_especialista, id_especialidad, id_usuario, orden_medica, nombre_orden_medica) 
-                VALUES (:id_fecha, :id_hora, :id_especialista, :id_especialidad, :id_usuario, :orden_medica, :nombre_orden_medica)';
+            return '(id_fecha, id_hora, id_especialista, id_especialidad, id_usuario, orden_medica, nombre_orden_medica) ' 
+            . $keyword . '(:id_fecha, :id_hora, :id_especialista, :id_especialidad, :id_usuario, :orden_medica, :nombre_orden_medica)';
                 
         }else if($table == 'fecha'){
-            return '(fecha) VALUES (:fecha)';
+            return '(fecha) '. $keyword .'  (:fecha)';
         } else if ($table == 'hora'){
-            return '(id_fecha, hora) VALUES (:id_fecha, :hora)';
+            return '(id_fecha, hora) '. $keyword .'  (:id_fecha, :hora)';
         }
         return null;
     }
 
     # Params: <colname, value_to_insert>
-    # Se asume que el controlador envia valores validos y/o no nulos
     public function insert($table, $params = []){
-        
         if(! isset($params)){
             $this->logger->error('Error insertando. No se recibieron valores.');
             throw new QBMissingValues('No se recibieron los valores necesarios para insertar.');
         }else{
 
             $query = "insert into {$table} ";
-            $values = $this->dispatcher($table);
-            
+            $values = $this->dispatcher($table, 'VALUES');
+
             if(! $values){
-                $this->logger->debug('ERROR insertando en tabla ' . $table . '. No existe.');
+                $this->logger->debug('Error insertando en tabla ' . $table . '. No existe.');
                 throw new QBInvalidTable('No existe la tabla ' . $table);
             }
 
             $query = $query . $values;
-            
+
             try{
                 $statement = $this->pdo->prepare($query);
                 $statement->execute($params);
                 $this->logger->info('Insercion en ' . $table . '. Sentencia: ' . $query . '. Parametros: ', [$params]);
 
             }catch(PDOException  $e){
-                $this->logger->debug('ERROR insertando en tabla ['. $table . ']. Sentencia: [' . $query . ']. Parametros: [' . $params . '].');
+                $this->logger->debug('Error insertando en tabla ['. $table . ']. Sentencia: [' . $query . ']. Parametros: [' . $params . '].');
                 $this->logger->error('stacktrace', [$e]);
                 echo '<pre>';
-                var_dump('ERROR:',$statement);
+                var_dump('ERROR:', $statement);
                 die;
             }
         }
     }
 
-    public function update(){
+    # La idea es recuperar TODAS las columnas de la/s tupla/s afectadas
+    # y modificar SOLO las recibidas en $params, el resto queda igual.
+    # P
+    public function update($table, $params = []){
 
-        #TODO
+        if(! isset($params)){
+            $this->logger->error('Error actualizando. No se recibieron valores.');
+            throw new QBMissingValues('No se recibieron los valores necesarios para actualizar.');
+        }else{
+
+            # Recuperar la/s tupla/s a actualizar
+
+            $query = "update {$table} ";
+            $values = $this->dispatcher($table, 'SET');
+
+            if(! $values){
+                $this->logger->debug('Error acutalizando en tabla ' . $table . '. No existe.');
+                throw new QBInvalidTable('No existe la tabla ' . $table);
+            }
+
+            $where = '';
+
+            $query = $query . $values . $where;
+            
+
+            try{
+                $statement = $this->pdo->prepare($query);
+                $statement->execute($params);
+                $this->logger->info('Actualizacion en ' . $table . '. Sentencia: ' . $query . '. Parametros: ', [$params]);
+
+            }catch(PDOException  $e){
+                $this->logger->debug('Error actualizando en tabla ['. $table . ']. Sentencia: [' . $query . ']. Parametros: [' . $params . '].');
+                $this->logger->error('stacktrace', [$e]);
+                echo '<pre>';
+                var_dump('ERROR:', $statement);
+                die;
+            }
+        }
     }
 
     public function delete($table, $params){
