@@ -14,22 +14,17 @@ class UsuariosController extends Controller{
     }
 
     public function loginProcess() {
-        global $log;
-        
+        global $log;    
         $isValid = true;
         $notification_text = 'Sesion iniciada con éxito';
-
         $values = [
             'mail' => $_POST['mail'],
             'pwd' => $_POST['pwd']
         ];
-
         list($isValid, $result) = $this->model->login($values);
-
         if(! $isValid){
             $notification_text = 'El usuario no existe. Por favor regístrese.';
         }
-
         $titulo = 'Iniciar sesión';
         $notification = true;
         $notification_type = $isValid ? SUCCESS : ERROR;
@@ -82,36 +77,6 @@ class UsuariosController extends Controller{
         $notification = true;
         $notification_type = $isValid ? SUCCESS : ERROR;
         require $this->viewsDir . 'register_view.php';
-
-
-        /* $requiredValues = [
-            'nombre' => ['label' => 'Nombre'],
-            'apellido' => ['label' => 'Apellido'],
-            'celular' => ['label' => 'Celular'],
-            'email' => ['label' => 'Email', 'validate' => function ($email) {
-                return $this->validateEmail($email);
-            }],
-            'conf_email' => ['label' => 'Email', 'validate' => function ($email) {
-                return $this->validateEmail($email);
-            }],
-            'contrasenia' => ['label' => 'Contraseña', 'validate' => function ($pass) {
-                return $this->validatePassword($pass);
-            }],
-            'conf_contrasenia' => ['label' => 'Contraseña', 'validate' => function ($pass) {
-                return $this->validatePassword($pass);
-            }],
-            'fecha_nacimiento' => ['label' => 'Fecha de nacimiento', 'validate' => function ($date) {
-                return $this->validateDate($date);
-            }],
-        ];
-        # valido los campos
-        list($validated, $isValid, $notification_text) = $this->validateForm($requiredValues); # validated viene sanitizado
-        if (!$isValid) $this->register(true, false, $notification_text);
-        # valido los campos que requieren confirmacion
-        else if ($validated['email'] != $validated['conf_email']) $this->register(true, false, 'Los email no coinciden');
-        else if ($validated['contrasenia'] != $validated['conf_contrasenia']) $this->register(true, false, 'Las contraseñas no coinciden');
-        else $this->register(true, true, 'Registro completado con éxito'); */
-
     }
 
 }

@@ -117,7 +117,6 @@ class QueryBuilder {
             $where = '';
 
             $query = $query . $values . $where;
-            
 
             try{
                 $statement = $this->pdo->prepare($query);
@@ -141,8 +140,6 @@ class QueryBuilder {
         #$count = $this->execute($query);
     }
 
-
 }
-
 
 ?>

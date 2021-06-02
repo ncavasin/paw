@@ -115,32 +115,22 @@ class Usuario extends Model{
         $isValid = true;
 
         if (! isset($values['mail']) || ! isset($values['pwd'])) return false;
-
         $result = $this->queryBuilder->selectUsuario($this->table, $values);
 
-        # Si no hay coincidencia en la base el usuario no se puede loguear
-        if(! count($result)) return false;
+        # Si no devuelve SOLO 1 USER, login fallido
+        if(count($result) != 1) return false;
+        $user = $result[0]; # tengo que agarrar el primer elemento, porque es un arreglo
         
-        # Desencripta pwd y verifica si coincide
-        $pwdMatch = password_verify($values['pwd'], $result['pwd']);
+        # Dejo los vardump para que testees y mires los valores
+        var_dump('Password de la request: ' . $values['pwd']);
+        var_dump('Password en la db (sin descifrar): ' . $user['pwd']);
+        var_dump('¿Password en la db coincide?');
+        var_dump(password_verify($values['pwd'], $user['pwd']));
 
-        # Hash directo de la db
-        $dbHash = '$2y$10$d85GFOszBhjvDbEItSwyteQ3uSWSxFUQdtLbJuzHhpphge7Nd5g7G';
-        $pwdMatchDb = password_verify($values['pwd'], $dbHash);
-        
-        echo'<pre>'; 
-        var_dump('Password original: ' . $values['pwd']);
-        var_dump('Password hasheada en db: ' . $dbHash);
-        var_dump($values);
-        var_dump($result); 
-        var_dump('Match por query:' . $pwdMatch);
-        var_dump('Match por valor hardcodeado: ' . $pwdMatchDb);
-        die;
-
-        if (! $pwdMatch) return false;
-
-        $result['pwd'] = null;
-        return [$isValid, $result];
+        if (!password_verify($values['pwd'], $user['pwd'])) return [false]; # Verifico el hash de la pass y retorno falso si no coinciden
+        # Sigo si coinciden
+        $user['pwd'] = null;
+        return [$isValid, $user];
     }
 
     public function save () {
@@ -152,8 +142,6 @@ class Usuario extends Model{
             var_dump($e);die;
         }
     }
-
-
 }
 
 ?>
