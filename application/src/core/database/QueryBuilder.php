@@ -19,14 +19,11 @@ class QueryBuilder {
 
         if((! isset($params['mail'])) || (! isset($params['pwd']))) return false;
 
-        #$hash = password_hash($params['pwd'], PASSWORD_DEFAULT);
-
         $where =  "mail = :mail";
         $query = "select * from {$table} where {$where}";
 
         $sentencia = $this->pdo->prepare($query);
         $sentencia->bindValue(":mail", $params['mail']);
-        #$sentencia->bindValue(":pwd", $params['pwd']);
         
         $sentencia->setFetchMode(PDO::FETCH_ASSOC);
         $sentencia->execute();
