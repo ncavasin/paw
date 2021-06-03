@@ -78,7 +78,7 @@ class QueryBuilder {
 
             try{
                 $statement = $this->pdo->prepare($query);
-                $statement->execute($params);
+                $statement->execute($params); # TODO falta hacer bindValue
                 $this->logger->info('Insercion en ' . $table . '. Sentencia: ' . $query . '. Parametros: ', [$params]);
 
             }catch(PDOException  $e){

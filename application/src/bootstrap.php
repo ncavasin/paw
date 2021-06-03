@@ -74,6 +74,11 @@ $router->get('/newturn', 'PageController@turns');
 $router->post('/newturn', 'TurnosController@nuevoTurno');
 $router->get('/myturns', 'TurnosController@getTurnos');
 
+$router->get('/servicios/audiologia', 'ServicesController@audiologia');
+$router->get('/servicios/cardiologia', 'ServicesController@cardiologia');
+$router->get('/servicios/densitometria', 'ServicesController@densitometria');
+$router->get('/servicios/ecografia_doppler', 'ServicesController@ecografiaDoppler');
+
 # $router->get('/turns/', 'TurnsController@index');
 # Add all needed routes 
 
