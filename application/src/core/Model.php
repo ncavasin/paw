@@ -11,7 +11,7 @@ class Model {
     public $queryBuilder;
 
     public function setQueryBuilder(QueryBuilder $qb) {
-        
+
         $this->queryBuilder = $qb;
 
     }

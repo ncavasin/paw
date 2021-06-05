@@ -24,7 +24,7 @@
                     <input type="email" id="email" name="email" placeholder="ejemplo@email.com" autofocus required tabindex="1" /><br>
                 </fieldset>
 
-                <input type="submit" value="Enviar" class="submit" />
+                <input type="submit" value="Enviar" class="main_button" />
 
             </form>
         </section>
