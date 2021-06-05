@@ -11,8 +11,14 @@ class ConnectionBuilder{
 
     use Loggable;
 
-    public function make(Config $config):PDO{
-        
+    private static $instance = null;
+    private $connection;
+
+    private function __construct(){
+        # Do nothing
+    }
+
+    private function make(Config $config){
         try{
             $adapter =  $config->get("DB_ADAPTER");
             $hostname = $config->get("DB_HOSTNAME");
@@ -20,7 +26,7 @@ class ConnectionBuilder{
             $port =     $config->get("DB_PORT");
             $charset =  $config->get("DB_CHARSET");
             
-            return new PDO(
+            $this->connection = new PDO(
                 # Connection is different because of docker presence
                 # name = paw | hostname = paw_db | port = 5432 | username = admin | password = admin
                 "{$adapter}:host={$hostname};dbname={$dbname};port={$port}",
@@ -44,9 +50,24 @@ class ConnectionBuilder{
             var_dump($config->get("DB_PASSWORD"));
             $this->logger->error('Internal Server Error', ['Error' => $e]);
             die('Error Interno - Consulte al administrador');
-
         }
+    }
 
+    public static function getInstance(){
+        if(self::$instance == null){
+            # echo '[ConnectionBuilder] - Instance created';
+            self::$instance = new ConnectionBuilder();
+        }
+        else{
+            echo '[ConnectionBuilder] - Singleton applied';
+        }
+        return self::$instance;
+
+    }
+
+    public function getConnection(Config $config):PDO{
+        $this->make($config);
+        return $this->connection;
     }
 }
 

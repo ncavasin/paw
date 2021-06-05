@@ -1,13 +1,12 @@
 <?php
 
+use Paw\app\models\Especialidad;
 use Paw\core\Controller;
 
 
 class EspecialidadesController extends Controller{
-
-    public function __construct(){
-        parent::__construct();
-    }
+    
+    public ?string $modelName = Especialidad::class;
 
     # Lista todas las especialidades
     public function index(){
@@ -16,7 +15,7 @@ class EspecialidadesController extends Controller{
 
     # Lista una especialidad
     public function getEspecialidad(){
-
+        
     }
 }
 

@@ -4,16 +4,9 @@ namespace Paw\app\controllers;
 
 use Paw\core\Controller;
 
+use const Paw\core\database\FILE_SIZE_MAX;
+
 class PageController extends Controller{
-
-    public function __construct(){
-        
-        parent::__construct();
-
-        # 10Mb = 10.000.000b
-        define ("_MAXFILESIZE", 10000000, true);
-
-    }
 
     private function validateEmail($email) {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) return true;
@@ -63,7 +56,7 @@ class PageController extends Controller{
         require $this->viewsDir . 'login_view.php';
     }
 
-    public function loginProcess(){
+/*     public function loginProcess(){
         $requiredValues = [
             'email' => ['label' => 'Email', 'validate' => function ($email) {
                 return $this->validateEmail($email);
@@ -78,7 +71,7 @@ class PageController extends Controller{
             else $this->login(true, false, 'Usuario y contraseña incorrectos');
         }
     }
-
+ */
 
     public function register($notification = false, $isValid = false, $notification_text = 'Uno o mas campos no son validos'){
         $titulo = 'Registrarse';
@@ -196,7 +189,7 @@ class PageController extends Controller{
 
                 if (file_exists($newFileName))
                     $this->turns(true, false, 'Error al subir el archivo: Ya existe');
-                else if ($fileSize > constant('_MAXFILESIZE'))
+                else if ($fileSize > FILE_SIZE_MAX)
                     $this->turns(true, false, "Tamaño de archivo excedido. Limite 10Mb.");
                 else if (! ($mimeType == 'application/pdf')){
                     $this->turns(true, false, 'El archivo no tiene una extensión válida (PDF)');

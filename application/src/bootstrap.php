@@ -35,9 +35,16 @@ $handler = new StreamHandler($config->get('LOG_PATH'));
 $handler->setLevel($config->get('LOG_LEVEL'));
 $log->pushHandler($handler);
 
-$connectionBuilder = new ConnectionBuilder();
+$connectionBuilder = ConnectionBuilder::getInstance();
 $connectionBuilder->setLogger($log);
-$connection = $connectionBuilder->make($config);
+$connection = $connectionBuilder->getConnection($config);
+
+# Set default timezone
+date_default_timezone_set("America/Argentina/Buenos_Aires");
+
+# Test singleton
+# $conb = ConnectionBuilder::getInstance();
+# $con = $conb->getConnection($config);
 
 # Requests handler
 $request = new Request();
@@ -52,19 +59,25 @@ $router->get('/about', 'PageController@about');
 $router->get('/services', 'PageController@services');
 
 $router->get('/login', 'PageController@login');
-$router->post('/login', 'PageController@loginProcess');
+$router->post('/login', 'UsuariosController@loginProcess');
 
 $router->get('/reset_password', 'PageController@resetPassword');
 $router->post('/reset_password', 'PageController@resetPasswordProcess');
 
 $router->get('/register', 'PageController@register');
-$router->post('/register', 'PageController@registerProcess');
+$router->post('/register', 'UsuariosController@register');
 
 $router->get('/coverages', 'PageController@coverages');
 $router->post('/coverages', 'PageController@coveragesProcess');
 
-$router->get('/turns', 'PageController@turns');
-$router->post('/turns', 'PageController@turnsProcess');
+$router->get('/newturn', 'PageController@turns');
+$router->post('/newturn', 'TurnosController@nuevoTurno');
+$router->get('/myturns', 'TurnosController@getTurnos');
+
+$router->get('/servicios/audiologia', 'ServicesController@audiologia');
+$router->get('/servicios/cardiologia', 'ServicesController@cardiologia');
+$router->get('/servicios/densitometria', 'ServicesController@densitometria');
+$router->get('/servicios/ecografia_doppler', 'ServicesController@ecografiaDoppler');
 
 # $router->get('/turns/', 'TurnsController@index');
 # Add all needed routes 

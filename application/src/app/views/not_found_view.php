@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="es-AR">
     <head>
-        <?php
-            require 'parts/head_view.php'
-        ?>
+        <?php require 'parts/head_view.php' ?>
     </head>
     <body>
         <?php 

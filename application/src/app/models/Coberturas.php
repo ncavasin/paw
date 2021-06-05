@@ -2,6 +2,7 @@
 
 namespace Paw\app\models;
 
+use Paw\core\database\Constants;
 use Paw\core\exceptions\InvalidFormatException;
 use Paw\core\Model;
 
@@ -17,8 +18,8 @@ class Coberturas extends Model{
 
     public function setNombre(string $nombre){
 
-        if(strlen($nombre) > constant('_SERVICES_MAX')){
-            throw new InvalidFormatException('Nombre de Servicio demasiado largo. Limite ' . constant('_SERVICES_MAX') . ' caracteres.');
+        if(strlen($nombre) > Constants::getFileSize()){
+            throw new InvalidFormatException('Nombre de Servicio demasiado largo. Limite ' . Constants::getFileSize() . ' caracteres.');
         }
 
         $this->field['nombre'] = $nombre;
@@ -33,7 +34,7 @@ class Coberturas extends Model{
             }
 
             $method = 'set' . ucfirst($key);
-            $this->method($values[$key]);
+            $method($values[$key]);
         }
 
     }
