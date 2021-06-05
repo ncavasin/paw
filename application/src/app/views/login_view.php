@@ -40,9 +40,9 @@
                     <a href="/reset_password" target="_self">¿Olvidaste tu contraseña?</a>
                     <a href="/register" target="_self">Registrarse</a>
 
-                    <input type="submit" value="Ingresar" class="submit"/>
+                    <input type="submit" value="Ingresar" class="main_button"/>
                 </form>
-            </section>        
+            </section>
         </main>
         
         <?php 

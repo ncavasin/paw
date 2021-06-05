@@ -5,6 +5,7 @@
             require 'parts/head_view.php'
         ?>
         <link rel="stylesheet" type='text/css' href="assets/css/index.css"/>   
+        <link rel="stylesheet" type='text/css' href="assets/css/main.css"/>   
     </head>
     <body>
         <?php 
@@ -12,7 +13,7 @@
         ?>
         
         <main>
-            <h1><?= $titulo ?? "" ?></h2>   
+            <h1><?= $titulo ?? "" ?></h2>
         </main>
         <?php 
             require 'parts/footer_view.php';
