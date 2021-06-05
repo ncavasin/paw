@@ -4,7 +4,7 @@
         <?php
             require 'parts/head_view.php'
         ?>
-        <link rel="stylesheet" type='text/css' href="assets/css/index.css"/>   
+        <script src="/js/app.js"></script>
     </head>
     <body>
         <?php 
