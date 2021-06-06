@@ -11,7 +11,7 @@ class App{
 
         document.addEventListener('DOMContentLoaded', () => { 
             paw.loadScript('subMenu', '/js/components/subMenu.js', () => {
-                let mainMenu = new SubMenu("nav ul li a");
+                let mainMenu = new SubMenu("nav ul li");
             })
         });
 

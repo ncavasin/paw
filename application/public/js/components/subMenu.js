@@ -1,36 +1,45 @@
 class SubMenu {
 
     constructor(pContainer) {
-        
-        // Find received element
-        let container = pContainer.tagName ? pContainer : document.querySelector(pContainer);
 
-        // Create submenu button
-        let button = paw.newElement(
-            "button",
-            "",
-            //{ class: 'main_menu_abierto'},
-            //{ click: "console.log('click');"}
-        );
+        // Find second element of "nav ul li"
+        let container = document.querySelectorAll(pContainer).item(1);
+        console.log(container);
 
+        // Create sub-menu items
+        let ul = paw.newElement('ul', '');
+        let li = paw.newElement('li', '');
+        for(var i = 0; i < 4; i++){
+            let a = paw.newElement('a', 'Audiologia', {href: '/index', target: '_self'});
+            a.classList.add('sub_menu_list_item');
+            li.appendChild(a);
+        }
+        ul.appendChild(li);
+        ul.classList.add('sub_menu_list');
+        container.appendChild(ul);
 
-        // Add functionality
-        button.addEventListener("click", (event) => {
-            console.log("HOLA");
-            if (ul.classList.contains('sub_menu_cerrado')){
-
-                ul.classList.add('sub_menu_abierto');
-                ul.classList.remove('sub_menu_cerrado');
-
-            }else{
-
-                ul.classList.add('sub_menu_cerrado');
-                ul.classList.remove('sub_menu_abierto');
-            }
+        // Handle events
+        container.addEventListener('ontap', () => {
+            show();
+        });
+        container.addEventListener('mouseover', () =>{
+            show();
+        });
+    
+        container.addEventListener('mouseout', () => {
+            hide();
         });
 
-        // Append to father
-        container.appendChild(button);
+        function show() {
+            ul.style.display = 'inherit';
+        }
+
+        function hide() {
+            ul.style.display = 'none';
+        }
+
     }
+
+    
 }
 
