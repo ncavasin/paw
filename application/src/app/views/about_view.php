@@ -11,7 +11,6 @@
             require 'parts/header_view.php';
         ?>
 
-
         <main>
             <section style="text-align: left;">
                 <h2>VISIÓN</h2>

@@ -46,7 +46,7 @@ h3, a{
 
 ul .button{
     align-self: center;
-    justify-self: stretch;        
+    justify-self: stretch;
     border-radius: var(--border_value);
     background-color: var(--azul);
     color: white;

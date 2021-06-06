@@ -1,8 +1,6 @@
 class App{
 
     constructor(){
-        document.addEventListener("touchstart", function(){}, true);
-        
         // Load main menu functionality
         document.addEventListener('DOMContentLoaded', () => { 
             paw.loadScript('MainMenu', '/js/components/mainMenu.js', () => {

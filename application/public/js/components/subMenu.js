@@ -44,17 +44,6 @@ class SubMenu {
             }
         });
 
-        // Show on hover
-        // container.addEventListener('mouseover', () => {
-        //     button.style.display = 'inherit';
-        // });
-
-        // Hide on exit
-        // container.addEventListener('mouseout', () => {
-        //     button.style.display = 'none';
-        // });
-
-
     }
 
     
