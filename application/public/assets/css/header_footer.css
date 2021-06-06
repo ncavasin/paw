@@ -35,7 +35,7 @@ header{
 
 .menu_user{
     display: flex;
-    flex-flow: row;
+    flex-flow: row-reverse;
     justify-content: right;
     font-size: smaller;
 }
@@ -112,6 +112,8 @@ nav{
 
     .telefono{
         display: inline-block;
+        position: absolute;
+        left: 0;
         grid-area: tel;
         justify-self: left;
         align-self: center;
