@@ -7,4 +7,8 @@
 <link rel="stylesheet" type='text/css' href="/assets/css/header_footer.css"/>
 <link rel="stylesheet" type='text/css' href="/assets/css/main.css"/>
 <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+
+<script src="/js/components/paw.js"></script>
+<script src="/js/app.js"></script>
+
 <title><?= $titulo ?? "Dental Medical Group" ?></title>
