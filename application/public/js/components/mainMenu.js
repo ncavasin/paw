@@ -1,7 +1,7 @@
 class MainMenu {
 
     constructor(pContainer) {
-        // Find nav
+        // Find received element
         let container = pContainer.tagName ? pContainer : document.querySelector(pContainer);
 
         // Create burguer button
@@ -19,20 +19,15 @@ class MainMenu {
 
         // Add functionality
         button.addEventListener("click", (event) => {
-            if (event.target.classList.contains('hamburguesaAbrir')){
-                
-                
-                event.target.classList.add('hamburguesaCerrar');
+            if (ul.classList.contains('main_menu_cerrado')){
+
                 ul.classList.add('main_menu_abierto');
-
-                event.target.classList.remove('hamburguesaAbrir');
                 ul.classList.remove('main_menu_cerrado');
-            }else{
-                event.target.classList.add('hamburguesaAbrir');
-                ul.classList.add('main_menu_cerrado');
 
+            }else{
+
+                ul.classList.add('main_menu_cerrado');
                 ul.classList.remove('main_menu_abierto');
-                event.target.classList.remove('hamburguesaCerrar');
             }
         });
 

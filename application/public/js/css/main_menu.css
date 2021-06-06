@@ -2,15 +2,39 @@
 	grid-area: main;
     display: flex;
     flex-flow: column;
-    background-color: var(--azul);
+    background-color: var(--celeste);
     font-size: smaller;
     align-self: center;
-	transition-property: width;
-	transition-duration: 1s;
+
+	width: 100%;
+	transition: width 2s;
 }
 
 .main_menu_cerrado{
 	display: none;
+}
+
+/* opciones del menu */
+.main_menu_abierto > li{
+    align-self: center;
+    text-align: center; 
+    justify-self: stretch;
+    width: 100vw;
+	margin: 2vh 0;
+}
+
+.main_menu_abierto > li > a{
+    color: white;
+	padding: 1rem 0;
+	border-radius: 15px;
+	font-size: large;
+}
+
+.main_menu_abierto > li > a:hover{
+    color: var(--azul);
+    background-color: white;
+	transition-duration: .75s;
+	
 }
 
 .hamburguesa{
@@ -32,111 +56,3 @@
 }
 
 
-.hamburguesa .main_menu_cerrado {
-	width: 3rem;
-	transition-duration: 1s;
-	transition-property: width;
-}
-
-.hamburguesa .hamburguesaCerrado ul {
-	opacity: 0;
-	transition: 1s all;
-}
-
-.hamburguesa .hamburguesaAbierto {
-	width: 20rem;
-	transition-duration: 1s;
-	transition-property: width;
-}
-.hamburguesa .hamburguesaAbierto ul {
-	opacity: 1;
-	transition: 1s all;
-}
-
-.hamburguesa ul {
-	background-color: var(--azul);
-	padding-left: 2rem;
-	cursor: pointer;
-	clear: both;
-}
-
-.hamburguesa ul li ul {
-	max-height: 0;
-	overflow: hidden;
-	transition: 1s all;
-}
-
-.hamburguesa ul li:hover ul {
-	max-height: 100vh;
-	transition: 1s all;
-}
-
-.hamburguesa ul li {
-	display: block;
-	padding: 0.5rem;
-}
-
-.hamburguesa p {
-	display: block;
-	padding: 0.5rem;
-	border-bottom: 2ps solid black;
-}
-
-.hamburguesa > ul > li:hover {
-	border: black solid 3px;
-	border-width: 3px 0;
-}
-
-.hamburguesa > ul > li {
-	background-color: var(--paw-verde-medio-oscuro);
-}
-
-/* Funcionalidad Botón Hamburguesa */
-.hamburguesa button {
-	float: right;
-	border: 0;
-	width: 2rem;
-	height: 2rem;
-	margin: 0.5rem;
-	padding: 0;
-	cursor: pointer;
-	background-color: transparent;
-	position: relative;
-	overflow: hidden;
-}
-
-.hamburguesa button:hover,
-.hamburguesa button:focus {
-	margin-left: 0;
-}
-
-.hamburguesa button::before,
-.hamburguesa button::after {
-	display: block;
-	position: absolute;
-	content: " ";
-	width: 2rem;
-	height: 0.2rem;
-	background-color: white;
-	transition-property: all;
-	transition-duration: 1s;
-	border-radius: 0.2rem;
-}
-
-.hamburguesa button .hamburguesaAbrir::before {
-	transform: translateY(-1rem) rotate(0);
-	box-shadow: 0 0.6rem 0 white;
-}
-
-.hamburguesa button .hamburguesaAbrir::after {
-	transform: translateY(0.2rem) rotate(0);
-}
-
-.hamburguesa button .hamburguesaCerrar::before {
-	transform: translateY(0) rotate(45deg);
-	box-shadow: 0 0.6rem 0 transparent;
-}
-
-.hamburguesa button .hamburguesaCerrar::after {
-	transform: translateY(0) rotate(-45deg);
-}

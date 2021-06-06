@@ -87,58 +87,6 @@ nav{
     margin-left: 1.5rem;
 }
 
-
-/*
-.hamburguesa{
-    grid-area: hamburguesa;
-    background-color: var(--azul);
-    border: none;
-    cursor: pointer;
-    color: white;
-    text-align: center;
-    align-self: center;
-    font-size: x-large;
-    padding: .5rem .5rem;
-}
-
-.hamburguesa:hover{
-    background-color: white;
-    color: var(--azul);
-}*/
-
-/* menu 
-.main_menu_abierto{
-    display: flex;
-    flex-flow: column;
-    background-color: var(--azul);
-    font-size: smaller;
-    align-self: center;
-}
-*/
-
-
-
-/* opciones del menu */
-header > nav > ul > li{
-    align-self: center;
-    text-align: center; 
-    justify-self: stretch;
-    width: 100vw;
-}
-
-header > nav > ul > li:not(:last-of-type){
-    border-right: 1px solid var(--gris);
-}
-
-header > nav > ul > li > a{
-    color: white;
-}
-
-header > nav > ul > li > a:hover{
-    color: var(--azul);
-    background-color: white;
-}
-
 @media (min-width: 480px) {
 
     header{
@@ -185,7 +133,7 @@ header > nav > ul > li > a:hover{
         display: grid;
         grid-template-columns: .5fr 1fr;
         grid-template-areas: 
-                            "logo opciones";
+                            "logo hamburguesa opciones";
     }
 
     .logotipo{
@@ -194,7 +142,7 @@ header > nav > ul > li > a:hover{
     }
 
     
-    .main_menu{
+    .main_menu_abrir{
         grid-area: opciones;
         justify-self: stretch;
         display: grid;

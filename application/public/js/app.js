@@ -9,6 +9,12 @@ class App{
             })
         });
 
+        document.addEventListener('DOMContentLoaded', () => { 
+            paw.loadScript('subMenu', '/js/components/subMenu.js', () => {
+                let mainMenu = new SubMenu("nav ul li a");
+            })
+        });
+
         // Load carrousel functionality
         document.addEventListener('DOMContentLoaded', () => { 
             paw.loadScript('Carrousel', '/js/components/carrousel.js', () => {
