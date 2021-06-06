@@ -9,7 +9,6 @@ class paw{
             element.setAttribute(atr, attributes[atr]);
         }
         
-        
         // If content is NOT an HTML Element itself
         if (! content.tagName){
             // Create a textNode 
@@ -21,7 +20,6 @@ class paw{
         }
         
         element.appendChild(content);
-
         return element;
     }
     

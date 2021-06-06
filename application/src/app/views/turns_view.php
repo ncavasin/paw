@@ -36,7 +36,7 @@ require 'parts/head_view.php'
                             <option value="Ecografía Doppler">
                         </datalist>
 
-                        <label for="especialista">Especialista</label>
+<!--                         <label for="especialista">Especialista</label>
                         <input list="especialista-lista" id="especialista" name="especialista" 
                         placeholder="Fulano" 
                         tabindex="2"/>
@@ -56,7 +56,7 @@ require 'parts/head_view.php'
                         max=<?php
                             echo date('Y-m-d', strtotime(' +1 week'));
                         ?>
-                        tabindex="3"/>
+                        tabindex="3"/> -->
                         
                         <label for='orden_medica'>Orden Médica (*)</label>
                         <input type="file" name='orden_medica' class="file"
@@ -64,7 +64,7 @@ require 'parts/head_view.php'
                         tabindex="4"/>
                     </fieldset>
                 </form>
-                <h2>TURNOS DISPONIBLES</h2>
+                <!-- <h2>TURNOS DISPONIBLES</h2>
                 <table>
                     <colgroup>
                         <col>
@@ -88,7 +88,7 @@ require 'parts/head_view.php'
                 </table>
 
                 <input type="submit" form="form-turnos" name="reservar" value="Reservar" class="main_button"/>
-                <input type="reset" form="form-turnos" name="reset" value="Limpiar" class="limpiar"/>
+                <input type="reset" form="form-turnos" name="reset" value="Limpiar" class="limpiar"/> -->
             </section>
         </main>
 
