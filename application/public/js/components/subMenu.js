@@ -4,39 +4,56 @@ class SubMenu {
 
         // Find second element of "nav ul li"
         let container = document.querySelectorAll(pContainer).item(1);
-        console.log(container);
 
-        // Create sub-menu items
+        // Create drop-down button
+        let button = paw.newElement('button', '▼');
+        
+        // Hide it
+        // button.style.display = 'none';
+        
+        button.classList.add('btn');
+
+        // Create sub-menu list and items
         let ul = paw.newElement('ul', '');
         let li = paw.newElement('li', '');
+        
+        // Append fake anchors
         for(var i = 0; i < 4; i++){
-            let a = paw.newElement('a', 'Audiologia', {href: '/index', target: '_self'});
+            let a = paw.newElement('a', 'Servicio #' + (i+1), {href: '#', target: '_self'});
             a.classList.add('sub_menu_list_item');
             li.appendChild(a);
         }
+
+        // Connect them
         ul.appendChild(li);
         ul.classList.add('sub_menu_list');
         container.appendChild(ul);
+        container.appendChild(button);
+
+        // Add css 
+        container.classList.add('sub_menu_head');
 
         // Handle events
-        container.addEventListener('ontap', () => {
-            show();
-        });
-        container.addEventListener('mouseover', () =>{
-            show();
-        });
-    
-        container.addEventListener('mouseout', () => {
-            hide();
+        button.addEventListener('click', () => {
+            if(ul.style.display === 'inherit'){
+                ul.style.display = 'none';
+                button.innerHTML = '▼';
+            }else{
+                ul.style.display = 'inherit';
+                button.innerHTML = '▲';
+            }
         });
 
-        function show() {
-            ul.style.display = 'inherit';
-        }
+        // Show on hover
+        // container.addEventListener('mouseover', () => {
+        //     button.style.display = 'inherit';
+        // });
 
-        function hide() {
-            ul.style.display = 'none';
-        }
+        // Hide on exit
+        // container.addEventListener('mouseout', () => {
+        //     button.style.display = 'none';
+        // });
+
 
     }
 

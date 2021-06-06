@@ -20,12 +20,9 @@ class MainMenu {
         // Add functionality
         button.addEventListener("click", (event) => {
             if (ul.classList.contains('main_menu_cerrado')){
-
                 ul.classList.add('main_menu_abierto');
                 ul.classList.remove('main_menu_cerrado');
-
             }else{
-
                 ul.classList.add('main_menu_cerrado');
                 ul.classList.remove('main_menu_abierto');
             }
