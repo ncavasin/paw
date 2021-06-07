@@ -17,7 +17,7 @@ class App{
         // Load carrousel functionality
         document.addEventListener('DOMContentLoaded', () => { 
             paw.loadScript('Carrousel', '/js/components/carrousel.js', () => {
-                let carrousel = new Carrousel();
+                let carrousel = new Carrousel('main > section', 3);
             })
         });
     }

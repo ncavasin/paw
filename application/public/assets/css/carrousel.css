@@ -1,0 +1,94 @@
+:root{
+    --btnSlider: #bbb;
+}
+
+/* section carrousel*/
+.car_container{
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+                        "l s r"
+                        ". d .";
+}
+
+.slides_container{
+    grid-area: s;
+}
+
+.btn_left, .btn_right{
+    font-size: smaller;
+    cursor: pointer;
+    border: none;
+    width: 10vw;
+    height: 10vh;
+    background-color: var(--btnSlider);
+    color: white;
+    font-weight: bolder;
+    border-radius: 5px;
+}
+
+.btn_left:hover, .btn_right:hover, .dot:hover{
+    background-color: white;
+    color: var(--btnSlider);
+}
+
+.btn_left{
+    grid-area: l;
+}
+
+.btn_right{
+    grid-area: r;
+}
+
+.car_container .slides_container{
+    white-space: nowrap;
+}
+
+.car_container .slides_container .slide{
+    display: inline-block;
+    margin-right: -1rem;
+    vertical-align: top;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: 20%;
+}
+
+/* Puntos de abajo */
+.dot_container{
+    grid-area: d;
+}
+
+.dot{
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: var(--btnSlider);
+    border: 1px solid white;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+  
+.fade{
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+  
+@-webkit-keyframes fade{
+    from {opacity: .4}
+    to {opacity: 1}
+}
+  
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}

@@ -44,8 +44,18 @@ class SubMenu {
             }
         });
 
+        // Remove classes when desktop
+        let mQuery = window.matchMedia('(min-width: 480px)');
+        mQuery.addListener(removeClasses());
+
+        function removeClasses() {
+            if (mQuery.matches){
+                ul.classList.remove('main_menu_abierto');
+                ul.classList.remove('main_menu_cerrado');
+            }
+        }
     }
 
-    
+
 }
 

@@ -13,7 +13,7 @@
         ?>
         <main>
             <section>
-                <h2>CARROUSEL</h2>
+                <!-- <h2>CARROUSEL</h2> -->
             </section>
             <section>
                 <h2>NUESTROS SERVICIOS</h2>
