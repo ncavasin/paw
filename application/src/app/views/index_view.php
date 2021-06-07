@@ -4,8 +4,8 @@
         <?php
             require 'parts/head_view.php'
         ?>
-            <link rel="stylesheet" type='text/css' href="assets/css/index.css"/>
-            <link rel="stylesheet" type='text/css' href="assets/css/botones.css"/>
+        <link rel="stylesheet" type='text/css' href="assets/css/index.css"/>
+        <link rel="stylesheet" type='text/css' href="assets/css/botones.css"/>
     </head>
     <body>
         <?php 
@@ -13,7 +13,7 @@
         ?>
         <main>
             <section>
-                <h2>CARROUSEL</h2>
+                <!-- <h2>CARROUSEL</h2> -->
             </section>
             <section>
                 <h2>NUESTROS SERVICIOS</h2>

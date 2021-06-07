@@ -10,7 +10,7 @@ class App{
                 let subMenu = new SubMenu("nav ul li");
             })
             paw.loadScript('Carrousel', '/js/components/carrousel.js', () => {
-                let carrousel = new Carrousel();
+                let carrousel = new Carrousel('main > section', 3);
             })
             paw.loadScript('Truns', '/js/components/Turns.js', () => {
                 let turns = new Turns('#form-turnos fieldset', '#especialidad', '#especialista');
