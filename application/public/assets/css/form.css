@@ -21,6 +21,7 @@ input{
     border-radius: 20px;
     border: 1.5px solid var(--gris);
     font-size: large;
+    padding-left: 2ch;
 }
 
 input:placeholder-shown{

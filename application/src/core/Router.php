@@ -61,7 +61,7 @@ class Router {
 
 
     public function call($controller, $method){
-        
+        $this->logger->info($controller);
         $controller_name = "Paw\\app\\controllers\\{$controller}";
             
         # Serve it properly

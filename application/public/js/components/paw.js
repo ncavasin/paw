@@ -1,6 +1,6 @@
 class paw{
 
-    static newElement(tag, content, attributes = {}, events = {}){
+    static newElement(tag, content = '', attributes = {}, events = {}){
         let element = document.createElement(tag);
 
         // Load each attribute to the created element

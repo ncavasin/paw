@@ -62,6 +62,7 @@ nav{
                         "logo hamburguesa"
                         "main main";
     background-color: var(--azul);
+    
     position: sticky;
 }
 

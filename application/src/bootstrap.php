@@ -71,6 +71,9 @@ $router->get('/coverages', 'PageController@coverages');
 $router->post('/coverages', 'PageController@coveragesProcess');
 
 $router->get('/newturn', 'PageController@turns');
+$router->get('/especialidades', 'EspecialidadesController@getEspecialidades');
+$router->get('/especialistas', 'EspecialistasController@getEspecialistas');
+$router->get('/turnos_disponibles', 'TurnosController@getTurnosDisponibles');
 $router->post('/newturn', 'TurnosController@nuevoTurno');
 $router->get('/myturns', 'TurnosController@getTurnos');
 

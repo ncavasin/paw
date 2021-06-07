@@ -12,7 +12,7 @@ class TurnosController extends Controller{
     public ?string $modelName = Turno::class;
 
     # Lista todos los turnos disponibles a una fecha y hora det
-    public function nuevoTurno(){
+    public function nuevoTurno() {
         $notification = true;
         $notification_text = 'Turno reservado con éxito';
         $isValid = true;
@@ -69,8 +69,13 @@ class TurnosController extends Controller{
         # TODO Luego del testing, cambiar esta vista por la de mis turnos (Para mejor usabilidad)
     }
 
+    public function getTurnosDisponibles() {
+        header('Content-Type: application/json');
+        echo file_get_contents(__DIR__ . '/turnos.json');
+    }
+
     # Lista un solo turno
-    public function getTurnos(){
+    public function getTurnos() {
         $turnosCollection = $this->model->getAll();
         var_dump($turnosCollection);die;
     }

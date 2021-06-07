@@ -1,70 +1,71 @@
 <!DOCTYPE html>
 <html lang="es-AR">
-    <head>
-        <?php
 
-use const Paw\core\database\FILE_SIZE_MAX;
+<head>
+    <?php
 
-require 'parts/head_view.php'
-        ?>
-        <link rel="stylesheet" type='text/css' href="assets/css/form.css"/>
-        <link rel="stylesheet" type='text/css' href="assets/css/turnos.css"/>
-        <link rel='stylesheet' type='text/css' href='assets/css/notification.css'/>
-        <link rel='stylesheet' type='text/css' href='assets/css/botones.css'/>
-    </head>
-    <body>
-        <?php 
-            require 'parts/header_view.php';
-        ?>
+    use const Paw\core\database\FILE_SIZE_MAX;
 
-        <main>
-            <?php require 'parts/notification_view.php'; ?>
-            <section>
-                <h2>BÚSQUEDA DE TURNOS</h2>
-                <form action="" method="POST" id="form-turnos" 
-                      target="_self" enctype="multipart/form-data">
-                    <fieldset>
-                        <label for="especialidad">Especialidad</label>
-                        <input list="especialidad-lista" id="especialidad" name="especialidad" 
-                        placeholder="Kinesiología" 
-                        autofocus tabindex="1"/>
+    require 'parts/head_view.php'
+    ?>
+    <link rel="stylesheet" type='text/css' href="assets/css/form.css" />
+    <link rel="stylesheet" type='text/css' href="assets/css/turnos.css" />
+    <link rel='stylesheet' type='text/css' href='assets/css/notification.css' />
+    <link rel='stylesheet' type='text/css' href='assets/css/botones.css' />
+</head>
 
-                        <datalist id="especialidad-lista">
+<body>
+    <?php
+    require 'parts/header_view.php';
+    ?>
+
+    <main>
+        <?php require 'parts/notification_view.php'; ?>
+        <section>
+            <h2>BÚSQUEDA DE TURNOS</h2>
+            <form action="" method="POST" id="form-turnos" target="_self" enctype="multipart/form-data">
+                <fieldset>
+                    <label for="especialidad">Especialidad</label>
+                    <input list="especialidad-lista" id="especialidad" name="especialidad" placeholder="Kinesiología" autocomplete="off" autofocus tabindex="1" />
+
+                    <!-- ahora se obtiene por medio de JS 
+                            <datalist id="especialidad-lista">
                             <option value="Audiometría">
                             <option value="Cardiología">
                             <option value="Densitometría">
                             <option value="Ecografía Doppler">
-                        </datalist>
+                        </datalist> -->
 
-<!--                         <label for="especialista">Especialista</label>
-                        <input list="especialista-lista" id="especialista" name="especialista" 
-                        placeholder="Fulano" 
-                        tabindex="2"/>
-                        <datalist id="especialista-lista">
+                    <label for="especialista">Especialista</label>
+                    <input list="especialista-lista" id="especialista" name="especialista" placeholder="Fulano" autocomplete="off" tabindex="2" />
+
+                    <!-- ahora se obtiene por medio de JS
+                             <datalist id="especialista-lista">
                             <option value="Fulano">
                             <option value="Mengano">
                             <option value="Sultan">
                             <option value="Juan Doe">
-                        </datalist>
+                        </datalist> -->
 
-                        <label for="dia">Dia</label>
+                    <!-- ahora se devuelven todos los turnos disponibles 
+                            <label for="dia">Dia</label>
                         <input type="date" id="dia" name="dia" 
                         required 
                         min=<?php
                             echo date('Y-m-d', time());
-                        ?>
+                            ?>
                         max=<?php
                             echo date('Y-m-d', strtotime(' +1 week'));
-                        ?>
+                            ?>
                         tabindex="3"/> -->
-                        
-                        <label for='orden_medica'>Orden Médica (*)</label>
-                        <input type="file" name='orden_medica' class="file"
-                        required accept="application/pdf"
-                        tabindex="4"/>
-                    </fieldset>
-                </form>
-                <!-- <h2>TURNOS DISPONIBLES</h2>
+
+                    <label for='orden_medica'>Orden Médica (*)</label>
+                    <input type="file" name='orden_medica' class="file" required accept="application/pdf" tabindex="4" />
+                </fieldset>
+                <!-- <input type="reset" form="form-turnos" name="reset" value="Limpiar" class="limpiar" />
+                <input type="submit" form="form-turnos" name="reservar" value="Reservar" class="main_button" /> -->
+            </form>
+            <!-- <h2>TURNOS DISPONIBLES</h2>
                 <table>
                     <colgroup>
                         <col>
@@ -87,13 +88,14 @@ require 'parts/head_view.php'
                     </tbody>
                 </table>
 
-                <input type="submit" form="form-turnos" name="reservar" value="Reservar" class="main_button"/>
-                <input type="reset" form="form-turnos" name="reset" value="Limpiar" class="limpiar"/> -->
-            </section>
-        </main>
+                
+                 -->
+        </section>
+    </main>
 
-        <?php 
-            require 'parts/footer_view.php';
-        ?>
-    </body>
+    <?php
+    require 'parts/footer_view.php';
+    ?>
+</body>
+
 </html>

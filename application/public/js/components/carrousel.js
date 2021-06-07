@@ -1,7 +1,4 @@
 class Carrousel{
-
-    
-
     constructor(pContainer, qtyImgs){
         let index = 0;
 
@@ -93,3 +90,7 @@ class Carrousel{
         }
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    let carrousel = new Carrousel('main > section', 3);
+})
