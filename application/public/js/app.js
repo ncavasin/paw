@@ -12,8 +12,8 @@ class App{
             paw.loadScript('Carrousel', '/js/components/carrousel.js', () => {
                 let carrousel = new Carrousel();
             })
-            paw.loadScript('calendar', '/js/components/calendar.js', () => {
-                let turns = new Turns('#form-turnos fieldset', '#especialidad');
+            paw.loadScript('Truns', '/js/components/Turns.js', () => {
+                let turns = new Turns('#form-turnos fieldset', '#especialidad', '#especialista');
             })
         });
     }

@@ -34,13 +34,18 @@ esta funcionalidad se contará con la información necesaria en un JSON con la s
 
 // La idea entonces es la siguiente, el campo especialidad ya no lo vamos a necesitar
 class Turns {
-    constructor (container, especialidad) {
-        containerElement = document.querySelector(container)
-        especialidadElement = document.querySelector(especialidad)
+    constructor (container, especialidad, especialista) {
+        let containerElement = document.querySelector(container)
+        let especialidadElement = document.querySelector(especialidad)
+        let especialistaElement = document.querySelector(especialista)
 
+        console.log(especialidadElement.value)
         // crear el datalist de especialidades con un fetch
+        const especialidadesFetchCallBack = () => {
+            let datalistEspecialidad = document.createElement('datalist')
+            // crear las opciones con un for para traer las especialidades a las opciones
+        }
         
-                
         // crear boton para ver turnos disponibles
         // agregar onclick al boton para traer datos del especialista y los horarios que atiende
     }

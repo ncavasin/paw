@@ -12,7 +12,7 @@ class MainMenu {
             //{ click: "console.log('click');"}
         );
 
-        let css = paw.newElement('link', '', {rel: 'stylesheet', href:'js/css/main_menu.css'});
+        let css = paw.newElement('link', '', {rel: 'stylesheet', href:'assets/css/main_menu.css'});
         document.head.appendChild(css);
 
         let ul = document.querySelector("nav ul");
