@@ -11,7 +11,7 @@ class App{
             })
             paw.loadScript('FetchApi', '/js/components/FetchApi.js', () => {
                 // Primero necesito este script para poder usar el otro
-                paw.loadScript('Truns', '/js/components/Turns.js', () => {
+                paw.loadScript('Turns', '/js/components/Turns.js', () => {
                     let turns = new Turns('#form-turnos', '#especialidad', '#especialista');
                 })
             })

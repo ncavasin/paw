@@ -6,32 +6,39 @@
 .car_container{
     overflow: hidden;
     width: 100%;
-    position: relative;
-    margin: 0 auto;
 
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
     grid-template-rows: auto;
     grid-template-areas: 
-                        "l s r"
-                        ". d .";
+                        "s s s"
+                        "l d r";
 }
 
 .slides_container{
     grid-area: s;
+    
+    width: 100%;
+}
+
+.slide{
+    height: 100%;
+    width: 100%;
 }
 
 .btn_left, .btn_right{
     font-size: smaller;
     cursor: pointer;
     border: none;
-    width: 10vw;
-    height: 10vh;
+    width: 5vw;
+    height: 5vh;
     background-color: var(--btnSlider);
     color: white;
     font-weight: bolder;
     border-radius: 5px;
+    margin-top: 4rem;
 }
+
 
 .btn_left:hover, .btn_right:hover, .dot:hover{
     background-color: white;
@@ -68,7 +75,7 @@
     cursor: pointer;
     height: 15px;
     width: 15px;
-    margin: 0 2px;
+    margin: 5rem 1px 0 1px;
     background-color: var(--btnSlider);
     border: 1px solid white;
     border-radius: 50%;

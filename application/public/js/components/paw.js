@@ -15,8 +15,9 @@ class paw{
             content = document.createTextNode(content);
         }
 
-        for(var event in events){
-            element.addEventListener(event, () => { eval(events[event]) });
+        // Generic event listener
+        for(var e in events){
+            element.addEventListener(e, () => { eval(events[e]) });
         }
         
         element.appendChild(content);
