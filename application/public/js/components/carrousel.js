@@ -11,10 +11,6 @@ class Carrousel{
         let container = document.querySelectorAll(pContainer).item(0);
         container.classList.add('car_container');
 
-        // Get container's actual size
-        let devWidth = container.offsetWidth;
-        let devHeight = container.offsetHeight;
-
         // Create a container to hold every slide (aka image)
         let slidesContainer  = paw.newElement('div', '', {class: 'slides_container'});
 
@@ -26,11 +22,10 @@ class Carrousel{
 
             // Create a div per image and store the path of the image in 'background'
             let imgPath = basePath + i.toString() + ".jpg";
-            let slide = paw.newElement('div', '', {class: 'slide', id:'slide' + i});
-                        
+            let slide = paw.newElement('div', 'Slide0'+(i+1), {class: 'slide'});
+
+            // Insert background image
             slide.style.backgroundImage = "url(" + imgPath + ")";
-            slide.style.height = (devHeight) +'px';
-            slide.style.width = devWidth + 'px';
             slidesContainer.appendChild(slide);
 
             // Create a dot per image with proper class and id asignation
@@ -103,8 +98,24 @@ class Carrousel{
             // Check lower limit
             index = (index < 0 ) ? qtyImgs-1 : index;
 
-            let e = document.getElementsByClassName('car_container').item(0);
-            e.animate(container.style.marginLeft = - (index * devWidth)+'px');
+            // Get the slides container
+            let slidesContainer = document.getElementsByClassName('slides_container').item(0);
+            
+            // Get container's actual size
+            let carContainer = document.getElementsByClassName('car_container').item(0);
+            let devWidth = carContainer.offsetWidth;
+            let devHeight = carContainer.offsetHeight;
+
+            console.log(devWidth);
+            console.log(- (index * devWidth)+'px')
+            slidesContainer.style.marginLeft = -(index * devWidth)+'px';
+            // slidesContainer.animate([
+            //     {marginLeft: -(index * devWidth)+'px'},
+            //     {opacity: .4},
+            //     {opacity: 1}
+            // ],{
+            //     duration: 1250,
+            // });
 
             console.log(index);
         }

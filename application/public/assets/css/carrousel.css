@@ -6,10 +6,11 @@
 .car_container{
     overflow: hidden;
     width: 100%;
-
+    padding: 0;
+    height: 60vh;
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
-    grid-template-rows: auto;
+    grid-template-rows: 1fr .2fr;
     grid-template-areas: 
                         "s s s"
                         "l d r";
@@ -17,13 +18,17 @@
 
 .slides_container{
     grid-area: s;
-    
+    height: 100%;
     width: 100%;
 }
 
 .slide{
     height: 100%;
     width: 100%;
+    color: black;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .btn_left, .btn_right{
@@ -36,9 +41,7 @@
     color: white;
     font-weight: bolder;
     border-radius: 5px;
-    margin-top: 4rem;
 }
-
 
 .btn_left:hover, .btn_right:hover, .dot:hover{
     background-color: white;
@@ -59,12 +62,9 @@
 
 .car_container .slides_container .slide{
     display: inline-block;
-    margin-right: -1rem;
     vertical-align: top;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: 20%;
 }
+
 
 /* Puntos de abajo */
 .dot_container{
@@ -75,27 +75,12 @@
     cursor: pointer;
     height: 15px;
     width: 15px;
-    margin: 5rem 1px 0 1px;
     background-color: var(--btnSlider);
     border: 1px solid white;
     border-radius: 50%;
     display: inline-block;
     transition: background-color 0.6s ease;
+    margin-left: .1rem;
+    margin-right: .1rem
 }
-  
-.fade{
-    -webkit-animation-name: fade;
-    -webkit-animation-duration: 1.5s;
-    animation-name: fade;
-    animation-duration: 1.5s;
-}
-  
-@-webkit-keyframes fade{
-    from {opacity: .4}
-    to {opacity: 1}
-}
-  
-@keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
-}
+ 
