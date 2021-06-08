@@ -33,9 +33,9 @@ esta funcionalidad se contará con la información necesaria en un JSON con la s
 } */
 
 // La idea entonces es la siguiente, el campo especialidad ya no lo vamos a necesitar
-class Turns { 
-    // TODO agregar el turno seleccionado a un input hidden
-    // ! remover el fetch de especialidades cuando selecciona un especialista
+class Turns {
+	// TODO agregar el turno seleccionado a un input hidden
+	// ! remover el fetch de especialidades cuando selecciona un especialista
 	constructor(container, especialidad, especialista) {
 		const urlBase = window.location.origin
 		let css = paw.newElement('link', '', { rel: 'stylesheet', href: 'assets/css/form_turnos.css' })
@@ -83,7 +83,7 @@ class Turns {
 					if (fieldsetElement) fieldsetElement.innerHTML = ''
 					else
 						fieldsetElement = paw.newElement('fieldset', '', {
-							class: 'turnos-disponibles',
+							class: 'turnos-disponibles'
 						})
 					r.data.forEach(e => fieldsetElement.appendChild(this.createTurnCard(e)))
 					containerElement.appendChild(fieldsetElement)
@@ -105,8 +105,7 @@ class Turns {
 			// creo las opciones
 			let isSelectedValid = false
 			r.forEach(item => {
-				let optionElement = document.createElement('option')
-				optionElement.setAttribute('value', item.nombre) // ver como poner el id para hacer el get de items mas facil
+				let optionElement = paw.newElement('option', '', { value: item.nombre }) // ver como poner el id para hacer el get de items mas facil
 				datalistElement.appendChild(optionElement)
 				isSelectedValid = isSelectedValid || item.nombre === parent.value
 			})
@@ -119,13 +118,12 @@ class Turns {
 	createTurnCard = data => {
 		let especialista = data
 		const days = { Domingo: 0, Lunes: 1, Martes: 2, Miercoles: 3, Jueves: 4, Viernes: 5, sabado: 6 }
-		let div = paw.newElement('div', '', {
-			class: 'especialista-turnos',
+		let article = paw.newElement('article', '', {
+			class: 'especialista-turnos'
 		})
-		let header = paw.newElement('header', '', {class: 'header-card'})
-		header.appendChild(paw.newElement('h3', especialista.nombre + ' ' + especialista.apellido))
-		div.appendChild(header)
-
+		article.appendChild(
+			paw.newElement('h3', especialista.nombre + ' ' + especialista.apellido, { class: 'header-card' })
+		)
 		// genero los dias proximos en los que atiende y los agrego a una lista
 		let ulFechas = paw.newElement('ul', '', { class: 'ul-fechas' })
 		data.diasQueAtiende.forEach(dia => {
@@ -143,20 +141,21 @@ class Turns {
 			for (let hora = especialista.horarioInicio.horas; hora < especialista.horarioFinalizacion.horas; hora++)
 				for (
 					let minuto = especialista.horarioInicio.minutos;
-					minuto < 60;
-					minuto = minuto + especialista.duracionTurno
+					minuto < 60; // TODO ver si termina el horario en y 30 por ej
+					minuto = minuto + especialista.duracionTurno // TODO ver overflow de minutos
 				) {
-                    let liHora = aw.newElement('li', `${hora}:${minuto ? minuto : '00'}`)
-                    liHora.addEventListener('click', e => {
-                        // TODO aca debo procesar que cuando toque un horario se agregue al input hidden
-                        // ? ver si parsear el texto para enviar minuto y hora por separado
-                        // ! no olvidar que tengo que limpiar esos input hidden si cambia de especialista
-                    })
+					let liHora = paw.newElement('li', `${hora}:${minuto ? minuto : '00'}`)
+					liHora.addEventListener('click', e => {
+						// TODO aca debo procesar que cuando toque un horario se agregue al input hidden
+						// ? ver si parsear el texto para enviar minuto y hora por separado
+						// ! no olvidar que tengo que limpiar esos input hidden si cambia de especialista
+					})
 					ulHorarios.appendChild(liHora)
 				}
 			// li.appendChild(ulHorarios)
 			ulFechas.appendChild(li)
-            ulFechas.appendChild(ulHorarios)
+            let sublista = paw.newElement('li', ulHorarios, {class: 'sublista'})
+			ulFechas.appendChild(ulHorarios)
 			// agrego el evento click para mostar / ocultar horarios de una fecha
 			li.addEventListener('click', e => {
 				const horarios = document.getElementsByClassName('open')
@@ -168,7 +167,7 @@ class Turns {
 				ulHorarios.classList.add('open')
 			})
 		})
-		div.appendChild(ulFechas)
-		return div
+		article.appendChild(ulFechas)
+		return article
 	}
 }
