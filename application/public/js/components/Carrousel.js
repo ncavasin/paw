@@ -1,3 +1,10 @@
+
+document.addEventListener('DOMContentLoaded', () => {
+    let carrousel = new Carrousel('main > section', 3, '/assets/img/carrousel_');
+    let swipeDetector = new SwipeDetector();
+})
+
+
 class Carrousel{
     constructor(pContainer, qtyImgs, basePath){
 
@@ -22,7 +29,7 @@ class Carrousel{
 
             // Create a div per image and store the path of the image in 'background'
             let imgPath = basePath + i.toString() + ".jpg";
-            let slide = paw.newElement('div', 'Slide0'+(i+1), {class: 'slide'});
+            let slide = paw.newElement('div', '', {class: 'slide'});
 
             // Insert background image
             slide.style.backgroundImage = "url(" + imgPath + ")";
@@ -41,6 +48,10 @@ class Carrousel{
         // Create left and right buttons
         let left = paw.newElement('button', '<', {class: 'btn_left'});
         let right = paw.newElement('button', '>', {class: 'btn_right'});
+
+        // 
+        // TODO Create progress bar
+        // 
 
         // Handle clicks
         left.addEventListener('click', () => {
@@ -64,6 +75,14 @@ class Carrousel{
             }
         });
 
+        // Handle swipe
+        window.addEventListener('load', () => {
+            let dir = swipeDetect(slidesContainer);
+            console.log(dir);
+            moveSlider(dir);
+        });
+
+        // Connect everything
         container.appendChild(slidesContainer);
         container.appendChild(dotsContainer);
         container.appendChild(left);
@@ -80,6 +99,85 @@ class Carrousel{
         // setTimeout('changeImage()', time);
         //     return element;
         // }
+
+        function swipeDetect(targetElement){
+
+            let swipeDir;
+
+            // To calculate direction
+            let startX, startY, distX, distY;
+            
+            // Min distance to cover for being a swipe
+            let thresh = 100; 
+
+            // Max dist to cover in perpendicular dir to thresh
+            let max_dist = 100; 
+
+            // Time when finger was pressed
+            let startTime;
+            
+            // Time elapsed since finger was pressed
+            let elapsedTime;
+            
+            // Upper limit for elapsed time since finger was pressed
+            let flightTime = 10000;
+            
+            // Handle finger press
+            targetElement.addEventListener('touchstart', function (e){
+                e.preventDefault;
+
+                let touched = e.changedTouches[0];
+                console.log('TOUCHSTART:',touched);
+
+                // Init everything
+                swipeDir = 'none';
+                startX = touched.pageX;
+                startY = touched.pageY;
+                startTime = new Date().getTime();
+
+            }, false);
+
+            // Avoid swipe-scrolling
+            targetElement.addEventListener('touchmove', function(e){
+                e.preventDefault;
+            }, false);
+
+            // Handle figner lift
+            targetElement.addEventListener('touchend', function(e){
+                e.preventDefault;
+
+                let touched = e.changedTouches[0];
+                // ! remove later
+                console.log('TOUCHEND:', touched);
+
+                // Calculate swipe distance
+                distX = touched.pageX - startX;
+                distY = touched.pageY - startY;
+
+                // Get swiping time duration 
+                elapsedTime = new Date().getTime() - startTime;
+
+                // If swiping time is not too long
+                if(elapsedTime <= flightTime){
+                    
+                    // Is it a horizontal swipe?
+                    if(Math.abs(distX) >= thresh && Math.abs(distY) <= max_dist){
+
+                        // Change '>' for '<' to go against every rationale sense 
+                        // and invert swipe directions jajaj
+                        swipeDir = (distX > 0) ? 'left' : 'right';
+                        
+                        moveSlider(swipeDir);
+                    }
+                    // else it's a vertical swap and we don't care 
+                    // but we comment the case porlasdú
+                    // else if(Math.abs(distY) >= thresh && Math.abs(distX) <= thresh){
+                    //     swipeDir = (distY < 0) ?  'up' : 'down';
+                    //     console.log(swipeDir);
+                    // }
+                }
+            }, false);
+        }
 
         function setIndex(pIndex){
             index = Number(pIndex);
@@ -106,23 +204,14 @@ class Carrousel{
             let devWidth = carContainer.offsetWidth;
             let devHeight = carContainer.offsetHeight;
 
-            console.log(devWidth);
-            console.log(- (index * devWidth)+'px')
-            slidesContainer.style.marginLeft = -(index * devWidth)+'px';
-            // slidesContainer.animate([
-            //     {marginLeft: -(index * devWidth)+'px'},
-            //     {opacity: .4},
-            //     {opacity: 1}
-            // ],{
-            //     duration: 1250,
-            // });
+            slidesContainer.classList.add('partial_opacity');
+            slidesContainer.style.marginLeft = -(index * 2 * devWidth)+'px';
+            slidesContainer.classList.add('full_opacity');
+            // slidesContainer.classList.remove('partial_opacity');
+            // slidesContainer.classList.remove('full_opacity');
 
             console.log(index);
         }
 
     }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    let carrousel = new Carrousel('main > section', 3, '/assets/img/carrousel_');
-})

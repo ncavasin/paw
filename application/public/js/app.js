@@ -3,10 +3,10 @@ class App{
     constructor(){
         // Load main menu functionality
         document.addEventListener('DOMContentLoaded', () => { 
-            paw.loadScript('MainMenu', '/js/components/mainMenu.js', () => {
+            paw.loadScript('MainMenu', '/js/components/MainMenu.js', () => {
                 let mainMenu = new MainMenu("nav");
             })
-            paw.loadScript('subMenu', '/js/components/subMenu.js', () => {
+            paw.loadScript('SubMenu', '/js/components/SubMenu.js', () => {
                 let subMenu = new SubMenu("nav ul li");
             })
             paw.loadScript('FetchApi', '/js/components/FetchApi.js', () => {

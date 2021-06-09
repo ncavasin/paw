@@ -28,7 +28,7 @@
     color: black;
     background-size: 100%;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 20%;
 }
 
 .btn_left, .btn_right{
@@ -84,3 +84,15 @@
     margin-right: .1rem
 }
  
+.partial_opacity{
+    opacity: .4;
+    transform: skew(45deg, 0deg);
+    transition: all 1s;
+}
+
+.full_opacity{
+    opacity: 1;
+    transform: none;
+    transition: all 1s;
+}
+

@@ -7,7 +7,8 @@
     ?>
     <link rel="stylesheet" type='text/css' href="assets/css/index.css" />
     <link rel="stylesheet" type='text/css' href="assets/css/botones.css" />
-    <script src="/js/components/carrousel.js"></script>
+    <link rel="stylesheet" type='text/css' href="/assets/css/carrousel.css"/>
+    <script src="/js/components/Carrousel.js"></script>
 </head>
 
 <body>
