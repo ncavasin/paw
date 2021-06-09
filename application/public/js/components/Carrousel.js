@@ -1,15 +1,11 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     let carrousel = new Carrousel('main > section', 3, '/assets/img/carrousel_');
-    let swipeDetector = new SwipeDetector();
 })
 
 
 class Carrousel{
     constructor(pContainer, qtyImgs, basePath){
-
-        // First load image
-        // window.onload = changeImage;
 
         // Handles display and image's prefix
         let index = 0;
@@ -36,7 +32,7 @@ class Carrousel{
             slidesContainer.appendChild(slide);
 
             // Create a dot per image with proper class and id asignation
-            let dot = paw.newElement('button', '', {class: 'dot', id: i});
+            let dot = paw.newElement('button', '', {class: 'dot', id: 'dot'+i});
 
             // Handle click on dot
             dot.addEventListener('click', () => {
@@ -46,8 +42,11 @@ class Carrousel{
         }
 
         // Create left and right buttons
-        let left = paw.newElement('button', '<', {class: 'btn_left'});
-        let right = paw.newElement('button', '>', {class: 'btn_right'});
+        let left = paw.newElement('button', '<', {class: 'btn_left btn_inactive', id:'button_left'});
+        let right = paw.newElement('button', '>', {class: 'btn_right btn_inactive', id: 'button_right'});
+
+        // Create progress bar
+        let progress = paw.newElement('progess', '', {class: 'progress', id: 'pgBar', minValue: '0', maxValue: '100'});
 
         // 
         // TODO Create progress bar
@@ -77,9 +76,7 @@ class Carrousel{
 
         // Handle swipe
         window.addEventListener('load', () => {
-            let dir = swipeDetect(slidesContainer);
-            console.log(dir);
-            moveSlider(dir);
+            swipeDetect(slidesContainer);
         });
 
         // Connect everything
@@ -87,6 +84,7 @@ class Carrousel{
         container.appendChild(dotsContainer);
         container.appendChild(left);
         container.appendChild(right);
+        container.appendChild(progress);
 
         // function defineSizes(element, outContainer){
         // Get container's actual size
@@ -102,6 +100,7 @@ class Carrousel{
 
         function swipeDetect(targetElement){
 
+            // Swipe direction
             let swipeDir;
 
             // To calculate direction
@@ -111,7 +110,7 @@ class Carrousel{
             let thresh = 100; 
 
             // Max dist to cover in perpendicular dir to thresh
-            let max_dist = 100; 
+            let maxDist = 100; 
 
             // Time when finger was pressed
             let startTime;
@@ -147,8 +146,7 @@ class Carrousel{
                 e.preventDefault;
 
                 let touched = e.changedTouches[0];
-                // ! remove later
-                console.log('TOUCHEND:', touched);
+                // console.log('TOUCHEND:', touched);
 
                 // Calculate swipe distance
                 distX = touched.pageX - startX;
@@ -161,7 +159,7 @@ class Carrousel{
                 if(elapsedTime <= flightTime){
                     
                     // Is it a horizontal swipe?
-                    if(Math.abs(distX) >= thresh && Math.abs(distY) <= max_dist){
+                    if(Math.abs(distX) >= thresh && Math.abs(distY) <= maxDist){
 
                         // Change '>' for '<' to go against every rationale sense 
                         // and invert swipe directions jajaj
@@ -171,7 +169,7 @@ class Carrousel{
                     }
                     // else it's a vertical swap and we don't care 
                     // but we comment the case porlasdú
-                    // else if(Math.abs(distY) >= thresh && Math.abs(distX) <= thresh){
+                    // else if(Math.abs(distY) >= maxDist && Math.abs(distX) <= thresh){
                     //     swipeDir = (distY < 0) ?  'up' : 'down';
                     //     console.log(swipeDir);
                     // }
@@ -179,30 +177,109 @@ class Carrousel{
             }, false);
         }
 
+        function GetImageLoader(){
+
+            // Dic to hold images
+            let imageLoader = {}
+
+            imageLoader['LoadImage'] = function (imageUrl, progressUpdateCallback) {
+                return new Promise((resolve), (reject) => {
+                    let xhr = new XMLHttpRequest();
+
+                    // Create an async request for the image
+                    xhr.open('GET', imageUrl, true);
+
+                    // Store response as an array
+                    xhr.responseType = 'arraybuffer';
+
+                    // Handle download progress
+                    xhr.onprogress = function(e){
+                        // Check lower limit
+                        if(e.lengthComputable){
+                            progressUpdateCallback(parseInt((e.loaded / e.total) * 100));
+                        }
+                    };
+
+
+                    // Handle full download
+                    xhr.onloadend = function(e){
+                        progressUpdateCallback(100);
+                        let options = {};
+                        let headers = xhr.getAllResponseHeaders();
+
+                        // Filter header
+                        let typeMatch = xhr.match(/^Content-Type\:\s*(.*?)$/mi);
+
+                        // Verify it exists and has and an image in the second place
+                        if(typeMatch && typeMatch[1]){
+                            options.type = typeMatch[1];
+                        }
+
+                        // Create the binary-large-object
+                        let blob = new Blob([this.response], options);
+
+                        resolve(window.URL.createObjectURL(blob));
+                    };
+
+                    // Issue the async HTTP request
+                    xhr.send();
+                });
+            }
+            return imageLoader;
+        }
+
+        let img = document.getElementById('slide0');
+        let pgBar = document.getElementById('pgBar');
+        let imgLoader = GetImageLoader();
+
+        function updateProgress(progress){
+            pgBar.value = progress;
+        }
+
+        imgLoader.LoadImage('/assets/img/carrousel_0.jpg', updateProgress)
+                .then(img => {
+                    img.src = img;
+                });
+
         function setIndex(pIndex){
-            index = Number(pIndex);
-            checkLimits();
+            if (pIndex > index){
+                moveSlider('right');
+            }else{
+                moveSlider('left');
+            }
         }
 
         function moveSlider(direction){
-            index += (direction === 'right') ? 1 : - 1;
-            checkLimits();
-        }
 
-        function checkLimits(){
+            // Remove active dot and btn
+            let dot = document.getElementById('dot'+index);
+            dot.classList.remove('dot_active');
+
+            // let btn = document.getElementById('button_'+direction);
+            // console.log(btn);
+
+            // Update index
+            index += (direction === 'right') ? 1 : - 1;
+
             // Check upper limit
             index = (index >= qtyImgs) ? 0 : index;
 
             // Check lower limit
             index = (index < 0 ) ? qtyImgs-1 : index;
 
+            // Update active dot
+            dot = document.getElementById('dot'+index);
+            dot.classList.add('dot_active');
+
+            // btn = document.getElementById('button_'+direction);
+            // btn.classList.add('btn_active');
+            
             // Get the slides container
             let slidesContainer = document.getElementsByClassName('slides_container').item(0);
             
             // Get container's actual size
-            let carContainer = document.getElementsByClassName('car_container').item(0);
-            let devWidth = carContainer.offsetWidth;
-            let devHeight = carContainer.offsetHeight;
+            let devWidth = container.offsetWidth;
+            let devHeight = container.offsetHeight;
 
             slidesContainer.classList.add('partial_opacity');
             slidesContainer.style.marginLeft = -(index * 2 * devWidth)+'px';
