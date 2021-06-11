@@ -19,7 +19,7 @@ input{
     background-color: white;
     height: 3rem;
     border-radius: 20px;
-    border: 1.5px solid var(--gris);
+    border: 1px solid var(--gris);
     font-size: large;
     padding-left: 2ch;
 }
@@ -27,12 +27,4 @@ input{
 input:placeholder-shown{
     padding-left: 2ch;
     font-size: large;
-}
-
-.file {
-    border: none;
-    border-radius: 0;
-    justify-items: center;
-    background-color: transparent;
-    margin-top: .5rem;
 }

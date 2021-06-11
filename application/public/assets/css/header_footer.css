@@ -15,7 +15,7 @@ a{
     color: white;
 }
 
-header{
+.header_container{
     background-color: white;
     position: sticky;
     top: 0;
@@ -88,9 +88,9 @@ nav{
     margin-left: 1.5rem;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 481px) {
 
-    header{
+    .header_container{
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
         grid-template-areas: 
@@ -98,7 +98,7 @@ nav{
                             "nav";
     }
 
-    header > ul {
+    .header_container > ul {
         grid-area: opciones;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -107,7 +107,7 @@ nav{
         font-size: smaller;
     }
 
-    header > ul > li > a{
+    .header_container > ul > li > a{
         text-decoration: none;
     }
 
@@ -171,10 +171,12 @@ footer{
                         "rrss"
                         "dir"
                         "marca";
-    padding: 2rem 1rem 2rem 1rem;
+    padding: 1rem .5rem 0 .5rem;
 }
 
-footer > address{
+address{
+    justify-self: center;
+    text-align: center;
     grid-area: dir;
     display: grid;
     grid-template-columns: 1fr;
@@ -186,29 +188,44 @@ footer > address{
     background-color: rgba(var(--azul),  .25);
 }
 
+address > p{
+    margin: .5rem 0;
+}
 
-footer > small{
+
+small{
     grid-area: marca;
-    justify-self: left;
+    justify-self: center;
     align-self: flex-end;
     font-size: smaller;
-    font-weight: bolder;    
+    font-weight: bolder;
+    margin: .5rem 0;
+    text-align: center;
 }
 
 footer > ul{
     grid-area: rrss;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-    justify-content: center;
-    align-content: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 3rem;
+    justify-items: center;
+    align-items: center;
 }
 
 footer > ul > li{
     padding: 0 .5rem 0 .5rem;
 }
 
-.gg-instagram, .gg-facebook, .gg-mail{
+footer > ul > li > a{
+    width: 100%;
+}
+
+footer > ul > li > a:hover,
+footer > ul > li > a > i:hover{
+    background-color: white;
+    color: var(--azul);
+}
+.gg-instagram, .shape_facebook, .shape_mail{
     color: white;
 }
 

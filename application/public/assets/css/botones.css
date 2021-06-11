@@ -28,3 +28,8 @@
     background-color: var(--azul);
     color: white;
 }
+
+
+.limpiar, .main_button{
+    padding-left: 0;
+}

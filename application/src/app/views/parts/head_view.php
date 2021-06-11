@@ -7,7 +7,6 @@
 <link rel="stylesheet" type='text/css' href="/assets/css/reset.css"/>
 
 <link rel="stylesheet" type='text/css' href="/assets/css/header_footer.css"/>
-<link rel="stylesheet" type='text/css' href="/assets/css/main_menu.css"/>
 <link rel="stylesheet" type='text/css' href="/assets/css/main.css"/>
 <link rel="icon" type="image/png" href="/assets/img/favicon.png">
 

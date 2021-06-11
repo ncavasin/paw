@@ -3,7 +3,6 @@
 
 <head>
     <?php require $viewsDir . 'parts/head_view.php' ?>
-    <link rel="stylesheet" type='text/css' href="assets/css/main.css"/>
 </head>
 
 <body>

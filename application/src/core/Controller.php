@@ -60,10 +60,10 @@ class Controller {
                 'href' => 'https://www.instagram.com/dentalmedicalgroup',
                 'name' => 'instagram'
             ],
-            [
-                'href' => 'https://www.linkedin.com/dentalmedicalgroup',
-                'name' => 'linkedin'
-            ],
+            // [
+            //     'href' => 'https://www.linkedin.com/dentalmedicalgroup',
+            //     'name' => 'linkedin'
+            // ],
             [
                 'href' => 'mailto:contacto@dentalmedicalgroup.com',
                 'name' => 'mail'

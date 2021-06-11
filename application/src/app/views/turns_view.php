@@ -12,6 +12,7 @@
     <link rel="stylesheet" type='text/css' href="assets/css/turnos.css" />
     <link rel='stylesheet' type='text/css' href='assets/css/notification.css' />
     <link rel='stylesheet' type='text/css' href='assets/css/botones.css' />
+    <script src="/js/components/DragAndDrop.js"></script>
 </head>
 
 <body>
@@ -28,68 +29,26 @@
                     <label for="especialidad">Especialidad</label>
                     <input list="especialidad-lista" id="especialidad" name="especialidad" placeholder="Kinesiología" autocomplete="off" autofocus tabindex="1" />
 
-                    <!-- ahora se obtiene por medio de JS 
-                            <datalist id="especialidad-lista">
-                            <option value="Audiometría">
-                            <option value="Cardiología">
-                            <option value="Densitometría">
-                            <option value="Ecografía Doppler">
-                        </datalist> -->
-
                     <label for="especialista">Especialista</label>
                     <input list="especialista-lista" id="especialista" name="especialista" placeholder="Fulano" autocomplete="off" tabindex="2" />
 
-                    <!-- ahora se obtiene por medio de JS
-                             <datalist id="especialista-lista">
-                            <option value="Fulano">
-                            <option value="Mengano">
-                            <option value="Sultan">
-                            <option value="Juan Doe">
-                        </datalist> -->
-
-                    <!-- ahora se devuelven todos los turnos disponibles 
-                            <label for="dia">Dia</label>
-                        <input type="date" id="dia" name="dia" 
-                        required 
-                        min=<?php
+                        <!-- <?php
                             echo date('Y-m-d', time());
-                            ?>
-                        max=<?php
+                        ?>
+                        <?php
                             echo date('Y-m-d', strtotime(' +1 week'));
-                            ?>
-                        tabindex="3"/> -->
+                        ?> -->
 
-                    <label for='orden_medica'>Orden Médica (*)</label>
-                    <input type="file" name='orden_medica' class="file" required accept="application/pdf" tabindex="4" />
+                    <label for='orden_medica' id='label_orden' class='label_orden'>Orden Médica
+                        <input type="file" id='orden_medica' class="orden_medica input_hidden"
+                                name='orden_medica' 
+                                required accept="application/pdf" 
+                                tabindex="4" 
+                        />
+                    </label>
+                    <input type="reset" form="form-turnos" name="reset" value="Limpiar" class="limpiar"/>
                 </fieldset>
-                <!-- <input type="reset" form="form-turnos" name="reset" value="Limpiar" class="limpiar" />
-                <input type="submit" form="form-turnos" name="reservar" value="Reservar" class="main_button" /> -->
             </form>
-            <!-- <h2>TURNOS DISPONIBLES</h2>
-                <table>
-                    <colgroup>
-                        <col>
-                        <col>
-                        <col>
-                        <col>
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th>Especialidad</th><th>Especialista</th><th>Fecha</th><th>Hora</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="especialidad">Resonancia</td>
-                            <td class="especialista">Fulano</td>
-                            <td class="fecha">16/04/2021</td>
-                            <td class="hora">16:30</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                
-                 -->
         </section>
     </main>
 

@@ -7,7 +7,6 @@
     ?>
     <link rel="stylesheet" type='text/css' href="assets/css/index.css" />
     <link rel="stylesheet" type='text/css' href="assets/css/botones.css" />
-    <link rel="stylesheet" type='text/css' href="/assets/css/carrousel.css"/>
     <script src="/js/components/Carrousel.js"></script>
 </head>
 
@@ -16,8 +15,7 @@
     require 'parts/header_view.php';
     ?>
     <main>
-        <section>
-            <!-- <h2>CARROUSEL</h2> -->
+        <section id='carrousel'>
         </section>
         <section>
             <h2>NUESTROS SERVICIOS</h2>
