@@ -1,20 +1,10 @@
 :root{
-    --enter: blue;
-    --exit: yellow;
-    --dropped: #888;
+    --enter: #d3dde8;
+    --dropped: #b3d1f2;
     --min-width: 481px;
 }
 
 @media (min-width: 481px){
-
-    .drop_zone_container{
-        display: flex;
-        flex-flow: column;
-        border: 2px dashed var(--gris);
-        border-radius: 10px;
-        width: 100%;
-        height: 40vh;
-    }
 
     .drop_zone{
         text-align: center;
@@ -22,20 +12,31 @@
         transition: all .25s;
     }
 
-    .dragdrop{
+    .drag_drop{
         background-color:var(--azul);
     }
     .drag_enter{
         background-color: var(--enter);
     }
 
-    .drag_leave{
-        background-color: var(--exit);
+    .dropped_file{
+        font-size: small;
+        font-style: italic;
+        margin: 1rem 0;
     }
 
-    .dropped{
-        background-color: var(--dropped);
+    .dropped_file::before{
+        content: 'Archivo: ';
     }
+
+    .drop_container{
+        text-align: center;
+        background-color: var(--dropped);
+        border: 1px solid var(--gris);
+        border-radius: 25px;
+        transition: all .5s;
+    }
+    
 }
 
 

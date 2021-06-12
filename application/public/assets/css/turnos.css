@@ -50,9 +50,7 @@
     align-self: flex-end;
 }
 
-
-
- @media (min-width: 481px){
+@media (min-width: 481px){
 
     .limpiar{
         margin-top: 2rem;
@@ -61,7 +59,7 @@
     .label_orden{
         cursor: pointer;
         text-align: center;
-        height: 8rem;
+        height: 25vh;
         background-color: white;
         border-radius: var(--border_value);
         border: 2px dashed var(--gris);
