@@ -59,13 +59,13 @@ ul .button:hover{
 @media (min-width: 480px){
 
     section ul li{
-        margin: 4rem 0;
+        margin: 2rem 0;
     }
 
     h3 > a{
         padding-top: 5%;
         padding-bottom: 5%;
-        font-size: xx-large;
+        font-size: larger;
     }
 
 }

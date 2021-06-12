@@ -1,0 +1,186 @@
+@import url('https://css.gg/css?=|facebook|instagram|mail');
+
+:root{
+    --min_width: 481px;
+}
+
+*{
+    list-style: none;
+    text-decoration: none;
+}
+
+body{
+    min-height: 100vh;
+    width: 100%;
+    line-height: 1.25; 
+}
+
+a{
+    color: white;
+}
+
+/* inicio de preheader */
+header{
+    background-color: white;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+.telefono{
+    display: none;
+    text-align: left;
+    justify-self: center;
+    align-self: left;
+    color: var(--azul);
+}
+
+.menu_user{
+    display: flex;
+    flex-flow: row-reverse;
+    justify-content: right;
+    font-size: smaller;
+}
+
+.menu_user li{
+    margin-top: .25rem;
+    margin-bottom: .25rem;
+}
+
+.user_opt{
+    color: var(--azul);
+    padding: .25rem .25rem .25rem .25rem;
+    text-decoration: underline;
+}
+/* fin de preheader */
+
+/* inicio header */
+nav{
+    grid-area: nav;
+    text-align: left;
+    padding: .5rem 0 .5rem 0;
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: 
+                        "logo hamburguesa"
+                        "main main";
+    background-color: var(--azul);
+    
+    position: sticky;
+}
+
+
+/* forma de paralelograma */
+.logotipo::before{
+    width: .8rem;
+    height: 2.5rem;
+    background-color: white;
+    content: '';
+    transform: skew(25deg);
+    margin-right: 1rem;
+    text-align: center;
+    float: left;
+}
+
+.logotipo{
+    text-align: left;
+    font-weight: 900;
+    grid-area: logo;
+    justify-self: left;
+    align-self: center;
+    margin-left: 1.5rem;
+}
+/* fin header */
+
+
+@media (min-width: 481px) {
+
+    header{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        grid-template-areas: 
+                            "opciones"
+                            "nav";
+    }
+
+    header > ul {
+        grid-area: opciones;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas:
+                            "tel entrar registrarse";
+        font-size: smaller;
+    }
+
+    header > ul > li > a{
+        text-decoration: none;
+    }
+
+    .telefono{
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        grid-area: tel;
+        justify-self: left;
+        align-self: center;
+        text-align: center;
+        padding: .25rem .75rem .25rem 1rem;
+        margin-right: 3rem;
+        width: auto;
+    }
+
+    /* efecto entrar y registrarse */
+    header > a:first-of-type:hover, header > ul > li > a:hover{
+        background-color: var(--azul);
+        color: white;
+        font-weight: bolder;
+    }
+
+    nav{
+        grid-area: nav;
+        display: grid;
+        grid-template-columns: .5fr 1fr;
+        grid-template-areas: 
+                            "logo hamburguesa opciones";
+    }
+
+    .logotipo{
+        grid-area: logo;
+        justify-self: left;
+    }
+
+    .main_menu_desktop{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .main_menu_opt{
+        justify-content: center;
+        align-content: center;
+    }
+    
+    .main_menu_opt{
+        text-align: center;
+    }
+
+    .main_menu_opt:hover{
+        background-color: white;
+        color: var(--azul);
+        transition: .5s;
+    }
+    
+    .main_menu_abrir{
+        grid-area: opciones;
+        justify-self: stretch;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 2rem;
+    }
+}
+
+
