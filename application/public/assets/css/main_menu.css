@@ -1,3 +1,7 @@
+:root{
+    --min-width: 481px;
+}
+
 .hamburguesa{
     background-color: var(--azul);
     border: none;
@@ -119,8 +123,9 @@ li{
     transition-duration: .5s;
 }
 
-@media (min-width: 480px) {
-
+@media (min-width: 481px) {
+    
+    .hamburguesa,
     .main_menu_abierto,
     .sub_menu_list,
     .sub_menu_list_item,

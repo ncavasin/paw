@@ -1,6 +1,28 @@
+// After loading, keep listening for window resize 
+document.addEventListener('DOMContentLoaded', (e) => {
+    
+    // Add media query to be responsive
+    let min_width = getComputedStyle(document.documentElement).getPropertyValue(
+        "--min-width"
+    );
+    const mqIsDesktop = window.matchMedia('(min-width:'+min_width+')');
+
+    mqIsDesktop.addEventListener("change", (e) => {
+        if (! e.matches) {
+            console.log("MAINMENU::DESKTOP");
+            // undoAll();
+        }
+    });
+});
+
 class MainMenu {
 
     constructor(pContainer) {
+
+        // Load css
+        let css = paw.newElement('link', '', {rel: 'stylesheet', href:'assets/css/main_menu.css'});
+        document.head.appendChild(css);
+
         // Find received element
         let container = pContainer.tagName ? pContainer : document.querySelector(pContainer);
 
@@ -8,12 +30,9 @@ class MainMenu {
         let button = paw.newElement(
             "button",
             "☰",
-            { class: 'hamburguesa'},
-            //{ click: "console.log('click');"}
+            { class: 'hamburguesa'}
         );
 
-        let css = paw.newElement('link', '', {rel: 'stylesheet', href:'assets/css/main_menu.css'});
-        document.head.appendChild(css);
 
         let ul = document.querySelector("nav ul");
 

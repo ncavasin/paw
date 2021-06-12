@@ -1,4 +1,4 @@
-@import url('https://css.gg/css?=|facebook|instagram|log-in|log-out|mail|menu');
+@import url('https://css.gg/css?=|facebook|instagram|mail');
 
 *{
     list-style: none;
@@ -15,7 +15,7 @@ a{
     color: white;
 }
 
-.header_container{
+header{
     background-color: white;
     position: sticky;
     top: 0;
@@ -90,7 +90,7 @@ nav{
 
 @media (min-width: 481px) {
 
-    .header_container{
+    header{
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
         grid-template-areas: 
@@ -98,7 +98,7 @@ nav{
                             "nav";
     }
 
-    .header_container > ul {
+    header > ul {
         grid-area: opciones;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -107,7 +107,7 @@ nav{
         font-size: smaller;
     }
 
-    .header_container > ul > li > a{
+    header > ul > li > a{
         text-decoration: none;
     }
 
@@ -152,12 +152,6 @@ nav{
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 2rem;
     }
-
-    /* escondo hamburguesa */
-    .hamburguesa{
-        display: none;
-    }
-
 }
 
 footer{

@@ -1,17 +1,24 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-    let carrousel = new Carrousel('main > section', 3, '/assets/img/carrousel_');
+    let carrousel = new Carrousel('carrousel', 3, '/assets/img/carrousel_');
 })
 
 
 class Carrousel{
     constructor(pContainer, qtyImgs, basePath){
 
+        // Load css
+        let css = paw.newElement("link", "", {
+            rel: "stylesheet",
+            href: "assets/css/carrousel.css",
+        });
+        document.head.appendChild(css);
+
         // Handles display and image's prefix
         let index = 0;
 
-        // Get the container (first section of main)
-        let container = document.querySelectorAll(pContainer).item(0);
+        // Get the element
+        let container = document.getElementById(pContainer);
         container.classList.add('car_container');
 
         // Create a container to hold every slide (aka image)
@@ -25,7 +32,7 @@ class Carrousel{
 
             // Create a div per image and store the path of the image in 'background'
             let imgPath = basePath + i.toString() + ".jpg";
-            let slide = paw.newElement('div', '', {class: 'slide'});
+            let slide = paw.newElement('div', '', {class: 'slide', id:'slide'+i});
 
             // Insert background image
             slide.style.backgroundImage = "url(" + imgPath + ")";
@@ -45,12 +52,10 @@ class Carrousel{
         let left = paw.newElement('button', '<', {class: 'btn_left btn_inactive', id:'button_left'});
         let right = paw.newElement('button', '>', {class: 'btn_right btn_inactive', id: 'button_right'});
 
-        // Create progress bar
-        let progress = paw.newElement('progess', '', {class: 'progress', id: 'pgBar', minValue: '0', maxValue: '100'});
-
+        
         // 
         // TODO Create progress bar
-        // 
+        const pgBar = paw.newElement('progess', '', {class: 'progress', id: 'pgBar', minValue: '0', maxValue: '100'}); 
 
         // Handle clicks
         left.addEventListener('click', () => {
@@ -84,7 +89,7 @@ class Carrousel{
         container.appendChild(dotsContainer);
         container.appendChild(left);
         container.appendChild(right);
-        container.appendChild(progress);
+        container.appendChild(pgBar);
 
         // function defineSizes(element, outContainer){
         // Get container's actual size
@@ -177,13 +182,14 @@ class Carrousel{
             }, false);
         }
 
+        
         function GetImageLoader(){
 
             // Dic to hold images
             let imageLoader = {}
 
             imageLoader['LoadImage'] = function (imageUrl, progressUpdateCallback) {
-                return new Promise((resolve), (reject) => {
+                return new Promise((resolve, reject) => {
                     let xhr = new XMLHttpRequest();
 
                     // Create an async request for the image
@@ -208,7 +214,8 @@ class Carrousel{
                         let headers = xhr.getAllResponseHeaders();
 
                         // Filter header
-                        let typeMatch = xhr.match(/^Content-Type\:\s*(.*?)$/mi);
+                        // Check regex at https://regexr.com/5vnl9
+                        let typeMatch = headers.match(/^Content-Type\:\s*(image\/.*?)$/gim);
 
                         // Verify it exists and has and an image in the second place
                         if(typeMatch && typeMatch[1]){
@@ -228,8 +235,7 @@ class Carrousel{
             return imageLoader;
         }
 
-        let img = document.getElementById('slide0');
-        let pgBar = document.getElementById('pgBar');
+        let slide = document.getElementById('slide0');
         let imgLoader = GetImageLoader();
 
         function updateProgress(progress){
@@ -237,9 +243,10 @@ class Carrousel{
         }
 
         imgLoader.LoadImage('/assets/img/carrousel_0.jpg', updateProgress)
-                .then(img => {
-                    img.src = img;
-                });
+            .then(image => {
+                slide.style.backgroundImage = image;
+            });
+        
 
         function setIndex(pIndex){
             if (pIndex > index){
