@@ -1,5 +1,9 @@
 @import url('https://css.gg/css?=|facebook|instagram|mail');
 
+:root{
+    --min_width: 481px;
+}
+
 *{
     list-style: none;
     text-decoration: none;
@@ -88,6 +92,7 @@ nav{
     margin-left: 1.5rem;
 }
 
+
 @media (min-width: 481px) {
 
     header{
@@ -119,9 +124,9 @@ nav{
         justify-self: left;
         align-self: center;
         text-align: center;
-        font-size: smaller;
         padding: .25rem .75rem .25rem 1rem;
         margin-right: 3rem;
+        width: auto;
     }
 
     /* efecto entrar y registrarse */
@@ -144,6 +149,28 @@ nav{
         justify-self: left;
     }
 
+    .main_menu_desktop{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .main_menu_opt{
+        justify-content: center;
+        align-content: center;
+    }
+    
+    .main_menu_opt > a{
+        text-align: center;
+        padding: .5rem;
+    }
+
+    .main_menu_opt > a:hover{
+        background-color: white;
+        color: var(--azul);
+        transition: .5s;
+    }
     
     .main_menu_abrir{
         grid-area: opciones;
