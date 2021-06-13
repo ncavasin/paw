@@ -37,7 +37,7 @@ h3 > a{
     padding: 1rem 0;
 }
 
-h3, a{
+.servicio{
     display: inline-block;
     width: 85%;
 }
