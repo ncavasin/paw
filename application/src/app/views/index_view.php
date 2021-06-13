@@ -21,19 +21,19 @@
             <h2>NUESTROS SERVICIOS</h2>
             <ul>
                 <li>
-                    <h3><a href="services/audiologia" target="_self" class='button'>Audiología</a></h3>
+                    <h3><a href="services/audiologia" target="_self" class='button servicio'>Audiología</a></h3>
                 </li>
                 <li>
-                    <h3><a href="services/cardiologia" target="_self" class='button'>Cardiología</a></h3>
+                    <h3><a href="services/cardiologia" target="_self" class='button servicio'>Cardiología</a></h3>
                 </li>
                 <li>
-                    <h3><a href="services/densitometria" target="_self" class='button'>Densitometría</a></h3>
+                    <h3><a href="services/densitometria" target="_self" class='button servicio'>Densitometría</a></h3>
                 </li>
                 <li>
-                    <h3><a href="services/ecografia_doppler" target="_self" class='button'>Ecografía Doppler</a></h3>
+                    <h3><a href="services/ecografia_doppler" target="_self" class='button servicio'>Ecografía Doppler</a></h3>
                 </li>
                 <li>
-                    <h3><a href="services" target="_self" class='button'>Ver más</a></h3>
+                    <h3><a href="services" target="_self" class='button servicio'>Ver más</a></h3>
                 </li>
             </ul>
         </section>
