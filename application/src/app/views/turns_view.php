@@ -3,10 +3,8 @@
 
 <head>
     <?php
-
-    use const Paw\core\database\FILE_SIZE_MAX;
-
-    require 'parts/head_view.php'
+        use const Paw\core\database\FILE_SIZE_MAX;
+        require 'parts/head_view.php'
     ?>
     <link rel="stylesheet" type='text/css' href="assets/css/form.css" />
     <link rel="stylesheet" type='text/css' href="assets/css/turnos.css" />
@@ -25,33 +23,24 @@
         <section>
             <h2>BÚSQUEDA DE TURNOS</h2>
             <form action="" method="POST" id="form-turnos" target="_self" enctype="multipart/form-data">
-                <fieldset>
+                <fieldset id='fieldset-inputs'>
                     <label for="especialidad">Especialidad</label>
-                    <input list="especialidad-lista" id="especialidad" name="especialidad" placeholder="Kinesiología" autocomplete="off" autofocus tabindex="1" />
-
+                    <input list="especialidad-lista" id="especialidad" name="especialidad" placeholder="Kinesiología" autocomplete="off" autofocus/>
                     <label for="especialista">Especialista</label>
-                    <input list="especialista-lista" id="especialista" name="especialista" placeholder="Fulano" autocomplete="off" tabindex="2" />
-
-                        <!-- <?php
-                            echo date('Y-m-d', time());
-                        ?>
-                        <?php
-                            echo date('Y-m-d', strtotime(' +1 week'));
-                        ?> -->
-
+                    <input list="especialista-lista" id="especialista" name="especialista" placeholder="Fulano" autocomplete="off"/>
                     <label for='orden_medica' id='label_orden' class='label_orden'>Orden Médica
                         <input type="file" id='orden_medica' class="orden_medica input_hidden"
                                 name='orden_medica' 
-                                required accept="application/pdf" 
-                                tabindex="4" 
+                                accept="application/pdf" 
                         />
                     </label>
-                    <input type="reset" form="form-turnos" name="reset" value="Limpiar" class="limpiar"/>
+                </fieldset>
+                <fieldset id='fieldset-buttons'>
+                    <input id='reset' type="reset" form="form-turnos" name="reset" value="Limpiar" class="limpiar"/>
                 </fieldset>
             </form>
         </section>
     </main>
-
     <?php
     require 'parts/footer_view.php';
     ?>

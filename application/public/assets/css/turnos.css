@@ -45,17 +45,14 @@
     border-radius: 0;
 }
 
-/* hereda de botones.css y modifica posicion*/
-.limpiar{
-    align-self: flex-end;
+#fieldset-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (min-width: 481px){
-
-    .limpiar{
-        margin-top: 2rem;
-    }
-
     .label_orden{
         cursor: pointer;
         text-align: center;

@@ -18,7 +18,7 @@ class TurnosController extends Controller{
         $isValid = true;
         $titulo = 'Mis turnos';
 
-        #echo '<pre>'; var_dump($_FILES);die;
+        echo '<pre>'; var_dump($_POST);die;
 
         if (empty($_FILES)) {
             $notification_text = 'Falta completar la orden medica (Documento PDF)';

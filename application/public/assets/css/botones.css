@@ -5,15 +5,21 @@
     background-color: var(--azul);
     color: white;
     border: 1px solid white;
-    width: 10rem;
+    min-width: 10rem;
+    margin: 2rem;
 }
 
-.main_button:hover{
+.main_button[disabled] {
+    background-color: var(--gris);
+}
+
+.main_button:not([disabled]):hover{
     transition: var(--transition_time);
     color: var(--azul);
     background-color: white;
     border: 1px var(--azul) solid;
     padding: 0 .125rem 0 .125rem;
+    cursor: pointer
 }
 
 .limpiar{
@@ -21,12 +27,14 @@
     color: var(--azul);
     border: 1px solid var(--azul);
     border-radius: 10px;
+    margin: 2rem
 }
 
 .limpiar:hover{
     transition: var(--transition_time);
     background-color: var(--azul);
     color: white;
+    cursor: pointer
 }
 
 
