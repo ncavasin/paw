@@ -1,9 +1,8 @@
 // After loading, initiate script and keep listening for window resize 
-document.addEventListener('DOMContentLoaded', (e) => {
+/* document.addEventListener('DOMContentLoaded', (e) => {
     new DragAndDrop('label_orden');
 });
-
-
+ */
 // Globals
 let element;
 let parent;
@@ -35,7 +34,6 @@ function clean(){
         for(var i = ps.length -1; i >= 0; i--){
             element.removeChild(ps[i]);
         }
-
     }catch(ex){
         console.log(ex);
     }
@@ -55,16 +53,17 @@ function handleResize(){
     });
 }
         
-function handleFiles(files) {
+function handleFiles(files, callback) {
     for (var i = 0, len = files.length; i < len; i++) {
         let p = paw.newElement('p', files[i].name, {class: 'dropped_file'});
         element.appendChild(p);
     }
-    // let inputFile = document.getElementById('orden_medica');
-    // inputFile.files = files;
+    let inputFile = document.getElementById('orden_medica');
+    inputFile.files = files;
+    callback(inputFile)
 }
 
-function handleDrop(e){
+function handleDrop(e, callback){
     try{       
         element.classList.remove('drag_enter');
         element.classList.remove('drag_leave');
@@ -74,14 +73,11 @@ function handleDrop(e){
         console.log(ex);
     }
     let files = e.dataTransfer.files;
-    handleFiles(files);
+    handleFiles(files, callback);
 }
 
-
-
 class DragAndDrop{
-
-    constructor(elementId, fileId){
+    constructor(elementId, changeCallback){
         // Load css
         let css = paw.newElement("link", "", {
             rel: "stylesheet",
@@ -107,7 +103,6 @@ class DragAndDrop{
 
         // Add resize support
         handleResize();
-
         element.addEventListener("dragenter", (e) => {
             e.preventDefault();
             try{
@@ -141,13 +136,14 @@ class DragAndDrop{
         element.addEventListener("drop", (e) => {
             e.preventDefault();
             console.log("DROP");
-            handleDrop(e);
+            handleDrop(e, changeCallback);
         });
 
-
+        const hiddenInput = document.querySelector('#orden_medica')
+        if (hiddenInput){
+            hiddenInput.addEventListener('change', ({target}) => {
+                changeCallback(target)
+            })
+        }
     }
-
-
-
-
 }
