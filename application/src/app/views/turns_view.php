@@ -3,7 +3,6 @@
 
 <head>
     <?php
-        use const Paw\core\database\FILE_SIZE_MAX;
         require 'parts/head_view.php'
     ?>
     <link rel="stylesheet" type='text/css' href="assets/css/form.css" />
