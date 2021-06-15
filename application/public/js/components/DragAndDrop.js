@@ -53,14 +53,28 @@ function handleResize(){
     });
 }
         
+// Validate input is '.pdf' (backend really checks this later)
 function handleFiles(files, callback) {
+    // To validate extension
+    let validExtension =  /^[a-z0-9_()\-\[\]]+\.pdf$/i;
+    
     for (var i = 0, len = files.length; i < len; i++) {
         let p = paw.newElement('p', files[i].name, {class: 'dropped_file'});
         element.appendChild(p);
+
+        console.log('INPUTFILE', files[i]['name']);
+    
+        // Handle invalid extension
+        if(! validExtension.exec(files[i]['name'])){
+            alert('Solo se reciben archivos .pdf');
+            clean();
+            return
+        }
     }
     let inputFile = document.getElementById('orden_medica');
-    inputFile.files = files;
-    callback(inputFile)
+    
+
+    callback(inputFile);
 }
 
 function handleDrop(e, callback){
@@ -103,6 +117,8 @@ class DragAndDrop{
 
         // Add resize support
         handleResize();
+
+        // Handle events
         element.addEventListener("dragenter", (e) => {
             e.preventDefault();
             try{
