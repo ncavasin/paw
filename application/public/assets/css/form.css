@@ -10,6 +10,16 @@ form > a{
     color: var(--azul);
 }
 
+.busqueda{
+    margin: 0;
+}
+
+.lista_cobertura > li::before{
+    content: '>';
+    font-weight: bolder;
+    color: var(--azul);
+}
+
 
 fieldset{
     display: flex;

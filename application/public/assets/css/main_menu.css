@@ -21,9 +21,9 @@
     transition-duration: .75s;
 }
 
-li{
+/* li{
     display: inline-block;
-}
+} */
 
 .main_menu_abierto{
 	grid-area: main;

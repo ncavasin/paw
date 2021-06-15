@@ -18,7 +18,7 @@
     <main>
         <?php require 'parts/notification_view.php' ?>
         <section>
-            <form action="#" method="POST" target="_self">
+            <form action="#" method="POST" target="_self" class="busqueda">
                 <label for="busqueda">Buscar:</label>
                 <input type="search" id="busqueda" name="busqueda" placeholder="Galeno" autofocus tabindex="1" autocomplete="on" />
             </form>
@@ -28,7 +28,7 @@
                 <?php endforeach; ?>
             <?php endif; ?>
             <h2>OBRAS SOCIALES</h2>
-            <ul>
+            <ul class='lista_cobertura'>
                 <li>
                     ACA Salud Coop. Prest. Serv. Med.
                 </li>
@@ -82,7 +82,7 @@
                 </li>
             </ul>
             <h2>EMBAJADAS</h2>
-            <ul>
+            <ul class='lista_cobertura'>
                 <li>
                     Embajada Alemana
                 </li>
@@ -141,7 +141,7 @@
 
 
             <h2>Compañías Particulares</h2>
-            <ul>
+            <ul class='lista_cobertura'>
                 <li>
                     Aerovías de México
                 </li>
@@ -199,7 +199,7 @@
             </ul>
 
             <h2>A.R.T.</h2>
-            <ul>
+            <ul class='lista_cobertura'>
                 <li>
                     ASOCIART ART
                 </li>
