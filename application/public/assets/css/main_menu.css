@@ -25,6 +25,10 @@
     display: inline-block;
 } */
 
+.main_menu_desktop{
+    display: hidden;
+}
+
 .main_menu_abierto{
 	grid-area: main;
     display: flex;
@@ -133,4 +137,29 @@
         display: none;
     }
 
+    .main_menu_desktop{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }  
+
+    .main_menu_opt > a{
+        display: inline-block;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .main_menu_opt > a:hover{
+        background-color: white;
+        color: var(--azul);
+        transition: all .5s;
+    }
+    
+    .main_menu_abrir{
+        justify-self: stretch;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 2rem;
+    }
 }

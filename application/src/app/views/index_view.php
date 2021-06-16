@@ -16,6 +16,17 @@
     ?>
     <main>
         <section id='carrousel'>
+            <!-- <figure class='slider'>
+                <img src="/assets/img/carrousel_0.jpg">
+            </figure>
+            
+            <figure class='slider'>
+                <img src="/assets/img/carrousel_1.jpg">
+            </figure>
+            
+            <figure class='slider'>
+                <img src="/assets/img/carrousel_2.jpg">
+            </figure> -->
         </section>
         <section>
             <h2>NUESTROS SERVICIOS</h2>
