@@ -10,8 +10,7 @@
         <h1 class="logotipo">
             <a href="../" target="_self">Dental Medical Group</a>
         </h1>
-        <!-- <ul class="main_menu main_menu_cerrado"> -->
-        <ul class="main_menu_desktop">
+        <ul class="main_menu">
             <?php foreach($this->menuOptions as $mOpt):?>
                 <li class="main_menu_opt"><a href="<?= $mOpt['href']?>" target="_self" ><?=$mOpt['name']?></a></li>
             <?php endforeach; ?>

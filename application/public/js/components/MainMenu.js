@@ -1,5 +1,3 @@
-
-
 // After loading, keep listening for window resize 
 document.addEventListener('DOMContentLoaded', (e) => {
     
@@ -8,24 +6,12 @@ document.addEventListener('DOMContentLoaded', (e) => {
         "--min-width"
     );
     // const mqIsDesktop = window.matchMedia('(min-width:'+min_width-1+')');
-    const mqIsDesktop = window.matchMedia('(max-width: 480px)');
-    mqIsDesktop.addEventListener("change", (e) => {
-        if (e.matches) {
-            console.log("MAINMENU::DESKTOP");
-        }
-        else{
-            // undoAll();
-        }
-    });
+    
 });
 
 class MainMenu {
 
     constructor(pContainer) {
-
-        // Load css
-        let css = paw.newElement('link', '', {rel: 'stylesheet', href:'assets/css/main_menu.css'});
-        document.head.appendChild(css);
 
         // Find received element
         let container = pContainer.tagName ? pContainer : document.querySelector(pContainer);
@@ -36,18 +22,29 @@ class MainMenu {
             "☰",
             { class: 'hamburguesa'}
         );
-
-
+        
         let ul = document.querySelector("nav ul");
 
         // Add functionality
         button.addEventListener("click", (event) => {
-            if (ul.classList.contains('main_menu_cerrado')){
-                ul.classList.add('main_menu_abierto');
-                ul.classList.remove('main_menu_cerrado');
-            }else{
+            if (ul.classList.contains('main_menu')){
                 ul.classList.add('main_menu_cerrado');
-                ul.classList.remove('main_menu_abierto');
+                ul.classList.remove('main_menu');
+            }else{
+                ul.classList.add('main_menu');
+                ul.classList.remove('main_menu_cerrado');
+            }
+        });
+
+        const mqIsDesktop = window.matchMedia('(min-width: 481px)');
+        mqIsDesktop.addEventListener("change", (e) => {
+            if (e.matches) {
+                ul.classList.add('main_menu');
+                ul.classList.remove('main_menu_cerrado');
+            }
+            else{
+                console.log('MAINMENU::MOBILE');
+                // undoAll();
             }
         });
 

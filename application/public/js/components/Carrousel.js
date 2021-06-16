@@ -1,11 +1,11 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-    let carrousel = new Carrousel('carrousel', 3, '/assets/img/carrousel_');
+    let carrousel = new Carrousel('carrousel');
 })
 
 
 class Carrousel{
-    constructor(pContainer, qtyImgs, basePath){
+    constructor(pContainer){
 
         // Load css
         let css = paw.newElement("link", "", {
@@ -18,25 +18,20 @@ class Carrousel{
         let index = 0;
 
         // Get the element
-        let container = document.getElementById(pContainer);
-        container.classList.add('car_container');
+        let section = document.getElementById(pContainer);
+        section.classList.add('car_container');
 
-        // Create a container to hold every slide (aka image)
-        let slidesContainer  = paw.newElement('div', '', {class: 'slides_container'});
+        // Get the figure holding the images
+        let slidesContainer = document.querySelector('#slides_container');
+        
+        // Hold a ref to images quantity
+        let qtyImgs = slidesContainer.children.length;
 
         // Create a container to hold a dot per image
         let dotsContainer = paw.newElement('div', '', {class: 'dot_container'});
 
         // Iterate over images' quantity
         for(var i = 0; i < qtyImgs; i++){
-
-            // Create a div per image and store the path of the image in 'background'
-            let imgPath = basePath + i.toString() + ".jpg";
-            let slide = paw.newElement('div', '', {class: 'slide', id:'slide'+i});
-
-            // Insert background image
-            slide.style.backgroundImage = "url(" + imgPath + ")";
-            slidesContainer.appendChild(slide);
 
             // Create a dot per image with proper class and id asignation
             let dot = paw.newElement('button', '', {class: 'dot', id: 'dot'+i});
@@ -52,16 +47,14 @@ class Carrousel{
         let left = paw.newElement('button', '<', {class: 'btn_left btn_inactive', id:'button_left'});
         let right = paw.newElement('button', '>', {class: 'btn_right btn_inactive', id: 'button_right'});
 
-        
-        // 
-        // TODO Create progress bar
-        const pgBar = paw.newElement('progess', '', {class: 'progress', id: 'pgBar', minValue: '0', maxValue: '100'}); 
+        // !
+        // TODO progress bar
+        // !
 
         // Handle clicks
         left.addEventListener('click', () => {
             moveSlider('left');
         });
-
         right.addEventListener('click', () => {
             moveSlider('right');
         });
@@ -85,23 +78,9 @@ class Carrousel{
         });
 
         // Connect everything
-        container.appendChild(slidesContainer);
-        container.appendChild(dotsContainer);
-        container.appendChild(left);
-        container.appendChild(right);
-        container.appendChild(pgBar);
-
-        // function defineSizes(element, outContainer){
-        // Get container's actual size
-        //     let devWidth = outContainer.offsetWidth;
-        //     let devHeight = outContainer.offsetHeight; 
-
-        //     element.style.backgroundImage = "url(" + imgPath + ")";
-        //     element.style.height = (devHeight) +'px';
-        //     element.style.width = devWidth + 'px';
-        // setTimeout('changeImage()', time);
-        //     return element;
-        // }
+        section.appendChild(dotsContainer);
+        section.appendChild(left);
+        section.appendChild(right);
 
         function swipeDetect(targetElement){
 
@@ -182,72 +161,6 @@ class Carrousel{
             }, false);
         }
 
-        
-        function GetImageLoader(){
-
-            // Dic to hold images
-            let imageLoader = {}
-
-            imageLoader['LoadImage'] = function (imageUrl, progressUpdateCallback) {
-                return new Promise((resolve, reject) => {
-                    let xhr = new XMLHttpRequest();
-
-                    // Create an async request for the image
-                    xhr.open('GET', imageUrl, true);
-
-                    // Store response as an array
-                    xhr.responseType = 'arraybuffer';
-
-                    // Handle download progress
-                    xhr.onprogress = function(e){
-                        // Check lower limit
-                        if(e.lengthComputable){
-                            progressUpdateCallback(parseInt((e.loaded / e.total) * 100));
-                        }
-                    };
-
-
-                    // Handle full download
-                    xhr.onloadend = function(e){
-                        progressUpdateCallback(100);
-                        let options = {};
-                        let headers = xhr.getAllResponseHeaders();
-
-                        // Filter header
-                        // Check regex at https://regexr.com/5vnl9
-                        let typeMatch = headers.match(/^Content-Type\:\s*(image\/.*?)$/gim);
-
-                        // Verify it exists and has and an image in the second place
-                        if(typeMatch && typeMatch[1]){
-                            options.type = typeMatch[1];
-                        }
-
-                        // Create the binary-large-object
-                        let blob = new Blob([this.response], options);
-
-                        resolve(window.URL.createObjectURL(blob));
-                    };
-
-                    // Issue the async HTTP request
-                    xhr.send();
-                });
-            }
-            return imageLoader;
-        }
-
-        let slide = document.getElementById('slide0');
-        let imgLoader = GetImageLoader();
-
-        function updateProgress(progress){
-            pgBar.value = progress;
-        }
-
-        imgLoader.LoadImage('/assets/img/carrousel_0.jpg', updateProgress)
-            .then(image => {
-                slide.style.backgroundImage = image;
-            });
-        
-
         function setIndex(pIndex){
             if (pIndex > index){
                 moveSlider('right');
@@ -258,12 +171,9 @@ class Carrousel{
 
         function moveSlider(direction){
 
-            // Remove active dot and btn
+            // Remove active dot
             let dot = document.getElementById('dot'+index);
             dot.classList.remove('dot_active');
-
-            // let btn = document.getElementById('button_'+direction);
-            // console.log(btn);
 
             // Update index
             index += (direction === 'right') ? 1 : - 1;
@@ -278,21 +188,13 @@ class Carrousel{
             dot = document.getElementById('dot'+index);
             dot.classList.add('dot_active');
 
-            // btn = document.getElementById('button_'+direction);
-            // btn.classList.add('btn_active');
-            
-            // Get the slides container
-            let slidesContainer = document.getElementsByClassName('slides_container').item(0);
-            
             // Get container's actual size
-            let devWidth = container.offsetWidth;
-            let devHeight = container.offsetHeight;
+            let devWidth = section.offsetWidth;
+            let devHeight = section.offsetHeight;
 
             slidesContainer.classList.add('partial_opacity');
             slidesContainer.style.marginLeft = -(index * 2 * devWidth)+'px';
             slidesContainer.classList.add('full_opacity');
-            // slidesContainer.classList.remove('partial_opacity');
-            // slidesContainer.classList.remove('full_opacity');
 
             console.log(index);
         }

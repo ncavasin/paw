@@ -36,11 +36,11 @@ class Controller {
         $this->menuOptions = [
             [
                 'href' => '/about',
-                'name' => '¿Quienes Somos?'
+                'name' => 'Nosotros'
             ],
             [
                 'href' => '/services',
-                'name' => 'Nuestros Servicios'
+                'name' => 'Servicios'
             ],
             [
                 'href' => '/coverages',

@@ -15,18 +15,12 @@
     require 'parts/header_view.php';
     ?>
     <main>
-        <section id='carrousel'>
-            <!-- <figure class='slider'>
-                <img src="/assets/img/carrousel_0.jpg">
+        <section id="carrousel" class="car_container">
+            <figure id="slides_container" class="slides_container">
+                <img src="/assets/img/carrousel0.jpg" class="slide">
+                <img src="/assets/img/carrousel1.jpg" class="slide">
+                <img src="/assets/img/carrousel2.jpg" class="slide">
             </figure>
-            
-            <figure class='slider'>
-                <img src="/assets/img/carrousel_1.jpg">
-            </figure>
-            
-            <figure class='slider'>
-                <img src="/assets/img/carrousel_2.jpg">
-            </figure> -->
         </section>
         <section>
             <h2>NUESTROS SERVICIOS</h2>

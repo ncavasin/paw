@@ -1,6 +1,3 @@
-// !!!
-// TODO ARREGLAR CAMBIO DE CLASES DE HAMBURGUESA, ROMPE EL MENU PRINCIPAL
-// !!!!
 // Add media query to be responsive
 let min_width = getComputedStyle(document.documentElement).getPropertyValue(
     "--min-width"
