@@ -282,12 +282,14 @@ nav{
         display: inline-block;
         padding: 1rem;
         text-align: center;
+        border-radius: 10px;
     }
-
+    
     .main_menu_opt > a:hover{
         background-color: white;
         color: var(--azul);
         transition: all .5s;
+        border-radius: 10px;
     }
     
     .main_menu_abrir{
