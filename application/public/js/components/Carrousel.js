@@ -1,6 +1,10 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-    let carrousel = new Carrousel('carrousel');
+    let pbar = document.querySelector('progress');
+    console.log(pbar)
+
+    new Carrousel('carrousel');
+    updateProgress(100);
 })
 
 let qtyImgs;
@@ -34,12 +38,12 @@ class Carrousel{
         // Iterate over images' quantity
         for(var i = 0; i < qtyImgs; i++){
 
-            // Add random effect
-            
-
             // Create a dot per image with proper class and id asignation
-            let dot = paw.newElement('button', '', {class: 'dot', id: 'dot'+i});
-
+            let dot = paw.newElement('button', '', {class: 'dot', id: i});
+            
+            // Mark the first one as active
+            if (i == 0) dot.classList.add("dot_active");
+            
             // Handle click on dot
             dot.addEventListener('click', () => {
                 setIndex(dot.id);
@@ -50,10 +54,6 @@ class Carrousel{
         // Create left and right buttons
         let left = paw.newElement('button', '<', {class: 'btn_left btn_inactive', id:'button_left'});
         let right = paw.newElement('button', '>', {class: 'btn_right btn_inactive', id: 'button_right'});
-
-        // !
-        // TODO progress bar
-        // !
 
         // Handle clicks
         left.addEventListener('click', () => {
@@ -165,22 +165,26 @@ class Carrousel{
             }, false);
         }
 
+
         function setIndex(pIndex){
-            if (pIndex > index){
-                moveSlider('right');
-            }else{
-                moveSlider('left');
+
+            let dir = 'right';
+            if (pIndex < index){
+                dir = 'left'
             }
+
+            moveSlider(dir, Math.abs(index - pIndex));
         }
 
-        function moveSlider(direction){
+
+        function moveSlider(direction, amount=1){
 
             // Remove active dot
-            let dot = document.getElementById('dot'+index);
+            let dot = document.getElementById(index);
             dot.classList.remove('dot_active');
 
             // Update index
-            index += (direction === 'right') ? 1 : - 1;
+            index += (direction === 'right') ? amount : - amount;
 
             // Check upper limit
             index = (index >= qtyImgs) ? 0 : index;
@@ -189,21 +193,13 @@ class Carrousel{
             index = (index < 0 ) ? qtyImgs-1 : index;
 
             // Update active dot
-            dot = document.getElementById('dot'+index);
+            dot = document.getElementById(index);
             dot.classList.add('dot_active');
 
-            // Get container's actual size
-            let devWidth = section.offsetWidth;
-            let devHeight = section.offsetHeight;
-
-            // slidesContainer.classList.add('partial_opacity');
-            // slidesContainer.style.marginLeft = -(index * 2 * devWidth)+'px';
-            // slidesContainer.classList.add('full_opacity');
-
+            // Adapt css display style properly
             for (i = 0; i < qtyImgs; i++) {
                 slidesContainer.children[i].style.display = "none";
             }
-
             slidesContainer.children[index].style.display = "block";
 
             console.log(index);
