@@ -16,14 +16,12 @@
     ?>
     <main>
         <section id="carrousel" class="car_container">
+            <progress max="100" min="0"></progress> 
             <figure id="slides_container" class="slides_container">
-                <img src="/assets/img/carrousel0.jpg" class="slide efecto2">
-                <img src="/assets/img/carrousel1.jpg" class="slide efecto1">
-                <img src="/assets/img/carrousel2.jpg" class="slide efecto3">
+                <img src="/assets/img/carrousel0.jpg" class="slide efecto2"/>
+                <img src="/assets/img/carrousel1.jpg" class="slide efecto1"/>
+                <img src="/assets/img/carrousel2.jpg" class="slide efecto3"/>
             </figure>
-            <progress max="100" min="0">
-                
-            </progress> 
         </section>
         <section>
             <h2>NUESTROS SERVICIOS</h2>
@@ -48,8 +46,9 @@
     </main>
 
     <?php
-    require 'parts/footer_view.php';
+        require 'parts/footer_view.php';
     ?>
+
 </body>
 
 </html>
