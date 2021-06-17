@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let carrousel = new Carrousel('carrousel');
 })
 
+let qtyImgs;
 
 class Carrousel{
     constructor(pContainer){
@@ -25,13 +26,16 @@ class Carrousel{
         let slidesContainer = document.querySelector('#slides_container');
         
         // Hold a ref to images quantity
-        let qtyImgs = slidesContainer.children.length;
+        qtyImgs = slidesContainer.children.length;
 
         // Create a container to hold a dot per image
         let dotsContainer = paw.newElement('div', '', {class: 'dot_container'});
 
         // Iterate over images' quantity
         for(var i = 0; i < qtyImgs; i++){
+
+            // Add random effect
+            
 
             // Create a dot per image with proper class and id asignation
             let dot = paw.newElement('button', '', {class: 'dot', id: 'dot'+i});
@@ -192,9 +196,15 @@ class Carrousel{
             let devWidth = section.offsetWidth;
             let devHeight = section.offsetHeight;
 
-            slidesContainer.classList.add('partial_opacity');
-            slidesContainer.style.marginLeft = -(index * 2 * devWidth)+'px';
-            slidesContainer.classList.add('full_opacity');
+            // slidesContainer.classList.add('partial_opacity');
+            // slidesContainer.style.marginLeft = -(index * 2 * devWidth)+'px';
+            // slidesContainer.classList.add('full_opacity');
+
+            for (i = 0; i < qtyImgs; i++) {
+                slidesContainer.children[i].style.display = "none";
+            }
+
+            slidesContainer.children[index].style.display = "block";
 
             console.log(index);
         }

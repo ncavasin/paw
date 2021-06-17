@@ -51,7 +51,7 @@ header{
     display: inline-block;
     text-decoration: underline;
     margin: 0 .25rem;
-    padding: .5rem 0;
+    padding: .5rem .5rem;
 }
 
 .user_opt:hover,

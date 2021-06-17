@@ -17,9 +17,9 @@
     <main>
         <section id="carrousel" class="car_container">
             <figure id="slides_container" class="slides_container">
-                <img src="/assets/img/carrousel0.jpg" class="slide">
-                <img src="/assets/img/carrousel1.jpg" class="slide">
-                <img src="/assets/img/carrousel2.jpg" class="slide">
+                <img src="/assets/img/carrousel0.jpg" class="slide efecto1">
+                <img src="/assets/img/carrousel1.jpg" class="slide efecto2">
+                <img src="/assets/img/carrousel2.jpg" class="slide efecto3">
             </figure>
         </section>
         <section>
