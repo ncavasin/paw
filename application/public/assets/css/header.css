@@ -1,7 +1,22 @@
 @import url('https://css.gg/css?=|facebook|instagram|mail');
 
+
 :root{
+    font-family: 'Roboto', sans-serif;
+    --celeste: #0eacd8;
+    --azul: #003b70;
+    --violeta: #4f2c7f;
+    --gris: #C4C4C4;
+    --success: #357a38; 
+    --error: #f44336;
+    --warn: #b26a00;
+    --border_value: 25px;
+    --transition_time: .25s;
     --min_width: 481px;
+    
+    --padding_section: 2rem;
+    --margin_section: 2rem;
+    --border_section:
 }
 
 *{

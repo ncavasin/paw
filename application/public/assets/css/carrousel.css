@@ -96,6 +96,7 @@
     transition: .5s;
 }
 
+
 .efecto1{
     animation-name: efecto1;
     animation-duration: .5s;
@@ -126,4 +127,8 @@
 @keyframes efecto3{
     from    {transform: skew(90deg);}
     to      {transform: skew(0deg);}
+}
+
+progress{
+    appearance: none;
 }
