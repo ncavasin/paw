@@ -8,7 +8,7 @@
     </ul>
     <nav>
         <h1 class="logotipo">
-            <a href="../" target="_self">Dental Medical Group</a>
+            <a href="../" target="_self">Dental<br>Medical<br>Group</a>
         </h1>
         <ul class="main_menu">
             <?php foreach($this->menuOptions as $mOpt):?>

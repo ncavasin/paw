@@ -92,25 +92,27 @@ nav{
 
 .logotipo::before{
     content: '';
+    position: absolute;
     background-color: white;
     transform: skew(25deg);
-    margin-right: 1rem;
-    width: .8rem;
-    height: 2.5rem;
-    float: left;
+    width: 1rem;
+    height: 100%;
+    margin-left: 1.5rem;
 }
 
 .logotipo{
-    margin-left: 1.5rem;
-    align-self: center;
-    text-align: left;
     cursor: pointer;
-}
+    background-color: var(--azul);
+    margin: .5rem 0;
+    position: relative;
+} 
+
 
 .logotipo > a{
     display: inline-block;
-    width: 50%;
+    min-width: 3rem;
     font-weight: 900;
+    margin-left: 3.5rem;
 }
 
 
@@ -175,7 +177,7 @@ nav{
 /* main menu end */
 
 /* opcion nuestros servicios */
-.main_menu_cerrado > li:nth-of-type(2){
+.sub_menu_head{
     display: grid;
     grid-template-columns: auto 10vw;
     grid-template-rows: auto auto;
@@ -190,8 +192,7 @@ nav{
 }
 
 .main_menu_cerrado > li:nth-of-type(2) > a:hover::after{
-    /*content: '▼';
-    margin-left: 5px;*/
+    
     text-decoration: none;
     transition-duration: .75s;
 }
@@ -233,7 +234,7 @@ nav{
 }
 /* submenu ends */
 
-@media (min-width: 481px) {
+@media (min-width: 555px) {
 
     .hamburguesa,
     .main_menu_cerrado,
@@ -297,6 +298,10 @@ nav{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 2rem;
+    }
+
+    .sub_menu_head{
+        display: inline-block;
     }
 
 }
