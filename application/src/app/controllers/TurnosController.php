@@ -80,4 +80,13 @@ class TurnosController extends Controller{
         var_dump($turnosCollection);die;
     }
 
+    public function getWaitingList() {
+        $rol = $_GET['rol']; # En esta variable vendría el rol del usuario para saber que script cargar en la pagina, si el de medico o el de usuario
+        $isMedic = false;
+        if ($this->model->isMedic($rol)) {
+            $isMedic = true;
+        }
+        require $this->viewsDir . 'waiting_list_view.php';
+    }
+
 }
