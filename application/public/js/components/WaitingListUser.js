@@ -70,6 +70,9 @@ class WaitingListUser {
 	miTurno = (data, parent) => {
 		// Limpio el contenedor
 		parent.innerHTML = ''
+        // Creo la alarma
+        const audio = paw.newElement('audio', '', {id: "turn-alert", src: "/sounds/turn-alert.mp3", preload: "auto"})
+        parent.appendChild(audio)
 		let miTurno = paw.newElement('article', '', { class: 'tarjeta-turno confirmar' })
 		miTurno.appendChild(paw.newElement('h2', `¡Llegó tu turno!`))
         miTurno.appendChild(paw.newElement('p', 'Usted tiene 2 minutos para confimar asistencia, de lo contrario se tomará que no asistió automaticamente'))
@@ -83,6 +86,8 @@ class WaitingListUser {
 		clearInterval(this.intervalId)
         // 30 segundos a modo de muestra pero deberian ser 2 minutos, tambien deberia haber un contador que muestre tiempo restante
         this.intervalId = setTimeout(()=>this.noAsistio(parent), 120000) 
+        // Hago sonal la alarma
+        audio.play()
 	}
 
 	esperar = (data, parent) => {
