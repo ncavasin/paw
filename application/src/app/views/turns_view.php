@@ -10,6 +10,8 @@
     <link rel='stylesheet' type='text/css' href='assets/css/notification.css' />
     <link rel='stylesheet' type='text/css' href='assets/css/botones.css' />
     <script src="/js/components/DragAndDrop.js"></script>
+    <script src="/js/components/FetchApi.js"></script>
+    <script src="/js/components/TurnsForm.js"></script>
 </head>
 
 <body>
@@ -20,7 +22,7 @@
     <main>
         <?php require 'parts/notification_view.php'; ?>
         <section>
-            <h2>BÚSQUEDA DE TURNOS</h2>
+            <h2>NUEVO TURNO</h2>
             <form action="" method="POST" id="form-turnos" target="_self" enctype="multipart/form-data">
                 <fieldset id='fieldset-inputs'>
                     <label for="especialidad">Especialidad</label>
