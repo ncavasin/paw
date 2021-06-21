@@ -36,7 +36,9 @@ class WaitingListUser {
 		let mainTitle = document.querySelector('main h2')
 		mainTitle.textContent = 'Lista de espera'
 		let main = document.querySelector('main')
-		main.appendChild(mainTitle)
+        let permissionButton = paw.newElement('button', 'Habilitar alarma', {class: 'main_button'})
+        permissionButton.addEventListener('click', _ => { permissionButton.setAttribute('disabled', true)})
+		main.appendChild(permissionButton)
 		let turnsSection = paw.newElement('section', '', { class: 'turnos' })
 		main.appendChild(turnsSection)
 		// Consulto por primera vez
@@ -71,7 +73,7 @@ class WaitingListUser {
 		// Limpio el contenedor
 		parent.innerHTML = ''
         // Creo la alarma
-        const audio = paw.newElement('audio', '', {id: "turn-alert", src: "/sounds/turn-alert.mp3", preload: "auto"})
+        const audio = paw.newElement('audio', '', {id: "turn-alert", src: "/sounds/turn-alert.mp3", preload: "auto", autoplay: true})
         parent.appendChild(audio)
 		let miTurno = paw.newElement('article', '', { class: 'tarjeta-turno confirmar' })
 		miTurno.appendChild(paw.newElement('h2', `¡Llegó tu turno!`))
