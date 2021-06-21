@@ -134,7 +134,6 @@ class TurnsForm {
 							turnsButton.setAttribute('disabled', true)
 							submitButton.setAttribute('disabled', true)
 							cleanHiddenInputs()
-							let fileInput = document.querySelector('#orden_medica')
 							fieldsetElement.innerHTML = ''
 						})
 						fieldsetButtons.appendChild(submitButton)
@@ -210,8 +209,6 @@ class TurnsForm {
 				) {
 					let liHora = paw.newElement('li', `${hora}:${minuto > 9 ? minuto : `0${minuto}`}`)
 					liHora.addEventListener('click', e => {
-						// ? ver si parsear el texto para enviar minuto y hora por separado
-						// ! no olvidar que tengo que limpiar esos input hidden si cambia de especialista
 						// limpio los li que podrian estar seleccionados (deberia traer solo uno)
 						const selecteds = document.querySelectorAll('.selected')
 						selecteds.forEach(e => e.classList.remove('selected'))
@@ -222,6 +219,7 @@ class TurnsForm {
 						// ! si se cambia la forma en la que se guarda la fecha en el input se debe cambiar la forma en la que se genera el id del ulHorarios al mismo formato
 						// me fijo si hay una orden medica cargada asi habilito el boton de submit
 						let fileInput = document.querySelector('#orden_medica')
+                        console.log(fileInput.files)
 						if (fileInput.files.length) document.querySelector('#submit').removeAttribute('disabled')
 					})
 					ulHorarios.appendChild(liHora)
