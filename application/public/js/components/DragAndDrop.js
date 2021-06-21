@@ -28,12 +28,9 @@ function clean() {
 		element.classList.add('label_orden')
 		element.classList.add('drop_zone')
 
-		let ps = document.getElementsByClassName('dropped_file')
-
-		// Iterate in reverse order because removing modifies index
-		for (var i = ps.length - 1; i >= 0; i--) {
-			element.removeChild(ps[i])
-		}
+		let ftc = document.querySelector('#files-text-container')
+        ftc.innerHTML = ''
+			
 	} catch (ex) {
 		console.log(ex)
 	}
@@ -53,15 +50,14 @@ function handleResize() {
 
 // Validate input is '.pdf' (backend really checks this later)
 function handleFiles(files, callback) {
-    let filesTextContainer = document.querySelector('#files-text-container')
-    // Si no existe el contenedor, lo creo, si existe lo limpio
-    if (filesTextContainer) filesTextContainer.innerHTML = ''
-    else filesTextContainer = paw.newElement('div', '', {id: 'files-text-container'})
+	let filesTextContainer = document.querySelector('#files-text-container')
+	// Si no existe el contenedor, lo creo, si existe lo limpio
+	if (filesTextContainer) filesTextContainer.innerHTML = ''
+	else filesTextContainer = paw.newElement('div', '', { id: 'files-text-container' })
 	// To validate extension
 	let validExtension = /^[a-z0-9_()\-\[\]]+\.pdf$/i
 
 	validExtension = '.pdf'
-    
 
 	for (var i = 0, len = files.length; i < len; i++) {
 		let p = paw.newElement('p', files[i].name, { class: 'dropped_file' })
@@ -77,23 +73,29 @@ function handleFiles(files, callback) {
 			return
 		}
 	}
-    element.appendChild(filesTextContainer)
+	element.appendChild(filesTextContainer)
 	let inputFile = document.getElementById('orden_medica')
-
+	inputFile.files = files
 	callback(inputFile)
 }
 
 function handleDrop(e, callback) {
-	try {
-		element.classList.remove('drag_enter')
-		element.classList.remove('drag_leave')
-		element.classList.remove('label_orden')
-		element.classList.add('drop_container')
-	} catch (ex) {
-		console.log(ex)
-	}
 	let files = e.dataTransfer.files
-	handleFiles(files, callback)
+	if (files.length !== 1) {
+		element.classList.remove('drag_enter')
+		element.classList.add('drag_leave')
+		alert('Multiples archivos no estan permitidos')
+	} else {
+		try {
+			element.classList.remove('drag_enter')
+			element.classList.remove('drag_leave')
+			element.classList.remove('label_orden')
+			element.classList.add('drop_container')
+		} catch (ex) {
+			console.log(ex)
+		}
+		handleFiles(files, callback)
+	}
 }
 
 class DragAndDrop {
@@ -110,6 +112,8 @@ class DragAndDrop {
 
 		// Add all classes
 		element.classList.add('drop_zone')
+		element.classList.add('label_orden')
+
 
 		// Get limpiar button
 		let button = document.querySelector('input[type="reset"]')
