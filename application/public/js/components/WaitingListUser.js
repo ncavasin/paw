@@ -88,6 +88,8 @@ class WaitingListUser {
         this.intervalId = setTimeout(()=>this.noAsistio(parent), 120000) 
         // Hago sonal la alarma
         audio.play()
+        navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+        if (navigator.vibrate) navigator.vibrate([500, 200, 500, 200, 500])
 	}
 
 	esperar = (data, parent) => {
