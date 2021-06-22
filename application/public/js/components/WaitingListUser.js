@@ -58,7 +58,7 @@ class WaitingListUser {
         clearInterval(this.intervalId)
         parent.innerHTML = ''
         // En este punto deberia enviar al backend que se acepto el turno y esperar 200 ok
-        parent.appendChild(paw.newElement('p', 'Turno confirmado, acercate a la oficina', {class: 'turno-aceptado'}))
+        parent.appendChild(paw.newElement('p', 'Turno confirmado, por favor golpee antes de entrar', {class: 'turno-aceptado'}))
     }
     
     noAsistio = parent => {
@@ -72,6 +72,8 @@ class WaitingListUser {
 	miTurno = (data, parent) => {
 		// Limpio el contenedor
 		parent.innerHTML = ''
+        let permissionButton = document.querySelector('main>button')
+        permissionButton.setAttribute('disabled', true)
         // Creo la alarma
         const audio = paw.newElement('audio', '', {id: "turn-alert", src: "/sounds/turn-alert.mp3", preload: "auto", autoplay: true})
         parent.appendChild(audio)

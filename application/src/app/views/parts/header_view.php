@@ -1,5 +1,4 @@
 <header>
-    
     <ul class="menu_user">
         <li><a href="<?= $this->contact['href']?>" class="telefono"><?= $this->contact['name']?></a></li>
         <?php foreach($this->userOptions as $uOpt):?>

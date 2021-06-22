@@ -76,8 +76,9 @@ class TurnosController extends Controller{
 
     # Lista un solo turno
     public function getTurnos() {
-        $turnosCollection = $this->model->getAll();
-        var_dump($turnosCollection);die;
+        require $this->viewsDir . 'my_turns_view.php';
+        /* $turnosCollection = $this->model->getAll();
+        var_dump($turnosCollection);die; */
     }
 
     public function getWaitingList() {
