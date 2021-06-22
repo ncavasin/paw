@@ -79,7 +79,6 @@ li.selected {
     border: 1.5px solid var(--gris); 
     margin: 1rem; padding: 1rem; 
     border-radius: 10px; 
-    min-Width: 20rem; 
     flex-grow: 1
 }
 
@@ -102,5 +101,6 @@ li.selected {
 }
 
 #fieldset-buttons {
-    order: 4
+    order: 4;
+    flex-wrap: wrap
 }
