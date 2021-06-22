@@ -129,6 +129,16 @@ class TurnsForm {
 								class: 'main_button',
 								disabled: true // disabled por defecto hasta que se llenen los campos necesarios para poder submitear
 							})
+                        submitButton.addEventListener('click', e => {
+                            let input = document.querySelector('#orden_medica')
+                            if (input.files.length !== 1) {
+                                e.preventDefault()
+                                alert('Por favor seleccione solo un archivo')
+                            } else if (!input.files[0].name.endsWith('.pdf')) {
+                                e.preventDefault()
+                                alert('Solo se aceptan archivos .pdf')
+                            }
+                        })
 						// me subscribo al boton de limpiar para limpiar tambien los hidden inputs (no se si lo hace automaticamente o no)
 						resetButton.addEventListener('click', e => {
 							turnsButton.setAttribute('disabled', true)
@@ -219,7 +229,6 @@ class TurnsForm {
 						// ! si se cambia la forma en la que se guarda la fecha en el input se debe cambiar la forma en la que se genera el id del ulHorarios al mismo formato
 						// me fijo si hay una orden medica cargada asi habilito el boton de submit
 						let fileInput = document.querySelector('#orden_medica')
-                        console.log(fileInput.files)
 						if (fileInput.files.length) document.querySelector('#submit').removeAttribute('disabled')
 					})
 					ulHorarios.appendChild(liHora)
