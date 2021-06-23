@@ -17,6 +17,11 @@
             "name": "Marcello Diego",
             "email": "diegomarcello_17@gmail.com",
             "role": "Owner/Developer"
+        },
+        {
+            "name": "Tosello Joaquin",
+            "email": "tosellojoaquin@gmail.com",
+            "role": "Owner/Developer"
         }
     ],
     "require": {
