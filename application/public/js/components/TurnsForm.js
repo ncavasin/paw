@@ -31,6 +31,7 @@ esta funcionalidad se contará con la información necesaria en un JSON con la s
     ]s
     }, {...}, {...}]
 } */
+
 document.addEventListener('DOMContentLoaded', () => {
 	let turns = new TurnsForm('#form-turnos', '#especialidad', '#especialista')
 })
