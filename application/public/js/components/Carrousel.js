@@ -1,10 +1,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-    let pbar = document.querySelector('progress');
-    console.log(pbar)
+
 
     new Carrousel('carrousel');
-    updateProgress(100);
 })
 
 let qtyImgs;

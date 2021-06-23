@@ -23,7 +23,7 @@ class MainMenu {
             { class: 'hamburguesa'}
         );
         
-        let ul = document.querySelector("nav ul");
+        let ul = document.querySelector("#main_menu");
 
         // Add functionality
         button.addEventListener("click", (event) => {

@@ -17,9 +17,10 @@ let ul;
 
 class SubMenu {
     constructor(pContainer) {
-        // Find second element of "nav ul li"
-        let container = document.querySelectorAll(pContainer).item(1);
-
+        // Find second li of main_menu
+        let container = document.querySelector(pContainer).children[1];
+        console.log(container);
+        
         // Create drop-down button
         let button = paw.newElement("button", "▼");
         button.classList.add("btn");
@@ -44,7 +45,7 @@ class SubMenu {
         container.appendChild(ul);
         container.appendChild(button);
 
-        // Css is loaded dynamically in the main menu
+        // Add its class
         container.classList.add("sub_menu_head");
 
         // Handle events
