@@ -9,7 +9,7 @@ class App{
 
 
             paw.loadScript('SubMenu', '/js/components/SubMenu.js', () => {
-                let subMenu = new SubMenu("#main_menu");
+                let subMenu = new SubMenu("nav ul li");
             })
 
             

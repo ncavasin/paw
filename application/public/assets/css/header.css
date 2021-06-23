@@ -30,36 +30,64 @@ body{
     line-height: 1.25; 
 }
 
-
 a{
     color: white;
 }
 
-
 header{
-    background-color: var(--azul);
+    background-color: white;
     position: sticky;
     top: 0;
     width: 100%;
-    z-index: 10; 
-    display: grid;
-    grid-template-areas: "logo nav";
+    display: flex;
+    flex-flow: column;
+    z-index: 10;
 }
 
+.menu_user{
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
+    align-content: center;
+    font-size: smaller;
+}
+
+.telefono{
+    display: none;
+    color: var(--azul);
+}
+
+.menu_user li{
+    height: 100%;
+}
+
+.user_opt{
+    color: var(--azul);
+    display: inline-block;
+    text-decoration: underline;
+    margin: 0 .25rem;
+    padding: .5rem .5rem;
+}
+
+.user_opt:hover,
+.telefono:hover{
+    background-color: var(--azul);
+    color: white;
+    font-weight: bolder;
+    height: 100%;
+}
 
 nav{
     text-align: left;
     padding: .5rem 0 .5rem 0;
     display: grid;
-    grid-template-columns: 90% 10%;
-    grid-template-rows: auto auto auto;
+    grid-template-columns: 20% 70% 10%;
+    grid-template-rows: auto auto;
     grid-template-areas: 
-                        "user user"
-                        ".    btn"
-                        "mobi mobi";
+                        "logo menu btn"
+                        "mobi mobi mobi";
     background-color: var(--azul);
     position: sticky;
-    overflow: hidden;
 }
 
 .logotipo::before{
@@ -73,15 +101,10 @@ nav{
 }
 
 .logotipo{
-    grid-area: logo;
-    justify-self: center;
-    align-self: center;
     cursor: pointer;
     background-color: var(--azul);
-    width: 100%;
+    margin: .5rem 0;
     position: relative;
-    display: inline-block;
-    z-index: 9;
 } 
 
 
@@ -92,32 +115,11 @@ nav{
     margin-left: 3.5rem;
 }
 
-.menu_user{
-    grid-area: user;
-    display: flex;
-    flex-flow: row;
-    justify-content: flex-end;
-    align-content: center;
-    font-size: smaller;
-}
-
-.menu_user li{
-    height: 100%;
-}
-
-.user_opt{
-    display: inline-block;
-    justify-items: center;
-    align-items: center;
-    text-align: center;
-    text-decoration: underline;
-    margin: .5rem;
-    border-radius: 10px;
-}
 
 .hamburguesa{
     grid-area: btn;
-    justify-self: right;
+    justify-self: flex-end;
+    margin-right: .5rem;
     background-color: var(--azul);
     border: none;
     cursor: pointer;
@@ -148,8 +150,6 @@ nav{
 	width: 100%;
     height: 100%;
     transition: height .75s;
-    border-radius: 10px;
-    margin-top: .5rem;
 }
 
 .main_menu_cerrado > li{
@@ -157,6 +157,7 @@ nav{
     text-align: center; 
     justify-self: stretch;
     width: 100%;
+    margin: 1vh 0;
 }
 
 .main_menu_cerrado > li > a{
@@ -178,12 +179,11 @@ nav{
 /* opcion nuestros servicios */
 .sub_menu_head{
     display: grid;
-    grid-template-columns: 90% 10%;
+    grid-template-columns: auto 10vw;
     grid-template-rows: auto auto;
     grid-template-areas: 
                         "val btn"
                         "ul  ul";
-    position: relative;
 } 
 
 .main_menu_cerrado > li:nth-of-type(2) > a:hover{
@@ -199,16 +199,15 @@ nav{
 
 /* despliega el submenu */
 .btn{
-    display: run-in;
-    grid-area: btn;
     background-color: var(--violeta);
     color: white;
     border: none;
-    height: 100%;
+    grid-area: 'btn';
+    height: 5vh;
     width: 100%;
+    border-radius: 10px;
     cursor: pointer;
     align-self: center;
-    position: relative;
 }
 
 .sub_menu_list{
@@ -217,11 +216,10 @@ nav{
     background-color: var(--gris);
     border-radius: 5px;
     transition: all .75s;
-    border-radius: 10px;
 }
 
 .sub_menu_list_item{
-    padding: .5rem 0;
+    padding: 1rem 0;
     display: inline-block;
     width: 100%;
     text-align: center;
@@ -246,41 +244,32 @@ nav{
         display: none;
     }
 
-    header{
-        grid-template-columns: 30% 70%;
-    }
-
     .menu_user{
-        grid-area: user;
         font-size: smaller;
         justify-content: flex-end;
     }
 
-    .user_opt{
+    .telefono{
+        display: inherit;
+        text-align: center;
+    }
+
+    .user_opt,
+    .telefono{
         text-decoration: none;
         padding: .5rem;
-    }    
-    
-    .user_opt:hover{
-        background-color: white;
-        color: var(--azul);
-        font-weight: bolder;
-        transition: all .5s;
     }
 
     nav{
-        grid-area: nav;
-        padding: .5rem 0 .5rem 0;
         display: grid;
-        grid-template-columns: 100%;
-        grid-template-rows: auto auto;
+        grid-template-columns: 20% 70% 10%;
         grid-template-areas: 
-                            "user"
-                            "menu";
-        background-color: var(--azul);
+                            "logo menu menu";
     }
 
-
+    .logotipo{
+        justify-self: left;
+    }
 
     .main_menu{
         grid-area: menu;
