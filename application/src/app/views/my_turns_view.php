@@ -18,14 +18,9 @@
 
     <main>
         <section>
-            <a class='navigation-button' target='_self' href="/newturn">Nuevo turno</a>
-            <a class='navigation-button' target='_self' href="/waiting_list">Sala de espera</a>
-            <a class='navigation-button' target='_self' href="/waiting_list?rol=medic">Sala de espera (Medico)</a>
-        </section>
-        <section>
             <h2>HISTORIAL DE TURNOS</h2>
-            <p>Aún no tenes turnos registrados</p>
-<!--             <table id="table-mis-turnos">
+
+            <table id="table-mis-turnos">
                 <colgroup>
                     <col>
                     <col>
@@ -60,7 +55,7 @@
                         <td class="hora">16:30</td>
                     </tr>
                 </tbody>
-            </table> -->
+            </table>
         </section>
     </main>
 

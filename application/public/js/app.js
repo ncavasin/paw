@@ -11,6 +11,14 @@ class App{
             paw.loadScript('SubMenu', '/js/components/SubMenu.js', () => {
                 let subMenu = new SubMenu("#main_menu");
             })
+
+            
+            paw.loadScript('FetchApi', '/js/components/FetchApi.js', () => {
+                // Primero necesito este script para poder usar el otro
+                paw.loadScript('TurnsForm', '/js/components/TurnsForm.js', () => {
+                    let turns = new TurnsForm('#form-turnos', '#especialidad', '#especialista');
+                })
+            })
         });
     }
 

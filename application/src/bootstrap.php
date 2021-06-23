@@ -76,7 +76,6 @@ $router->get('/especialistas', 'EspecialistasController@getEspecialistas');
 $router->get('/turnos_disponibles', 'TurnosController@getTurnosDisponibles');
 $router->post('/newturn', 'TurnosController@nuevoTurno');
 $router->get('/myturns', 'TurnosController@getTurnos');
-$router->get('/waiting_list', 'TurnosController@getWaitingList');
 
 $router->get('/servicios/audiologia', 'ServicesController@audiologia');
 $router->get('/servicios/cardiologia', 'ServicesController@cardiologia');

@@ -31,9 +31,6 @@ esta funcionalidad se contará con la información necesaria en un JSON con la s
     ]s
     }, {...}, {...}]
 } */
-document.addEventListener('DOMContentLoaded', () => {
-	let turns = new TurnsForm('#form-turnos', '#especialidad', '#especialista')
-})
 
 class TurnsForm {
 	// TODO agregar loader que indiquie que el formulario esta cargandose
@@ -60,14 +57,14 @@ class TurnsForm {
 				type: 'hidden',
 				autocomplete: 'off'
 			})
-			// verifico los 3 hidden inputs ya que el form no los puede validar al estar ocultos (pincha al hacer foco)
+            // verifico los 3 hidden inputs ya que el form no los puede validar al estar ocultos (pincha al hacer foco)
 			// crear metodo para limpiar los hidden cuando sea necesario
 			const cleanHiddenInputs = () => {
 				hiddenDate.value = ''
 				hiddenHour.value = ''
 			}
-			containerElement.appendChild(hiddenDate)
-			containerElement.appendChild(hiddenHour)
+            containerElement.appendChild(hiddenDate)
+            containerElement.appendChild(hiddenHour)
 			// crear boton para ver turnos disponibles
 			let turnsButton = paw.newElement('input', '', {
 				disabled: true,
@@ -129,21 +126,12 @@ class TurnsForm {
 								class: 'main_button',
 								disabled: true // disabled por defecto hasta que se llenen los campos necesarios para poder submitear
 							})
-                        submitButton.addEventListener('click', e => {
-                            let input = document.querySelector('#orden_medica')
-                            if (input.files.length !== 1) {
-                                e.preventDefault()
-                                alert('Por favor seleccione solo un archivo')
-                            } else if (!input.files[0].name.endsWith('.pdf')) {
-                                e.preventDefault()
-                                alert('Solo se aceptan archivos .pdf')
-                            }
-                        })
 						// me subscribo al boton de limpiar para limpiar tambien los hidden inputs (no se si lo hace automaticamente o no)
 						resetButton.addEventListener('click', e => {
 							turnsButton.setAttribute('disabled', true)
-							submitButton.setAttribute('disabled', true)
+                            submitButton.setAttribute('disabled', true)
 							cleanHiddenInputs()
+                            let fileInput = document.querySelector('#orden_medica')
 							fieldsetElement.innerHTML = ''
 						})
 						fieldsetButtons.appendChild(submitButton)
@@ -219,17 +207,19 @@ class TurnsForm {
 				) {
 					let liHora = paw.newElement('li', `${hora}:${minuto > 9 ? minuto : `0${minuto}`}`)
 					liHora.addEventListener('click', e => {
+						// ? ver si parsear el texto para enviar minuto y hora por separado
+						// ! no olvidar que tengo que limpiar esos input hidden si cambia de especialista
 						// limpio los li que podrian estar seleccionados (deberia traer solo uno)
 						const selecteds = document.querySelectorAll('.selected')
-						selecteds.forEach(e => e.classList.remove('selected'))
+						selecteds.forEach(e => e.classList.remove('selected'))						
 						e.target.classList.add('selected') // agrego clase de seleccionado
 						hiddenHour.value = e.target.innerText || e.target.textContent // guardo el valor del horario seleccionado
 						// guardo el valor del dia seleccionado
 						hiddenDate.value = date.getTime() // TODO ver como mandar formato final al backend cuando integremos con persistencia
 						// ! si se cambia la forma en la que se guarda la fecha en el input se debe cambiar la forma en la que se genera el id del ulHorarios al mismo formato
-						// me fijo si hay una orden medica cargada asi habilito el boton de submit
-						let fileInput = document.querySelector('#orden_medica')
-						if (fileInput.files.length) document.querySelector('#submit').removeAttribute('disabled')
+                        // me fijo si hay una orden medica cargada asi habilito el boton de submit
+                        let fileInput = document.querySelector('#orden_medica')
+                        if (fileInput.files.length) document.querySelector('#submit').removeAttribute('disabled')
 					})
 					ulHorarios.appendChild(liHora)
 					//calcular minuto overflow por la duracion del turno para no emepzar siempre de 0

@@ -37,20 +37,3 @@ b{
 input:focus, textarea:focus, select:focus{
     outline: none;
 }
-
-.navigation-button {
-    padding: 1rem;
-    margin: 1rem;
-    background-color: var(--azul);
-    border-radius: var(--border_value);
-    position: relative;
-    display: inline-block;
-    border: 1px solid transparent
-}
-
-.navigation-button:hover {
-    color: var(--azul);
-    background-color: white;
-    border: 1px solid var(--azul);
-    transition: all .5s;
-}

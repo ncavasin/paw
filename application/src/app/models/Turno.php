@@ -46,18 +46,17 @@ class Turno extends Model{
     }
 
     public function set(array $values){
+        
         foreach(array_keys($this->fields) as $key){
+
             if(! isset($values[$key])){
                 continue;
             }
+
             $method = 'set' . ucfirst($key);
             $method($values[$key]);
         }
 
-    }
-
-    public function isMedic($rol) {
-        return $rol == 'medic';
     }
 }
 
