@@ -7,6 +7,7 @@
     ?>
     <link rel="stylesheet" type='text/css' href="assets/css/form.css" />
     <link rel="stylesheet" type='text/css' href="assets/css/notification.css" />
+    <link rel="stylesheet" type='text/css' href="assets/css/botones.css" />
 </head>
 
 <body>
@@ -23,7 +24,7 @@
                     <input type="email" id="email" name="email" placeholder="ejemplo@email.com" autofocus required tabindex="1" /><br>
                 </fieldset>
 
-                <input type="submit" value="Enviar" class="boton" />
+                <input type="submit" value="Enviar" class="main_button" />
 
             </form>
         </section>

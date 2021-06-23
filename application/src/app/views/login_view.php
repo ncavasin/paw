@@ -5,8 +5,8 @@
             require 'parts/head_view.php'
         ?>
         <link rel='stylesheet' type='text/css' href='assets/css/form.css' />
-        <link rel='stylesheet' type='text/css' href='assets/css/login.css' />
         <link rel='stylesheet' type='text/css' href='assets/css/notification.css' />
+        <link rel='stylesheet' type='text/css' href='assets/css/botones.css'/>
     </head>
     <body>
         <?php 
@@ -25,13 +25,13 @@
                 <?php endif; ?>
                 <form action="#" method="POST" target="_self">
                     <fieldset>
-                        <label for="email">Correo Electrónico:</label>
-                        <input type="email" id="email" name="email" 
+                        <label for="mail">Correo Electrónico:</label>
+                        <input type="email" id="mail" name="mail" 
                         placeholder="usuario@correo.com" 
                         required tabindex="1" autocomplete="on"/>
                         
-                        <label for="contrasenia">Contraseña:</label>
-                        <input type="password" id="contrasenia" name="contrasenia" 
+                        <label for="pwd">Contraseña:</label>
+                        <input type="password" id="pwd" name="pwd" 
                         placeholder="ultra secure password" 
                         required tabindex="2" autocomplete="on"/>
                     </fieldset>
@@ -39,9 +39,9 @@
                     <a href="/reset_password" target="_self">¿Olvidaste tu contraseña?</a>
                     <a href="/register" target="_self">Registrarse</a>
 
-                    <input type="submit" value="Ingresar" class="boton"/>
+                    <input type="submit" value="Ingresar" class="main_button"/>
                 </form>
-            </section>        
+            </section>
         </main>
         
         <?php 
