@@ -18,10 +18,14 @@ class TurnosController extends Controller{
         $isValid = true;
         $titulo = 'Mis turnos';
 
-        echo '<pre>'; var_dump($_POST);die;
-
         if (empty($_FILES)) {
             $notification_text = 'Falta completar la orden medica (Documento PDF)';
+            $isValid = false;
+        } else if ($_FILES['orden_medica']['error'] == 1) {
+            $notification_text = 'Tamaño de archivo máximo excedido';
+            $isValid = false;
+        } if ($_FILES['orden_medica']['error'] != 0) {
+            $notification_text = 'Ocurrio un error al cargar la orden medica';
             $isValid = false;
         } else {
             $finfo =        finfo_open(FILEINFO_MIME_TYPE);
@@ -30,6 +34,7 @@ class TurnosController extends Controller{
             $tempName =     $_FILES['orden_medica']['tmp_name'];
             $fileSize =     $_FILES['orden_medica']['size'];
             $newFileName =  $targetDir . $_FILES['orden_medica']['name'] . '--' . $timestamp; # el -- es para despues parsear el nombre y devolver el original
+            
             $mimeType =     finfo_file($finfo, $tempName);
             finfo_close($finfo);
             if (file_exists($newFileName)){
@@ -76,8 +81,18 @@ class TurnosController extends Controller{
 
     # Lista un solo turno
     public function getTurnos() {
-        $turnosCollection = $this->model->getAll();
-        var_dump($turnosCollection);die;
+        require $this->viewsDir . 'my_turns_view.php';
+        /* $turnosCollection = $this->model->getAll();
+        var_dump($turnosCollection);die; */
+    }
+
+    public function getWaitingList() {
+        $rol = $_GET['rol']; # En esta variable vendría el rol del usuario para saber que script cargar en la pagina, si el de medico o el de usuario
+        $isMedic = false;
+        if ($this->model->isMedic($rol)) {
+            $isMedic = true;
+        }
+        require $this->viewsDir . 'waiting_list_view.php';
     }
 
 }

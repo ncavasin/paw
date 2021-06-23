@@ -47,7 +47,7 @@ class Controller {
                 'name' => 'Coberturas'
             ],
             [
-                'href' => '/newturn',
+                'href' => '/myturns',
                 'name' => 'Turnos'
             ]
         ];
