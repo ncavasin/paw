@@ -3,3 +3,4 @@ logs/
 *.pdf
 files/
 .env
+cache_twig/
