@@ -144,5 +144,10 @@ class Usuario extends Model{
             var_dump($e);die;
         }
     }
+
+    public function get($values) {
+        $result = $this->queryBuilder->select($this->table, $values);
+        return count($result) == 0;
+    }
 }
 

@@ -59,6 +59,9 @@ class UsuariosController extends Controller{
             $notification_text = 'Las contraseñas no coinciden';
         }
 
+        # verificar que el mail no esté registrado, le paso todos los values pero usa solo mail
+        $isValid = $this->model->get($values);
+
         if ($isValid) {
             $result = $this->model->set($values);
             foreach($result as $item) {
@@ -71,6 +74,8 @@ class UsuariosController extends Controller{
             }
             # si salio bien le damos save
             # si hay problemas devolvemos error
+        } else {
+            $notification_text = 'Ya existe una cuenta registrada con el correo ' . $values['mail'];
         }
 
         $titulo = 'Registrarse';

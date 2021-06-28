@@ -30,13 +30,15 @@ class QueryBuilder {
         return $sentencia->fetchAll();
     }
 
-    public function select($table, $params = [], $join = []){
+    # Solo funciona con id o mail
+    public function select($table, $params = []){
         $where = '1 = 1';
         if (isset($params['id'])) $where = "id = :id";
+        if (isset($params['mail'])) $where = "mail = :mail";
         $query = "select * from {$table} where {$where}";
         $sentencia = $this->pdo->prepare($query);
         if (isset($params['id'])) $sentencia->bindValue(":id", $params['id']);
-        if (isset($params['id'])) $sentencia->bindValue(":mail", $params['mail']);
+        if (isset($params['mail'])) $sentencia->bindValue(":mail", $params['mail']);
         $sentencia->setFetchMode(PDO::FETCH_ASSOC);
         $sentencia->execute();
         return $sentencia->fetchAll();
