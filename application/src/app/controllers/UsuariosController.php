@@ -23,7 +23,7 @@ class UsuariosController extends Controller{
         ];
         list($isValid, $result) = $this->model->login($values);
         if(! $isValid){
-            $notification_text = 'El usuario no existe. Por favor regístrese.';
+            $notification_text = 'Usuario o contraseña incorrecto.';
         }
         $titulo = 'Iniciar sesión';
         $notification = true;
