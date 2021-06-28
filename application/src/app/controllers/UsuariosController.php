@@ -67,8 +67,8 @@ class UsuariosController extends Controller{
             foreach($result as $item) {
                 $isValid = is_null($item['error']) && $isValid;
             }
-            if ($isValid) $this->model->save();
-            else {
+            if ($isValid) $isValid = $this->model->save();
+            if (!$isValid) {
                 $notification_text = 'Error al ingresar datos desde el formulario, revise los logs para mas información';
                 $log->debug('Error en el modelo', [$result, $isValid]);
             }

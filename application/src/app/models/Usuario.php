@@ -21,7 +21,8 @@ class Usuario extends Model{
         "celular"           => ["value" => null, "error" => null],
         "mail"              => ["value" => null, "error" => null],
         "pwd"               => ["value" => null, "error" => null], 
-        "id_obra_social"    => ["value" => null, "error" => null]  # Only one cobertura per user
+        "id_obra_social"    => ["value" => null, "error" => null],  # Only one cobertura per user
+        #"rol"               => ["value" => 'user', "error" => null]
     ];
 
     public function setNombre(string $nombre){
@@ -141,7 +142,7 @@ class Usuario extends Model{
             foreach( $this->fields as $key => $field) $params[$key] = $field['value'];
             $this->queryBuilder->insert($this->table, $params);
         } catch(Exception $e){
-            var_dump($e);die;
+            # var_dump($e);
         }
     }
 

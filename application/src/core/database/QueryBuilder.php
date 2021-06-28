@@ -86,10 +86,9 @@ class QueryBuilder {
             }catch(PDOException  $e){
                 $this->logger->debug('Error insertando en tabla ['. $table . ']. Sentencia: [' . $query . ']. Parametros: [' . $params . '].');
                 $this->logger->error('stacktrace', [$e]);
-                echo '<pre>';
-                var_dump('ERROR:', $statement);
-                die;
+                return false;
             }
+            return true;
         }
     }
 
@@ -125,9 +124,9 @@ class QueryBuilder {
             }catch(PDOException  $e){
                 $this->logger->debug('Error actualizando en tabla ['. $table . ']. Sentencia: [' . $query . ']. Parametros: [' . $params . '].');
                 $this->logger->error('stacktrace', [$e]);
-                echo '<pre>';
+/*                 echo '<pre>';
                 var_dump('ERROR:', $statement);
-                die;
+                die; */
             }
         }
     }
