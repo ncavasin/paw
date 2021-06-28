@@ -225,7 +225,7 @@ final class InsertData extends AbstractMigration
                 'fnac' => '1995-01-01',
                 'celular' => '+5492323111111',
                 'mail' => 'usuario1@test.com',
-                'pwd' => '123456',
+                'pwd' => '$2y$10$.8Cr0.9kTWTEOkjE/59Ghep2LvkosK5MKXkpRkj904f01hcAYWaTe',
                 'id_obra_social' => 1,
                 'rol' => 'user'
             ],
@@ -236,7 +236,7 @@ final class InsertData extends AbstractMigration
                 'fnac' => '1995-02-02',
                 'celular' => '+5492323222222',
                 'mail' => 'usuario2@test.com',
-                'pwd' => '123456',
+                'pwd' => '$2y$10$.8Cr0.9kTWTEOkjE/59Ghep2LvkosK5MKXkpRkj904f01hcAYWaTe', /* password sin hash: 123456 */
                 'id_obra_social' => 1,
                 'rol' => 'user'
             ],
@@ -247,7 +247,7 @@ final class InsertData extends AbstractMigration
                 'fnac' => '1995-02-02',
                 'celular' => '+5491133333333',
                 'mail' => 'especialista1@test.com',
-                'pwd' => '123456',
+                'pwd' => '$2y$10$.8Cr0.9kTWTEOkjE/59Ghep2LvkosK5MKXkpRkj904f01hcAYWaTe',
                 'id_obra_social' => 1,
                 'rol' => 'medic'
             ],
