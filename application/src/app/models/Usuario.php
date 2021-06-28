@@ -121,12 +121,12 @@ class Usuario extends Model{
         if(count($result) != 1) return false;
         $user = $result[0]; # tengo que agarrar el primer elemento, porque es un arreglo de arreglos
         
-        # Dejo los vardump para que testees y mires los valores
-        var_dump($user);
+        # vardump para testear que funciona
+        /* var_dump($user);
         var_dump('Password de la request: ' . $values['pwd']);
         var_dump('Password en la db (sin descifrar): ' . $user['pwd']);
         var_dump('¿Password en la db coincide?');
-        var_dump(password_verify($values['pwd'], $user['pwd']));
+        var_dump(password_verify($values['pwd'], $user['pwd'])); */
 
         if (!password_verify($values['pwd'], $user['pwd'])) return [false]; # Verifico el hash de la pass y retorno falso si no coinciden
 
