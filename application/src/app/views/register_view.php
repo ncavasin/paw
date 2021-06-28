@@ -50,7 +50,7 @@
                     <label for="conf_pwd" class="required">Confirmación</label>
                     <input type="password" id="conf_pwd" name="conf_pwd" placeholder="Contraseña" required tabindex="8" />
                 </fieldset>
-                <input type="submit" value="Registrarse" class="main_button" form="form-turnos"/>
+                <input type="submit" value="Registrarse" class="main_button"/>
             </form>
         </section>
     </main>
