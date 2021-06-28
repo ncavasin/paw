@@ -97,22 +97,12 @@ final class FirstMigrations extends AbstractMigration
                 'limit' => Constants::getPwdMax(),
                 'null' => false ])
             ->addColumn('id_obra_social', 'integer', ['limit' => Constants::getOsNomMax(), 'null' => true])
+            ->addcolumn('rol', 'string')
             # col local   | tbl externa  | col externa
             ->addForeignKey('id_obra_social', 'obras_sociales', 'id')
             ->addIndex(['mail'], [
                 'unique' => true,
                 'name' => 'idx_ususarios_mail'])
-            ->create();
-
-        $tableFecha = $this->table('fecha');
-        $tableFecha->addColumn('fecha', 'date')
-            ->create();
-
-        $tableHora = $this->table('hora', ['id' => false, 'primary_key' => ['id', 'id_fecha']]);
-        $tableHora->addColumn('id', 'integer', ['identity'=> true])
-            ->addColumn('id_fecha', 'integer')
-            ->addColumn('hora', 'time')
-            ->addForeignKey('id_fecha', 'fecha', 'id')
             ->create();
 
         $tableTurno = $this->table('turnos');
