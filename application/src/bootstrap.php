@@ -47,10 +47,6 @@ $connection = $connectionBuilder->getConnection($config);
 # Set default timezone
 date_default_timezone_set("America/Argentina/Buenos_Aires");
 
-# Test singleton
-# $conb = ConnectionBuilder::getInstance();
-# $con = $conb->getConnection($config);
-
 # Requests handler
 $request = new Request();
 
