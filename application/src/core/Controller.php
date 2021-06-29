@@ -4,6 +4,7 @@ namespace Paw\core;
 
 use Paw\core\database\QueryBuilder;
 use Paw\core\Model;
+use Paw\core\Session;
 
 class Controller {
 
@@ -15,6 +16,7 @@ class Controller {
     protected array $userOptions;
     protected array $menuOptions;
     protected array $footerLinks;
+    protected Session $session;
 
     public function __construct(){
         global $connection, $log;
@@ -82,6 +84,7 @@ class Controller {
             $model->setQueryBuilder($qb);
             $this->setModel($model);
         }
+        $this->session = new Session();
     }
 
     private function setModel(Model $model){
