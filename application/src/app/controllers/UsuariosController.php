@@ -9,8 +9,9 @@ use Paw\app\models\Usuario;
 class UsuariosController extends Controller{
     public ?string $modelName = Usuario::class;
     
-    public function index() {
-
+    public function logout() {
+        if (isset($_GET['session'])) $this->session->destroy();
+        require $this->viewsDir . 'index_view.php';
     }
 
     public function loginProcess() {
@@ -21,13 +22,20 @@ class UsuariosController extends Controller{
             'mail' => $_POST['mail'],
             'pwd' => $_POST['pwd']
         ];
-        list($isValid, $result) = $this->model->login($values);
+        list($isValid, $user) = $this->model->login($values);
         if(! $isValid){
             $notification_text = 'Usuario o contraseña incorrecto.';
         }
         $titulo = 'Iniciar sesión';
         $notification = true;
         $notification_type = $isValid ? SUCCESS : ERROR;
+        if ($isValid) {
+            // Como se logea hago un start y guardo los datos
+            $this->session->start();
+            $this->session->setData('user', $user);
+            header('Location: /', true, 301); 
+            exit();
+        }
         require $this->viewsDir . 'login_view.php';
         
     }
@@ -70,7 +78,7 @@ class UsuariosController extends Controller{
             if ($isValid) $isValid = $this->model->save();
             if (!$isValid) {
                 $notification_text = 'Error al ingresar datos desde el formulario, revise los logs para mas información';
-                $log->debug('Error en el modelo', [$result, $isValid]);
+                $log->debug('Error al guardar el usuario', [$result, $isValid]);
             }
             # si salio bien le damos save
             # si hay problemas devolvemos error
