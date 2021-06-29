@@ -2,7 +2,7 @@
 <html>
     <head>
         {% block head %}
-            {{ include "/parts/head.html" }}
+            {{ include "/parts/head.php" }}
         {% endblock %}
 
         {% block title %}
@@ -12,7 +12,7 @@
     <body>
         <header>
             {% block header %}
-                {{ include "/parts/header.html" }}
+                {{ include "/parts/header.php" }}
             {% endblock %}
         </header>
 
@@ -24,7 +24,7 @@
 
         <footer>
             {% block footer %}
-                {{ include "/parts/footer.html" }}
+                {{ include "/parts/footer.php" }}
             {% endblock %}
         </footer>
     </body>

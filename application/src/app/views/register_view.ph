@@ -1,4 +1,4 @@
-{% extends "layout.html"%}
+{% extends "layout.php"%}
 
 
 {% block head %}
@@ -9,7 +9,7 @@
     <link rel='stylesheet' type='text/css' href='assets/css/botones.css'/>
 {% endblock %}
 
-{{ include("/parts/notification.html") }}
+{{ include("/parts/notification.php") }}
 
 {% block main %}
     <section>
