@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            {{ include "/parts/head.html" }}
+        {% endblock %}
+
+        {% block title %}
+            {{ title ? title : "Dental Medical Group" }}
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            {% block header %}
+                {{ include "/parts/header.html" }}
+            {% endblock %}
+        </header>
+
+        <main>
+            {% block main %}
+
+            {% endblock %}
+        </main>
+
+        <footer>
+            {% block footer %}
+                {{ include "/parts/footer.html" }}
+            {% endblock %}
+        </footer>
+    </body>
+</html>

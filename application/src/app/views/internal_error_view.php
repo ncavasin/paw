@@ -13,7 +13,7 @@
         ?>
         
         <main>
-            <h1><?= $titulo ?? "" ?></h2>
+            <h2><?= $titulo ?? "" ?></h2>
         </main>
         <?php 
             require 'parts/footer_view.php';

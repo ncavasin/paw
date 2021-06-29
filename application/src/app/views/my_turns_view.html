@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    {{ parent() }}
+    
+    <link rel="stylesheet" type='text/css' href="assets/css/form.css" />
+    <link rel="stylesheet" type='text/css' href="assets/css/turnos.css" />
+    <link rel='stylesheet' type='text/css' href='assets/css/notification.css' />
+    <link rel='stylesheet' type='text/css' href='assets/css/botones.css' />
+{% endblock %}
+
+
+{% block main %}
+    <section>
+        <a class='navigation-button' target='_self' href="/newturn">Nuevo turno</a>
+        <a class='navigation-button' target='_self' href="/waiting_list">Sala de espera</a>
+        <a class='navigation-button' target='_self' href="/waiting_list?rol=medic">Sala de espera (Medico)</a>
+    </section>
+    
+    <section>
+        <h2>HISTORIAL DE TURNOS</h2>
+        <p>Aún no tenes turnos registrados</p>
+    </section>
+{%% endblock %}

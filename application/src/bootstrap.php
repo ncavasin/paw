@@ -22,7 +22,7 @@ $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
 # Twig
-$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/app/views');
+$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/app/views/');
 $twig = new \Twig\Environment($loader, [
     'cache' => __DIR__ . '/app/views/cache_twig/',
 ]);
