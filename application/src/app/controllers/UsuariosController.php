@@ -17,7 +17,6 @@ class UsuariosController extends Controller{
     public function loginProcess() {
         global $log;    
         $isValid = true;
-        $view = 'login_view.php';
         $notification_text = 'Sesion iniciada con éxito';
         $values = [
             'mail' => $_POST['mail'],
@@ -31,13 +30,13 @@ class UsuariosController extends Controller{
         $notification = true;
         $notification_type = $isValid ? SUCCESS : ERROR;
         if ($isValid) {
-            $view = 'index_view.php';
             // Como se logea hago un start y guardo los datos
             $this->session->start();
             $this->session->setData('user', $user);
-            echo var_dump($this->session->get());
+            header('Location: /', true, 301); 
+            exit();
         }
-        require $this->viewsDir . $view;
+        require $this->viewsDir . 'login_view.php';
         
     }
 
