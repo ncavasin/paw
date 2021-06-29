@@ -30,11 +30,7 @@ class UsuariosController extends Controller{
         $notification = true;
         $notification_type = $isValid ? SUCCESS : ERROR;
         if ($isValid) {
-            // Como se logea hago un start y guardo los datos
-            $this->session->start();
-            $this->session->setData('user', $user);
-            header('Location: /', true, 301); 
-            exit();
+            // Aca iria el codigo de sesion pero no funciona
         }
         require $this->viewsDir . 'login_view.php';
         
