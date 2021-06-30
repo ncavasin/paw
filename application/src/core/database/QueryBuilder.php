@@ -50,13 +50,9 @@ class QueryBuilder {
             return '(nombre, apellido, fnac, celular, mail, pwd, id_obra_social, rol) '. $keyword .' (:nombre, :apellido, :fnac, :celular, :mail, :pwd, :id_obra_social, :rol)';
         }
         else if($table == 'turnos'){
-            return '(id_fecha, id_hora, id_especialista, id_especialidad, id_usuario, orden_medica, nombre_orden_medica) ' 
-            . $keyword . '(:id_fecha, :id_hora, :id_especialista, :id_especialidad, :id_usuario, :orden_medica, :nombre_orden_medica)';
+            return '(id_usuario, hora, id_especialista, minuto, fecha, orden_medica, nombre_orden_medica) ' 
+            . $keyword . ' (:id_usuario, :hora, :id_especialista, :minuto, :fecha, :orden_medica, :nombre_orden_medica)';
                 
-        }else if($table == 'fecha'){
-            return '(fecha) '. $keyword .'  (:fecha)';
-        } else if ($table == 'hora'){
-            return '(id_fecha, hora) '. $keyword .'  (:id_fecha, :hora)';
         }
         return null;
     }
@@ -65,7 +61,7 @@ class QueryBuilder {
     public function insert($table, $params = []){
         if(! isset($params)){
             $this->logger->error('Error insertando. No se recibieron valores.');
-            throw new QBMissingValues('No se recibieron los valores necesarios para insertar.');
+            #throw new QBMissingValues('No se recibieron los valores necesarios para insertar.');
         }else{
 
             $query = "insert into {$table} ";
@@ -73,7 +69,7 @@ class QueryBuilder {
 
             if(! $values){
                 $this->logger->debug('Error insertando en tabla ' . $table . '. No existe.');
-                throw new QBInvalidTable('No existe la tabla ' . $table);
+                #throw new QBInvalidTable('No existe la tabla ' . $table);
             }
 
             $query = $query . $values;

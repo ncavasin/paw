@@ -33,7 +33,6 @@ class UsuariosController extends Controller{
             // Aca iria el codigo de sesion pero no funciona
         }
         require $this->viewsDir . 'login_view.php';
-        
     }
 
     public function register() {
