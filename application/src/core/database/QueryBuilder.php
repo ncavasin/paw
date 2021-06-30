@@ -30,6 +30,19 @@ class QueryBuilder {
         return $sentencia->fetchAll();
     }
 
+    public function selectEspecialista($especialidad) {
+        $join = '';
+        if (isset($especialidad) && $especialidad != '') 
+            $join = 'join especialidades as ep on ep.nombre = :especialidad join intermedia as it on ( es.id = it.id_especialista and ep.id = it.id_especialidad)';
+        $query = 'select es.nombre, es.apellido, es.id from especialistas as es ' . $join;
+        $sentencia = $this->pdo->prepare($query);
+        if (isset($especialidad) && $especialidad != '') $sentencia->bindValue(':especialidad', $especialidad);
+        $this->logger->info($query);
+        $sentencia->setFetchMode(PDO::FETCH_ASSOC);
+        $sentencia->execute();
+        return $sentencia->fetchAll();
+    }
+
     # Solo funciona con id o mail
     public function select($table, $params = []){
         $where = '1 = 1';
@@ -52,7 +65,6 @@ class QueryBuilder {
         else if($table == 'turnos'){
             return '(id_usuario, hora, id_especialista, minuto, fecha, orden_medica, nombre_orden_medica) ' 
             . $keyword . ' (:id_usuario, :hora, :id_especialista, :minuto, :fecha, :orden_medica, :nombre_orden_medica)';
-                
         }
         return null;
     }

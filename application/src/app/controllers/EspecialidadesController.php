@@ -21,8 +21,9 @@ class EspecialidadesController extends Controller{
     }
 
     public function getEspecialidades(){
+        $especialidades = $this->model->get();
         header('Content-Type: application/json');
-        echo json_encode([0 => ["nombre" => 'Alergia'], 1 => ["nombre" => 'Quebradura']]);
+        echo json_encode($especialidades);
     }
 }
 
