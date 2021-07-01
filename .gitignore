@@ -4,3 +4,4 @@ logs/
 files/
 .env
 cache_twig/
+*.code-*
