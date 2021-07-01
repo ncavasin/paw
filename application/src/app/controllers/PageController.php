@@ -56,23 +56,6 @@ class PageController extends Controller{
         require $this->viewsDir . 'login_view.php';
     }
 
-/*     public function loginProcess(){
-        $requiredValues = [
-            'email' => ['label' => 'Email', 'validate' => function ($email) {
-                return $this->validateEmail($email);
-            }],
-            'contrasenia' => ['label' => 'Contraseña'],
-        ];
-        list($validated, $isValid, $notification_text) = $this->validateForm($requiredValues);
-        if (!$isValid) $this->login(true, false, $notification_text);
-        else {
-            # simulacion de consulta a la base de datos sobre si el usuario y contraseña esta bien
-            if ($validated['email'] == 'admin@admin.com' && $validated['contrasenia'] == 'admin') $this->login(true, true, 'Sesión iniciada con éxito');
-            else $this->login(true, false, 'Usuario y contraseña incorrectos');
-        }
-    }
- */
-
     public function register($notification = false, $isValid = false, $notification_text = 'Uno o mas campos no son validos'){
         $titulo = 'Registrarse';
         $notification_type = $isValid? SUCCESS : ERROR;
@@ -98,13 +81,6 @@ class PageController extends Controller{
         else if ($validated['email'] != $validated['conf_email']) $this->register(true, false, 'Los email no coinciden');
         else if ($validated['contrasenia'] != $validated['conf_contrasenia']) $this->register(true, false, 'Las contraseñas no coinciden');
         else $this->register(true, true, 'Registro completado con éxito');
-
-        # en este punto los datos estan validados y se guardarian en la base de datos
-        # try{
-        #    guardar formulario
-        #    if ok then $this->register(true, true, 'Registro completado con éxito');
-        #    else error
-        #} catch then error
 
     }
 
@@ -165,7 +141,6 @@ class PageController extends Controller{
             'especialista' => ['label' => 'Especialista'],
             'dia' => [  'label' => 'Dia', 
                         'validate' => function ($date) { return $this->validateDate($date);}]
-            # falta validar la hora que no podemos por falta de js
         ];
 
         if(empty($_FILES)){
@@ -201,11 +176,6 @@ class PageController extends Controller{
                     } else {
                         $this->turns(true, false, "Error interno del servidor, no se pudo guardar el archivo");
                     }
-
-                    # Format dia
-                    # Add db hit
-                    # Mapping between timestamp and filename
-
                 }
             }
         }
