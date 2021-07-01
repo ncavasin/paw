@@ -30,6 +30,19 @@ class QueryBuilder {
         return $sentencia->fetchAll();
     }
 
+    public function selectEspecialista($especialidad) {
+        $join = '';
+        if (isset($especialidad) && $especialidad != '') 
+            $join = 'join especialidades as ep on ep.nombre = :especialidad join intermedia as it on ( es.id = it.id_especialista and ep.id = it.id_especialidad)';
+        $query = 'select es.nombre, es.apellido, es.id from especialistas as es ' . $join;
+        $sentencia = $this->pdo->prepare($query);
+        if (isset($especialidad) && $especialidad != '') $sentencia->bindValue(':especialidad', $especialidad);
+        $this->logger->info($query);
+        $sentencia->setFetchMode(PDO::FETCH_ASSOC);
+        $sentencia->execute();
+        return $sentencia->fetchAll();
+    }
+
     # Solo funciona con id o mail
     public function select($table, $params = []){
         $where = '1 = 1';
@@ -50,13 +63,8 @@ class QueryBuilder {
             return '(nombre, apellido, fnac, celular, mail, pwd, id_obra_social, rol) '. $keyword .' (:nombre, :apellido, :fnac, :celular, :mail, :pwd, :id_obra_social, :rol)';
         }
         else if($table == 'turnos'){
-            return '(id_fecha, id_hora, id_especialista, id_especialidad, id_usuario, orden_medica, nombre_orden_medica) ' 
-            . $keyword . '(:id_fecha, :id_hora, :id_especialista, :id_especialidad, :id_usuario, :orden_medica, :nombre_orden_medica)';
-                
-        }else if($table == 'fecha'){
-            return '(fecha) '. $keyword .'  (:fecha)';
-        } else if ($table == 'hora'){
-            return '(id_fecha, hora) '. $keyword .'  (:id_fecha, :hora)';
+            return '(id_usuario, hora, id_especialista, minuto, fecha, orden_medica, nombre_orden_medica) ' 
+            . $keyword . ' (:id_usuario, :hora, :id_especialista, :minuto, :fecha, :orden_medica, :nombre_orden_medica)';
         }
         return null;
     }
@@ -65,7 +73,7 @@ class QueryBuilder {
     public function insert($table, $params = []){
         if(! isset($params)){
             $this->logger->error('Error insertando. No se recibieron valores.');
-            throw new QBMissingValues('No se recibieron los valores necesarios para insertar.');
+            #throw new QBMissingValues('No se recibieron los valores necesarios para insertar.');
         }else{
 
             $query = "insert into {$table} ";
@@ -73,7 +81,7 @@ class QueryBuilder {
 
             if(! $values){
                 $this->logger->debug('Error insertando en tabla ' . $table . '. No existe.');
-                throw new QBInvalidTable('No existe la tabla ' . $table);
+                #throw new QBInvalidTable('No existe la tabla ' . $table);
             }
 
             $query = $query . $values;

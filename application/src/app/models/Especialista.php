@@ -11,7 +11,7 @@ use const Paw\core\database\USER_NOM_AP_MAX;
 class Especialista extends Model{
 
     # 1-1 relation against Especialista table
-    public $table;
+    public $table = 'especialistas';
 
     # Table columns
     public $fields = [
@@ -51,6 +51,10 @@ class Especialista extends Model{
             $method($values[$key]);
         }
 
+    }
+
+    public function get($especialidad) {
+        return $this->queryBuilder->selectEspecialista($especialidad);
     }
 
 }
