@@ -21,7 +21,8 @@ class Usuario extends Model{
         "celular"           => ["value" => null, "error" => null],
         "mail"              => ["value" => null, "error" => null],
         "pwd"               => ["value" => null, "error" => null], 
-        "id_obra_social"    => ["value" => null, "error" => null]  # Only one cobertura per user
+        "id_obra_social"    => ["value" => 1, "error" => null],  # Only one cobertura per user
+        "rol"               => ["value" => 'user', "error" => null]
     ];
 
     public function setNombre(string $nombre){
@@ -96,12 +97,12 @@ class Usuario extends Model{
     }
 
     public function setId_obra_social($id_obra_social){
-        $this->fields['id_obra_social']['value'] = $id_obra_social;
+        $this->fields['id_obra_social']['value'] = 1;
     }
 
     public function set(array $values){
         foreach(array_keys($this->fields) as $key){
-            if((! isset($values[$key]) && $key != 'id_obra_social')){
+            if((! isset($values[$key]) && $key != 'id_obra_social' && $key != 'rol')){
                 $this->fields[$key]['error'] = "El campo no puede estar vacío ({$key})"; # TODO si no encuentra la variable deberia tirar un error 
             }
             # Armo el nombre de la funcion a ejecutar para el setter correspondiente
@@ -109,6 +110,11 @@ class Usuario extends Model{
             $this->$method($values[$key]);
         }
         return $this->fields;
+    }
+
+    public function setRol($rol) {
+        $this->fields['rol']['value'] = 'user';
+        return true;
     }
 
     public function login(array $values){
@@ -121,12 +127,12 @@ class Usuario extends Model{
         if(count($result) != 1) return false;
         $user = $result[0]; # tengo que agarrar el primer elemento, porque es un arreglo de arreglos
         
-        # Dejo los vardump para que testees y mires los valores
-        var_dump($user);
+        # vardump para testear que funciona
+        /* var_dump($user);
         var_dump('Password de la request: ' . $values['pwd']);
         var_dump('Password en la db (sin descifrar): ' . $user['pwd']);
         var_dump('¿Password en la db coincide?');
-        var_dump(password_verify($values['pwd'], $user['pwd']));
+        var_dump(password_verify($values['pwd'], $user['pwd'])); */
 
         if (!password_verify($values['pwd'], $user['pwd'])) return [false]; # Verifico el hash de la pass y retorno falso si no coinciden
 
@@ -139,10 +145,17 @@ class Usuario extends Model{
         try{
             $params = [];
             foreach( $this->fields as $key => $field) $params[$key] = $field['value'];
-            $this->queryBuilder->insert($this->table, $params);
+            return $this->queryBuilder->insert($this->table, $params);
         } catch(Exception $e){
-            var_dump($e);die;
+            echo '<pre>';
+            echo var_dump($e);
+            return false;
         }
+    }
+
+    public function get($values) {
+        $result = $this->queryBuilder->select($this->table, $values);
+        return count($result) == 0;
     }
 }
 

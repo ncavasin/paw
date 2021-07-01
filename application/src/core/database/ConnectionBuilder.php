@@ -32,11 +32,7 @@ class ConnectionBuilder{
                 "{$adapter}:host={$hostname};dbname={$dbname};port={$port}",
                 $config->get("DB_USERNAME"),
                 $config->get("DB_PASSWORD"),
-                [
-                    'options' => [
-                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-                    ]
-                ]
+                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING)
             );
 
         }catch(PDOException $e){

@@ -30,13 +30,28 @@ class QueryBuilder {
         return $sentencia->fetchAll();
     }
 
-    public function select($table, $params = [], $join = []){
+    public function selectEspecialista($especialidad) {
+        $join = '';
+        if (isset($especialidad) && $especialidad != '') 
+            $join = 'join especialidades as ep on ep.nombre = :especialidad join intermedia as it on ( es.id = it.id_especialista and ep.id = it.id_especialidad)';
+        $query = 'select es.nombre, es.apellido, es.id from especialistas as es ' . $join;
+        $sentencia = $this->pdo->prepare($query);
+        if (isset($especialidad) && $especialidad != '') $sentencia->bindValue(':especialidad', $especialidad);
+        $this->logger->info($query);
+        $sentencia->setFetchMode(PDO::FETCH_ASSOC);
+        $sentencia->execute();
+        return $sentencia->fetchAll();
+    }
+
+    # Solo funciona con id o mail
+    public function select($table, $params = []){
         $where = '1 = 1';
         if (isset($params['id'])) $where = "id = :id";
+        if (isset($params['mail'])) $where = "mail = :mail";
         $query = "select * from {$table} where {$where}";
         $sentencia = $this->pdo->prepare($query);
         if (isset($params['id'])) $sentencia->bindValue(":id", $params['id']);
-        if (isset($params['id'])) $sentencia->bindValue(":mail", $params['mail']);
+        if (isset($params['mail'])) $sentencia->bindValue(":mail", $params['mail']);
         $sentencia->setFetchMode(PDO::FETCH_ASSOC);
         $sentencia->execute();
         return $sentencia->fetchAll();
@@ -45,16 +60,11 @@ class QueryBuilder {
     private function dispatcher($table, $keyword){
         if($table == 'usuarios'){
             # IMPORTANTE sin la especificacion de las columnas antes, no anda (porque sino espera que le pases el id tambien y es autoincremental)
-            return '(nombre, apellido, fnac, celular, mail, pwd, id_obra_social) '. $keyword .' (:nombre, :apellido, :fnac, :celular, :mail, :pwd, :id_obra_social)';
+            return '(nombre, apellido, fnac, celular, mail, pwd, id_obra_social, rol) '. $keyword .' (:nombre, :apellido, :fnac, :celular, :mail, :pwd, :id_obra_social, :rol)';
         }
         else if($table == 'turnos'){
-            return '(id_fecha, id_hora, id_especialista, id_especialidad, id_usuario, orden_medica, nombre_orden_medica) ' 
-            . $keyword . '(:id_fecha, :id_hora, :id_especialista, :id_especialidad, :id_usuario, :orden_medica, :nombre_orden_medica)';
-                
-        }else if($table == 'fecha'){
-            return '(fecha) '. $keyword .'  (:fecha)';
-        } else if ($table == 'hora'){
-            return '(id_fecha, hora) '. $keyword .'  (:id_fecha, :hora)';
+            return '(id_usuario, hora, id_especialista, minuto, fecha, orden_medica, nombre_orden_medica) ' 
+            . $keyword . ' (:id_usuario, :hora, :id_especialista, :minuto, :fecha, :orden_medica, :nombre_orden_medica)';
         }
         return null;
     }
@@ -63,7 +73,7 @@ class QueryBuilder {
     public function insert($table, $params = []){
         if(! isset($params)){
             $this->logger->error('Error insertando. No se recibieron valores.');
-            throw new QBMissingValues('No se recibieron los valores necesarios para insertar.');
+            #throw new QBMissingValues('No se recibieron los valores necesarios para insertar.');
         }else{
 
             $query = "insert into {$table} ";
@@ -71,7 +81,7 @@ class QueryBuilder {
 
             if(! $values){
                 $this->logger->debug('Error insertando en tabla ' . $table . '. No existe.');
-                throw new QBInvalidTable('No existe la tabla ' . $table);
+                #throw new QBInvalidTable('No existe la tabla ' . $table);
             }
 
             $query = $query . $values;
@@ -84,10 +94,9 @@ class QueryBuilder {
             }catch(PDOException  $e){
                 $this->logger->debug('Error insertando en tabla ['. $table . ']. Sentencia: [' . $query . ']. Parametros: [' . $params . '].');
                 $this->logger->error('stacktrace', [$e]);
-                echo '<pre>';
-                var_dump('ERROR:', $statement);
-                die;
+                return false;
             }
+            return true;
         }
     }
 
@@ -123,9 +132,9 @@ class QueryBuilder {
             }catch(PDOException  $e){
                 $this->logger->debug('Error actualizando en tabla ['. $table . ']. Sentencia: [' . $query . ']. Parametros: [' . $params . '].');
                 $this->logger->error('stacktrace', [$e]);
-                echo '<pre>';
+/*                 echo '<pre>';
                 var_dump('ERROR:', $statement);
-                die;
+                die; */
             }
         }
     }

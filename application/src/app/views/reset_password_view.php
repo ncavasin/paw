@@ -1,38 +1,28 @@
-<!DOCTYPE html>
-<html lang="es-AR">
+{% extends "layout.php" %}
 
-<head>
-    <?php
-    require 'parts/head_view.php'
-    ?>
+
+{% block head %}
+    {{ parent() }}
+    
     <link rel="stylesheet" type='text/css' href="assets/css/form.css" />
     <link rel="stylesheet" type='text/css' href="assets/css/notification.css" />
     <link rel="stylesheet" type='text/css' href="assets/css/botones.css" />
-</head>
+{% endblock %}
 
-<body>
-    <?php
-    require 'parts/header_view.php';
-    ?>
-    <main>
-        <?php require 'parts/notification_view.php' ?>
-        <section>
-            <h2>REESTABLECER CONTRASEÑA</h2>
-            <form action="#" method="POST" target="_self">
-                <fieldset>
-                    <label for="email">Email de la cuenta a recuperar</label>
-                    <input type="email" id="email" name="email" placeholder="ejemplo@email.com" autofocus required tabindex="1" /><br>
-                </fieldset>
+{{ include("/parts/notification.php") }}
 
-                <input type="submit" value="Enviar" class="main_button" />
+{% block main %}
+    <section>
+        <h2>REESTABLECER CONTRASEÑA</h2>
+        
+        <form action="#" method="POST" target="_self">
+            <fieldset>
+                <label for="email">Email de la cuenta a recuperar</label>
+                <input type="email" id="email" name="email" placeholder="ejemplo@email.com" autofocus required tabindex="1" /><br>
+            </fieldset>
 
-            </form>
-        </section>
-    </main>
+            <input type="submit" value="Enviar" class="main_button" />
 
-    <?php
-    require 'parts/footer_view.php';
-    ?>
-</body>
-
-</html>
+        </form>
+    </section>
+{% endblock %}

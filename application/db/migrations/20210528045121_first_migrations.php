@@ -40,6 +40,19 @@ final class FirstMigrations extends AbstractMigration
                 'limit' => Constants::getNomApMax(),
                 'null'  => false
             ])
+            ->addColumn('matricula', 'string')
+            ->addColumn('horaini', 'integer')
+            ->addColumn('horafin', 'integer')
+            ->addColumn('minutoini', 'integer')
+            ->addColumn('minutofin', 'integer')
+            ->addColumn('duracion_turno', 'integer')
+            ->create();
+
+        $tableDiasQueAtiende = $this->table('dias_que_atiende', ['id' => false, 'primary_key' => ['id', 'id_especialista']]);
+        $tableDiasQueAtiende->addColumn('id', 'integer', ['identity' => true])
+            ->addColumn('nombre_dia', 'string')
+            ->addColumn('id_especialista', 'integer')
+            ->addForeignKey('id_especialista', 'especialistas', 'id')
             ->create();
 
         # PK compuesta => id_especialidad id_especialista
@@ -84,6 +97,7 @@ final class FirstMigrations extends AbstractMigration
                 'limit' => Constants::getPwdMax(),
                 'null' => false ])
             ->addColumn('id_obra_social', 'integer', ['limit' => Constants::getOsNomMax(), 'null' => true])
+            ->addcolumn('rol', 'string')
             # col local   | tbl externa  | col externa
             ->addForeignKey('id_obra_social', 'obras_sociales', 'id')
             ->addIndex(['mail'], [
@@ -91,28 +105,16 @@ final class FirstMigrations extends AbstractMigration
                 'name' => 'idx_ususarios_mail'])
             ->create();
 
-        $tableFecha = $this->table('fecha');
-        $tableFecha->addColumn('fecha', 'date')
-            ->create();
-
-        $tableHora = $this->table('hora', ['id' => false, 'primary_key' => ['id', 'id_fecha']]);
-        $tableHora->addColumn('id', 'integer', ['identity'=> true])
-            ->addColumn('id_fecha', 'integer')
-            ->addColumn('hora', 'time')
-            ->addForeignKey('id_fecha', 'fecha', 'id')
-            ->create();
-
         $tableTurno = $this->table('turnos');
         $tableTurno->addColumn('id_usuario', 'integer')
-            ->addColumn('id_fecha', 'integer')
-            ->addColumn('id_hora', 'integer')
+            ->addColumn('fecha', 'date')
+            ->addColumn('hora', 'integer')
+            ->addColumn('minuto', 'integer')
             ->addColumn('id_especialista', 'integer')
-            ->addColumn('id_especialidad', 'integer')
             ->addColumn('orden_medica', 'string')
             ->addcolumn('nombre_orden_medica', 'string')
             ->addForeignKey('id_usuario', 'usuarios', 'id')
-            ->addForeignKey(['id_fecha', 'id_hora'], 'hora', ['id_fecha', 'id'])
-            ->addForeignKey(['id_especialista', 'id_especialidad'], 'intermedia', ['id_especialista', 'id_especialidad'])
+            ->addForeignKey('id_especialista', 'especialistas', 'id')
             ->create();
     }
 }

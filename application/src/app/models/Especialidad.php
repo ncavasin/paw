@@ -12,7 +12,7 @@ use const Paw\core\database\ESPECIALIDAD_NOM_MAX;
 class Especialidad extends Model{
 
     # 1-1 relation against Especialista table
-    public $table;
+    public $table = 'especialidades';
 
     # Table columns
     public $fields = [
@@ -50,6 +50,10 @@ class Especialidad extends Model{
             $method($values[$key]);
         }
 
+    }
+
+    public function get() {
+        return $this->queryBuilder->select($this->table, []);
     }
 
 }

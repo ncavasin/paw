@@ -21,6 +21,12 @@ $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
+// # Twig
+// $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/app/views/');
+// $twig = new \Twig\Environment($loader, [
+//     'cache' => __DIR__ . '/app/views/cache_twig/',
+// ]);
+// $twig->render('index_view.twig');
 
 # Load enviroment vars
 $dotenv = Dotenv::createUnsafeImmutable(__DIR__ . '/../');
@@ -41,10 +47,6 @@ $connection = $connectionBuilder->getConnection($config);
 
 # Set default timezone
 date_default_timezone_set("America/Argentina/Buenos_Aires");
-
-# Test singleton
-# $conb = ConnectionBuilder::getInstance();
-# $con = $conb->getConnection($config);
 
 # Requests handler
 $request = new Request();
